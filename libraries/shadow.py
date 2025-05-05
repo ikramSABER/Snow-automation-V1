@@ -166,8 +166,8 @@ def Rechercher_et_selectionner_creer_iu():
 
             if input_element:
                 js_input = driver.execute_script("return arguments[0];", input_element)
-                js_input.send_keys("Créer IU")
-                print("Texte 'Créer IU' saisi dans la barre contextuelle.")
+                js_input.send_keys("Créer Tco")
+                print("Texte 'Créer Tco' saisi dans la barre contextuelle.")
                 break
 
         except Exception as e:
@@ -178,7 +178,7 @@ def Rechercher_et_selectionner_creer_iu():
         raise Exception("Impossible d’accéder à la barre contextuelle après avoir cliqué sur 'All'.")
 
     for attempt in range(max_attempts):
-        print(f"[{attempt+1}/{max_attempts}] Tentative de clic sur le favori 'Créer IU'...")
+        print(f"[{attempt+1}/{max_attempts}] Tentative de clic sur le favori 'Créer Tco'...")
         try:
             result = driver.execute_script("""
                 try {
@@ -206,7 +206,7 @@ def Rechercher_et_selectionner_creer_iu():
 
                     for (const item of items) {
                         const text = item.innerText.trim().toLowerCase();
-                        if (text.includes("créer iu")) {
+                        if (text.includes("créer tco")) {
                             item.click();
                             return true;
                         }
@@ -218,15 +218,15 @@ def Rechercher_et_selectionner_creer_iu():
                 }
                 """)
             if result:
-                print("Clic sur 'Créer IU' dans les favoris réussi.")
+                print("Clic sur 'Créer Tco' dans les favoris réussi.")
                 return
 
         except Exception as e:
-            print(f"Erreur lors du clic sur 'Créer IU' : {e}")
+            print(f"Erreur lors du clic sur 'Créer Tco' : {e}")
 
         time.sleep(delay)
 
-    raise Exception("Impossible de cliquer sur 'Créer IU' dans les favoris.")
+    raise Exception("Impossible de cliquer sur 'Créer Tco' dans les favoris.")
 
 @keyword
 def switch_to_main_iframe(driver):
@@ -241,7 +241,7 @@ def switch_to_main_iframe(driver):
     driver.switch_to.frame(iframe)
 
 def remplir_champ_input_id_contrat(driver, wait):
-    champ_input_id = "IO:7ed859fc37b0de008c8c2b2943990ee3"
+    champ_input_id = "IO:5ef59274db883b804ea8fd141d961940"
     wait.until(EC.presence_of_element_located((By.ID, champ_input_id)))
     driver.execute_script(f"""
         let el = document.querySelector("[id='{champ_input_id}']");
@@ -250,12 +250,12 @@ def remplir_champ_input_id_contrat(driver, wait):
     """)
 
 def remplir_champ_origine(driver, wait):
-    origine_id = "IO:a522e42adb1732006e0970d9bf96193d"
+    origine_id = "IO:066bda30dbc83b804ea8fd141d9619d9"
     wait.until(EC.presence_of_element_located((By.ID, origine_id)))
     driver.execute_script(f"""
         let select = document.querySelector("[id='{origine_id}']");
         for (let option of select.options) {{
-            if (option.text.trim() === "Mail") {{
+            if (option.text.trim() === "Post-bascule CO") {{
                 select.value = option.value;
                 select.dispatchEvent(new Event('change', {{ bubbles: true }}));
                 break;
@@ -264,7 +264,7 @@ def remplir_champ_origine(driver, wait):
     """)
 
 def attendre_et_remplir_categorie(driver, wait):
-    categorie_id = "IO:b686ddbc37b0de008c8c2b2943990ece"
+    categorie_id = "IO:cb1a527cdb883b804ea8fd141d961908"
     hidden_id = f"sys_original.{categorie_id}"
 
     print("Attente du champ catégorie dans le DOM...")
@@ -307,7 +307,7 @@ def attendre_et_remplir_categorie(driver, wait):
         if (!hidden) throw "Sélecteur non trouvé : input[id='sys_original.{categorie_id}']";
 
         for (let option of select.options) {{
-            if (option.textContent.trim() === "ACCES") {{
+            if (option.textContent.trim() === "Action sur ligne") {{
                 select.value = option.value;
                 hidden.value = option.value;
                 select.dispatchEvent(new Event('change', {{ bubbles: true }}));
@@ -317,7 +317,7 @@ def attendre_et_remplir_categorie(driver, wait):
     """)
 
 def attendre_et_remplir_sous_categorie(driver, wait):
-    sous_categorie_id = "IO:fba919fc37b0de008c8c2b2943990e6e"
+    sous_categorie_id = "IO:2dcd5a34dbc83b804ea8fd141d961951"
     hidden_id = f"sys_original.{sous_categorie_id}"
 
     print("Attente du champ sous-catégorie dans le DOM...")
@@ -361,7 +361,7 @@ def attendre_et_remplir_sous_categorie(driver, wait):
         if (!hidden) throw "Sélecteur non trouvé : input[id='sys_original.{sous_categorie_id}']";
 
         for (let option of select.options) {{
-            if (option.textContent.trim() === "DF - Plus de signal") {{
+            if (option.textContent.trim() === "Abandon pour relance") {{
                 select.value = option.value;
                 hidden.value = option.value;
                 select.dispatchEvent(new Event('change', {{ bubbles: true }}));
@@ -371,15 +371,15 @@ def attendre_et_remplir_sous_categorie(driver, wait):
     """)
 
 def remplir_champ_technologie(driver, wait):
-    technologie_id = "IO:72b05ce2db1732006e0970d9bf96190c"
+    technologie_id = "IO:aa881e78db883b804ea8fd141d9619ad"
     hidden_id = f"sys_original.{technologie_id}"
 
     # Attendre que le champ apparaisse dans le DOM
     wait.until(EC.presence_of_element_located((By.ID, technologie_id)))
 
     driver.execute_script("""
-        const select = document.querySelector("select[id='IO:72b05ce2db1732006e0970d9bf96190c']");
-        const hidden = document.querySelector("input[id='sys_original.IO:72b05ce2db1732006e0970d9bf96190c']");
+        const select = document.querySelector("select[id='IO:aa881e78db883b804ea8fd141d9619ad']");
+        const hidden = document.querySelector("input[id='sys_original.IO:aa881e78db883b804ea8fd141d9619ad']");
 
         if (!select) throw "Sélecteur non trouvé : select[id='IO:...']";
         if (!hidden) throw "Sélecteur non trouvé : input[id='sys_original.IO:...']";
@@ -394,28 +394,9 @@ def remplir_champ_technologie(driver, wait):
         }
     """)
 
-def remplir_numero_mobile_disponible(driver, wait):
-    visible_input_id = "IO:c526c415375996408c8c2b2943990e65"
-    hidden_input_id = "sys_original.IO:c526c415375996408c8c2b2943990e65"
-    
-    # On attend que le champ soit présent dans le DOM
-    wait.until(EC.presence_of_element_located((By.ID, visible_input_id)))
-
-    driver.execute_script(f"""
-        const input = document.getElementById("{visible_input_id}");
-        const hidden = document.getElementById("{hidden_input_id}");
-        if (!input || !hidden) {{
-            throw new Error("Champs de numéro mobile non trouvés");
-        }}
-        input.value = "0612345678";
-        hidden.value = "0612345678";
-        input.dispatchEvent(new Event('input', {{ bubbles: true }}));
-        input.dispatchEvent(new Event('change', {{ bubbles: true }}));
-    """)
-
 def remplir_description(driver, wait):
-    textarea_id = "IO:228ad13037f0de008c8c2b2943990eba"
-    hidden_input_id = "sys_original.IO:228ad13037f0de008c8c2b2943990eba"
+    textarea_id = "IO:c62266fcdbc83b804ea8fd141d9619c4"
+    hidden_input_id = "sys_original.IO:c62266fcdbc83b804ea8fd141d9619c4"
 
     # Attendre que le champ description soit présent dans le DOM
     wait.until(EC.presence_of_element_located((By.ID, textarea_id)))
@@ -426,15 +407,15 @@ def remplir_description(driver, wait):
         if (!textarea || !hidden) {{
             throw new Error("Champs de description non trouvés");
         }}
-        textarea.value = "Ticket test automatisé NR FTTH SAV par Robotframework";
-        hidden.value = "Ticket test automatisé NR FTTH SAV par Robotframework";
+        textarea.value = "Ticket test automatisé NR Tco par Robotframework";
+        hidden.value = "Ticket test automatisé NR Tco SAV par Robotframework";
         textarea.dispatchEvent(new Event('input', {{ bubbles: true }}));
         textarea.dispatchEvent(new Event('change', {{ bubbles: true }}));
     """)
 
 
 def cocher_case_test_ticket(driver, wait):
-    checkbox_id = "ni.IO:5ccff1eddba60f00fb17fb261d961995"
+    checkbox_id = "ni.IO:ce16de4edb387b404ea8fd141d9619f6"
 
     # Attendre que l’élément soit présent dans le DOM
     checkbox = wait.until(EC.presence_of_element_located((By.ID, checkbox_id)))
@@ -456,12 +437,12 @@ def remplir_champs_obligatoires_iu():
 
     switch_to_main_iframe(driver)
     remplir_champ_input_id_contrat(driver, wait)
-    #remplir_champ_origine(driver, wait)
+    remplir_champ_origine(driver, wait)
     remplir_champ_technologie(driver, wait)
     attendre_et_remplir_categorie(driver, wait)
     attendre_et_remplir_sous_categorie(driver, wait)
     #attendre_et_remplir_categorie(driver, wait)
-    remplir_numero_mobile_disponible(driver, wait)
+
     remplir_description(driver, wait)
     cocher_case_test_ticket(driver, wait)
     soumettre_ticket(driver, wait)

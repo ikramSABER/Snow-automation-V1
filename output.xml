@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.12.0 on win32)" generated="2025-05-02T16:54:05.003045" rpa="false" schemaversion="5">
-<suite id="s1" name="Test Servicenow" source="C:\Users\geams\OneDrive\Bureau\ProjetAlten\tests\test_servicenow.robot">
+<robot generator="Robot 7.2.2 (Python 3.13.2 on win32)" generated="2025-05-05T13:55:14.173085" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Servicenow" source="C:\Test_Snow\ProjetAlten\tests\test_servicenow.robot">
 <kw name="Ouvrir le navigateur ServiceNow" owner="servicenow_keywords" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-05-02T16:54:05.517007" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
-<msg time="2025-05-02T16:54:06.204188" level="WARN">The chromedriver version (135.0.7049.95) detected in PATH at chromedriver.EXE might not be compatible with the detected chrome version (136.0.7103.48); currently, chromedriver 136.0.7103.49 is recommended for chrome 136.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2025-05-05T13:55:16.257064" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
+<msg time="2025-05-05T13:55:24.386556" level="WARN">The chromedriver version (135.0.7049.95) detected in PATH at chromedriver.EXE might not be compatible with the detected chrome version (136.0.7103.48); currently, chromedriver 136.0.7103.49 is recommended for chrome 136.*, so it is advised to delete the driver in PATH and retry</msg>
 <arg>${SERVICENOW_URL}</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-05-02T16:54:05.517007" elapsed="3.446429"/>
+<status status="PASS" start="2025-05-05T13:55:16.256248" elapsed="10.719890"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-05-02T16:54:08.964436" elapsed="0.062142"/>
+<status status="PASS" start="2025-05-05T13:55:26.978503" elapsed="4.355735"/>
 </kw>
-<status status="PASS" start="2025-05-02T16:54:05.516013" elapsed="3.510565"/>
+<status status="PASS" start="2025-05-05T13:55:16.252412" elapsed="15.082549"/>
 </kw>
 <test id="s1-t1" name="Création et vérifications d’un ticket sur ServiceNow" line="8">
 <kw name="Se connecter à ServiceNow" owner="servicenow_keywords">
@@ -22,77 +22,77 @@
 <arg>id=user_name</arg>
 <arg>timeout=15s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-05-02T16:54:09.028435" elapsed="0.049048"/>
+<status status="PASS" start="2025-05-05T13:55:31.358490" elapsed="0.522957"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-02T16:54:09.078538" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
+<msg time="2025-05-05T13:55:31.882790" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
 <arg>id=user_name</arg>
 <arg>${SNOW_USERNAME}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-02T16:54:09.077483" elapsed="0.140028"/>
+<status status="PASS" start="2025-05-05T13:55:31.882024" elapsed="0.378697"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-02T16:54:09.218558" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
+<msg time="2025-05-05T13:55:32.262369" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>${SNOW_PASSWORD}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-02T16:54:09.218558" elapsed="0.126874"/>
+<status status="PASS" start="2025-05-05T13:55:32.261483" elapsed="0.346808"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-02T16:54:09.346444" level="INFO">Clicking button 'id=sysverb_login'.</msg>
+<msg time="2025-05-05T13:55:32.609692" level="INFO">Clicking button 'id=sysverb_login'.</msg>
 <arg>id=sysverb_login</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-02T16:54:09.345432" elapsed="4.720192"/>
+<status status="PASS" start="2025-05-05T13:55:32.608993" elapsed="12.992067"/>
 </kw>
-<status status="PASS" start="2025-05-02T16:54:09.028435" elapsed="5.037189"/>
+<status status="PASS" start="2025-05-05T13:55:31.355289" elapsed="14.246130"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-05-02T16:54:34.067294" level="INFO">Slept 20 seconds.</msg>
+<msg time="2025-05-05T13:56:05.603738" level="INFO">Slept 20 seconds.</msg>
 <arg>time_=20</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-05-02T16:54:14.066623" elapsed="20.000671"/>
+<status status="PASS" start="2025-05-05T13:55:45.602381" elapsed="20.001845"/>
 </kw>
 <kw name="Cliquer Sur Bouton All" owner="shadow">
-<msg time="2025-05-02T16:54:34.163299" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
+<msg time="2025-05-05T13:56:05.667088" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
 Clic sur le bouton 'All' réussi.</msg>
-<status status="PASS" start="2025-05-02T16:54:34.068293" elapsed="0.095006"/>
+<status status="PASS" start="2025-05-05T13:56:05.606598" elapsed="0.060840"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-05-02T16:55:04.166134" level="INFO">Slept 30 seconds.</msg>
+<msg time="2025-05-05T13:56:35.670351" level="INFO">Slept 30 seconds.</msg>
 <arg>time_=30</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-05-02T16:54:34.164298" elapsed="30.001836"/>
+<status status="PASS" start="2025-05-05T13:56:05.668987" elapsed="30.001742"/>
 </kw>
 <kw name="Rechercher Et Selectionner Creer Iu" owner="shadow">
-<msg time="2025-05-02T16:55:04.670809" level="INFO">[1/30] Tentative d’accès à la barre de recherche contextuelle...
-Texte 'Créer IU' saisi dans la barre contextuelle.
-[1/30] Tentative de clic sur le favori 'Créer IU'...
-[2/30] Tentative de clic sur le favori 'Créer IU'...
-Clic sur 'Créer IU' dans les favoris réussi.</msg>
-<status status="PASS" start="2025-05-02T16:55:04.167128" elapsed="0.503681"/>
+<msg time="2025-05-05T13:56:36.354267" level="INFO">[1/30] Tentative d’accès à la barre de recherche contextuelle...
+Texte 'Créer Tco' saisi dans la barre contextuelle.
+[1/30] Tentative de clic sur le favori 'Créer Tco'...
+[2/30] Tentative de clic sur le favori 'Créer Tco'...
+Clic sur 'Créer Tco' dans les favoris réussi.</msg>
+<status status="PASS" start="2025-05-05T13:56:35.671788" elapsed="0.682750"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-05-02T16:55:24.672304" level="INFO">Slept 20 seconds.</msg>
+<msg time="2025-05-05T13:56:56.357256" level="INFO">Slept 20 seconds.</msg>
 <arg>time_=20</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-05-02T16:55:04.671808" elapsed="20.000496"/>
+<status status="PASS" start="2025-05-05T13:56:36.355723" elapsed="20.002326"/>
 </kw>
 <kw name="Remplir Champs Obligatoires Iu" owner="shadow">
-<msg time="2025-05-02T16:55:38.162446" level="INFO">Attente du champ catégorie dans le DOM...
+<msg time="2025-05-05T13:57:02.431028" level="INFO">Attente du champ catégorie dans le DOM...
 Attente du champ sous-catégorie dans le DOM...
 Tous les champs obligatoires ont été remplis.</msg>
-<status status="PASS" start="2025-05-02T16:55:24.673305" elapsed="13.489141"/>
+<status status="PASS" start="2025-05-05T13:56:56.359570" elapsed="6.072155"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-05-02T16:55:58.163846" level="INFO">Slept 20 seconds.</msg>
+<msg time="2025-05-05T13:57:22.435960" level="INFO">Slept 20 seconds.</msg>
 <arg>time_=20</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-05-02T16:55:38.163450" elapsed="20.000396"/>
+<status status="PASS" start="2025-05-05T13:57:02.433936" elapsed="20.003339"/>
 </kw>
 <doc>Simule la création d’un ticket LTT ServiceNow et vérifie l’ensemble des éléments requis.</doc>
-<status status="PASS" start="2025-05-02T16:54:09.026578" elapsed="109.139272"/>
+<status status="PASS" start="2025-05-05T13:55:31.337391" elapsed="111.101924"/>
 </test>
-<status status="PASS" start="2025-05-02T16:54:05.005079" elapsed="113.163805"/>
+<status status="PASS" start="2025-05-05T13:55:14.177113" elapsed="128.265821"/>
 </suite>
 <statistics>
 <total>
@@ -105,6 +105,6 @@ Tous les champs obligatoires ont été remplis.</msg>
 </suite>
 </statistics>
 <errors>
-<msg time="2025-05-02T16:54:06.204188" level="WARN">The chromedriver version (135.0.7049.95) detected in PATH at chromedriver.EXE might not be compatible with the detected chrome version (136.0.7103.48); currently, chromedriver 136.0.7103.49 is recommended for chrome 136.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2025-05-05T13:55:24.386556" level="WARN">The chromedriver version (135.0.7049.95) detected in PATH at chromedriver.EXE might not be compatible with the detected chrome version (136.0.7103.48); currently, chromedriver 136.0.7103.49 is recommended for chrome 136.*, so it is advised to delete the driver in PATH and retry</msg>
 </errors>
 </robot>
