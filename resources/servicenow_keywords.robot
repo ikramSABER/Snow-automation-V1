@@ -43,4 +43,20 @@ Lancer Demande Information
 Verification envoi SMS
     Verifier Etat Et Etape Technique
     Verifier Envoi Sms
-    Recuperer Numero Ticket
+    ${numero_ticket}=    Recuperer Numero Ticket
+    Log To Console    Le ticket est : ${numero_ticket}
+
+
+Aller à la Vue des Tickets SAV
+    Cliquer Sur Bouton All
+    Sleep    time_=5
+    Rechercher Et Selectionner Vue Tickets SAV
+
+Rechercher et Modifier le Ticket DDI1
+    Rechercher Ticket Par Numero
+    #Modifier Date Degel Via Calendrier    SAV-FTTH0008669277
+    #Cliquer Sur Lien Ticket    ${numero_ticket}
+
+Attendre Et Vérifier Relance DDI1
+    Attendre Motif Gel Relance DDI1
+    Verifier SMS Relance DDI1

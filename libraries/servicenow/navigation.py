@@ -52,37 +52,7 @@ def cliquer_sur_bouton_all():
 
 
 
-def remplir_champ_global_search(texte):
-    driver = get_driver()
-    max_attempts = 30
-    delay = 0.3
 
-    for attempt in range(max_attempts):
-        print(f"[{attempt+1}/{max_attempts}] Tentative d'accès au champ de recherche globale...")
-        try:
-            input_element = driver.execute_script("""
-                try {
-                    return document
-                        .querySelector("now-nav-layout")
-                        .shadowRoot
-                        .querySelector("sn-polaris-layout")
-                        .shadowRoot
-                        .querySelector("now-header")
-                        .shadowRoot
-                        .querySelector("sn-polaris-search input");
-                } catch(e) {
-                    return null;
-                }
-            """)
-            if input_element:
-                input_element.clear()
-                input_element.send_keys(texte)
-                print("Texte saisi avec succès.")
-                return
-        except Exception as e:
-            print(f"Erreur JS : {e}")
-        time.sleep(delay)
-    raise Exception("Impossible de remplir le champ de recherche global.")
 
 
 def rechercher_et_selectionner_creer_iu():
@@ -195,12 +165,39 @@ def rechercher_et_selectionner_creer_iu():
 
 def switch_to_main_iframe():
     driver = get_driver()
-    iframe = driver.execute_script("""
-        return document
-            .querySelector("body > macroponent-f51912f4c700201072b211d4d8c26010")
-            .shadowRoot
-            .querySelector("#gsft_main");
-    """)
-    if not iframe:
-        raise Exception("Iframe introuvable dans le Shadow DOM.")
-    driver.switch_to.frame(iframe)
+
+    # verifier si on est déja dans une iframe
+    if driver.execute_script("return window.frameElement !== null;"):
+        print("[INFO] Déjà dans l’iframe, aucune action nécessaire.")
+        return
+
+    max_attempts = 30
+    delay = 0.3
+
+    for attempt in range(max_attempts):
+        print(f"[{attempt+1}/{max_attempts}] Tentative de récupération de l’iframe principale...")
+
+        try:
+            iframe = driver.execute_script("""
+                try {
+                    const macro = document.querySelector("macroponent-f51912f4c700201072b211d4d8c26010");
+                    if (!macro || !macro.shadowRoot) return null;
+
+                    const shadow = macro.shadowRoot;
+                    return shadow.querySelector("#gsft_main");
+                } catch(e) {
+                    return null;
+                }
+            """)
+
+            if iframe:
+                driver.switch_to.frame(iframe)
+                print("[INFO] Iframe principale trouvée et activée.")
+                return
+
+        except Exception as e:
+            print(f"Erreur JS : {e}")
+
+        time.sleep(delay)
+
+    raise Exception("Échec de récupération de l’iframe principale après plusieurs tentatives.")
