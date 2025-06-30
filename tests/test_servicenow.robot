@@ -29,7 +29,7 @@ DDI
 Date Prévisionnelle De Dégel
     Sleep    time_=5
     Aller à l'URL du Ticket    https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/%24pa_dashboard.do
-    Sleep    time_=5
+    Sleep    time_=10
     Aller à la Vue des Tickets SAV
     Sleep    time_=5
 

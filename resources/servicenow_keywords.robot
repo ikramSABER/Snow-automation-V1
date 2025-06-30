@@ -49,7 +49,6 @@ Verification envoi SMS
 
 Aller à la Vue des Tickets SAV
     Cliquer Sur Bouton All
-    Sleep    time_=5
     Rechercher Et Selectionner Vue Tickets SAV
 
 Rechercher et Modifier le Ticket DDI1
