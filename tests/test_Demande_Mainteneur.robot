@@ -16,9 +16,7 @@ Test DDI Complet
     Sleep    time_=10
     Naviguer Vers Lien Ticket Spécifique
     Sleep    time_=10
-    Forcer Raz Et Mettre Ticket Actif
-    Sleep    time_=10
-    Affecter Ticket
+    Remplir Champ Assigned To
     Sleep    time_=10
     cliquer bouton save
     Sleep    time_=10
@@ -36,5 +34,11 @@ Test DDI Complet
     Sleep    time_=10
     cliquer_bouton_Modifier_RDV
     Sleep    time_=10
-
-
+    Modifier Rdv Jplus2 Apres Midi
+    Sleep    time_=10
+    cliquer bouton Modifier RDV2
+    Sleep    time_=10
+    clicker bouton Annuler RDV
+    Sleep    time_=10
+    clicker sur popup ok
+    Sleep    time_=10
