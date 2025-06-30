@@ -54,9 +54,7 @@ Aller à la Vue des Tickets SAV
 
 Rechercher et Modifier le Ticket DDI1
     Rechercher Ticket Par Numero
-    #Modifier Date Degel Via Calendrier    SAV-FTTH0008669277
-    #Cliquer Sur Lien Ticket    ${numero_ticket}
 
-Attendre Et Vérifier Relance DDI1
-    Attendre Motif Gel Relance DDI1
-    Verifier SMS Relance DDI1
+#Attendre Et Vérifier Relance DDI1
+    #Attendre Motif Gel Relance DDI1
+    #Verifier SMS Relance DDI1

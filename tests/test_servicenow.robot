@@ -15,7 +15,7 @@ Création et vérifications d’un ticket sur ServiceNow
 
 DDI
     #Aller à l'URL du Ticket    ${url_ticket}
-    #Aller à l'URL du Ticket    https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3De9c1bfb9c3166e104c5b2dd9d00131e2%26sysparm_record_target%3Du_savftth%26sysparm_record_row%3D1%26sysparm_record_rows%3D170%26sysparm_record_list%3Dactive%253Dtrue%255EORDERBYDESCsys_created_on
+    #Aller à l'URL du Ticket    https://bouyguestelecomltt3.service-now.com/u_savftth.do?sys_id=16124af387526210e93e433d8bbb35e0&sysparm_record_target=u_savftth&sysparm_record_row=1&sysparm_record_rows=175&sysparm_record_list=active%3Dtrue%5EORDERBYDESCsys_created_on
     #Sleep    time_=5
     
     Forcer Raz et Mettre Le Ticket Actif

@@ -297,7 +297,6 @@ def rechercher_ticket_par_numero():
         input.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter', keyCode: 13, which: 13, bubbles: true }));
         input.form?.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     """, champ_numero)
-
     print(f"[INFO] Recherche du ticket {numero_ticket} effectuée.")
 
 
@@ -318,18 +317,26 @@ def modifier_date_previsionnelle_via_calendrier():
             break
     if not row:
         raise Exception(f"Ligne du ticket {numero_ticket} introuvable")
+    time.sleep(15)
+    # prendre la date de création
+    date_creation_str = row.find_element(By.CSS_SELECTOR, "td:nth-child(5) div.datex.date-calendar").text.strip()
+    print(f"[DEBUG] Date de création lue : {date_creation_str}")
+    try:
+        date_creation = datetime.strptime(date_creation_str, "%d-%m-%Y %H:%M:%S")
+    except ValueError:
+        date_creation = datetime.strptime(date_creation_str, "%d-%m-%Y %H:%M")
 
-    # la case de la date previsionnelle
+    date_target = (date_creation + timedelta(minutes=2)).replace(microsecond=0)
+    print(f"[INFO] Nouvelle date prévisionnelle = {date_target.strftime('%d/%m/%Y %H:%M:%S')}")
+    time.sleep(15)
+    # calendrier
     champ_calendrier = row.find_element(By.CSS_SELECTOR, "td:nth-child(6) div.datex.date-calendar")
     ActionChains(driver).double_click(champ_calendrier).perform()
     print("[INFO] Double clic effectué sur le calendrier.")
     time.sleep(1)
 
-    # on met la date à date + 2j et l'heure à 18:00:00
-    date_target = (datetime.now() + timedelta(days=2)).replace(hour=18, minute=0, second=0, microsecond=0)
+    # sélection du jour
     day_id = f"GwtDateTimePicker_day{date_target.day}"
-
-    # selectionner le jour 
     driver.execute_script("""
         const el = document.getElementById(arguments[0]);
         if (el) {
@@ -338,31 +345,21 @@ def modifier_date_previsionnelle_via_calendrier():
             el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         }
     """, day_id)
-    time.sleep(0.5)
 
-    # selectionner l'heure
+    # sélection de l'heure
     try:
         heure, minute, seconde = date_target.strftime("%H:%M:%S").split(":")
-        # Heure
         champ_hh = driver.find_element(By.ID, "GwtDateTimePicker_hh")
-        champ_hh.clear()
-        champ_hh.send_keys(heure.zfill(2))
-
-        # Minute
         champ_mm = driver.find_element(By.ID, "GwtDateTimePicker_mm")
-        champ_mm.clear()
-        champ_mm.send_keys(minute.zfill(2))
-
-        # Seconde
         champ_ss = driver.find_element(By.ID, "GwtDateTimePicker_ss")
-        champ_ss.clear()
-        champ_ss.send_keys(seconde.zfill(2))
-
+        champ_hh.clear(); champ_hh.send_keys(heure.zfill(2))
+        champ_mm.clear(); champ_mm.send_keys(minute.zfill(2))
+        champ_ss.clear(); champ_ss.send_keys(seconde.zfill(2))
         print(f"[INFO] Heure {heure}:{minute}:{seconde} saisie avec succès.")
     except Exception as e:
         print(f"[ERROR] Échec de la saisie de l’heure : {e}")
 
-    # valider en cliquant hors calendrier
+    # clic de validation hors calendrier
     try:
         cellule_numero = row.find_element(By.CSS_SELECTOR, "td:nth-child(3)")
         cellule_numero.click()
