@@ -193,6 +193,8 @@ def rechercher_et_selectionner_creer_Tco():
     raise Exception("Impossible de cliquer sur 'Créer tco' dans les favoris.")
 
 
+
+
 def switch_to_main_iframe(driver):
     iframe = driver.execute_script("""
         return document

@@ -1,6 +1,7 @@
 *** Settings ***
 Resource    ../resources/servicenow_keywords.robot
 Suite Setup    Ouvrir le navigateur ServiceNow
+Library    ../libraries/servicenow/navigation.py
 #Suite Teardown    Fermer le navigateur
 
 *** Test Cases ***
@@ -16,3 +17,4 @@ Création et vérifications d’un ticket sur ServiceNow
     Sleep    time_=5
     Remplir les champs du ticket IU
     Sleep    time_=5
+   
