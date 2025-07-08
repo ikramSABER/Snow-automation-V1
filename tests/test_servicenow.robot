@@ -32,11 +32,15 @@ Date Prévisionnelle De Dégel
     Sleep    time_=10
     Aller à la Vue des Tickets SAV
     Sleep    time_=5
-
-    #Rechercher et Modifier le Ticket DDI1    SAV-FTTH0008669535
-    #Modifier Date Degel Via Calendrier    SAV-FTTH0008669535
-
     Rechercher et Modifier le Ticket DDI1
     Sleep    time_=5
     Modifier Date Previsionnelle Via Calendrier
-    #Attendre Et Vérifier Relance DDI1
+
+Relance DDI1
+    Sleep    time_=5
+    Cliquer Sur Numero Ticket
+    Sleep    time_=5
+    Attendre Le Motif Du Gel    relance ddi1
+    Sleep    time_=5
+    Vérifier Envoi SMS
+    Recuperer Numero Ticket

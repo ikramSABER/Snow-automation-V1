@@ -6,6 +6,13 @@ from selenium.webdriver.support.ui import Select
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 from datetime import datetime, timedelta
+from robot.libraries.BuiltIn import BuiltIn
+from datetime import datetime, timedelta
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+import time
+import locale
 
 def aller_à_lien_ticket(url):
     driver = get_driver()
@@ -299,73 +306,282 @@ def rechercher_ticket_par_numero():
     """, champ_numero)
     print(f"[INFO] Recherche du ticket {numero_ticket} effectuée.")
 
-
-from robot.libraries.BuiltIn import BuiltIn
-
 def modifier_date_previsionnelle_via_calendrier():
+    try:
+        locale.setlocale(locale.LC_TIME, 'en_US.UTF-8')
+    except:
+        print("[WARN] Locale en_US non supportée, aria-label pourrait échouer.")
+
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+    numero_ticket = get_numero_ticket_suite()
+
+    # ligne du ticket
+    rows = driver.find_elements(By.CSS_SELECTOR, "tr[id^='row_u_savftth_'] td:nth-child(3)")
+    row = next((cell.find_element(By.XPATH, "../..") for cell in rows if cell.text.strip() == numero_ticket), None)
+    if not row:
+        raise Exception(f"Ligne du ticket {numero_ticket} introuvable")
+
+    now = datetime.now()
+    target = (now + timedelta(hours=1, minutes=2)).replace(microsecond=0)
+    print(f"[DEBUG] Now local = {now.strftime('%d/%m/%Y %H:%M:%S')}")
+    print(f"[DEBUG] Target date = {target.strftime('%d/%m/%Y %H:%M:%S')}")
+
+    # Ouvrir le calendrier avec double clic
+    champ_cal = row.find_element(By.CSS_SELECTOR, "td:nth-child(6) div.datex.date-calendar")
+    driver.execute_script("arguments[0].scrollIntoView(true);", champ_cal)
+    try:
+        ActionChains(driver).double_click(champ_cal).perform()
+        print("[INFO] Double clic effectué sur le calendrier.")
+        time.sleep(0.5)
+    except:
+        champ_cal.click()
+        print("[WARN] Double clic échoué, clic simple exécuté.")
+
+    # attendre le champ hh preuve de calendrier ouvert 
+    try:
+        wait.until(lambda d: d.find_element(By.ID, "GwtDateTimePicker_hh").is_displayed())
+        print("[INFO] Calendrier bien ouvert (champ heure visible).")
+    except Exception as e:
+        print("[ERROR] Le calendrier ne s’est pas ouvert correctement.")
+        driver.save_screenshot("calendrier_non_ouvert.png")
+        raise e
+
+    # selection du jour par ariel label au lieu de jspath
+    jour_str = str(target.day)
+    label_target = target.strftime(f"%A, %B {jour_str}, %Y")
+    print(f"[DEBUG] aria-label attendu = {label_target}")
+    try:
+        jour_elem = wait.until(lambda d: d.find_element(By.CSS_SELECTOR, f'a[aria-label="{label_target}"]'))
+        jour_elem.click()
+        print(f"[INFO] Jour sélectionné avec aria-label : {label_target}")
+    except Exception as e:
+        print(f"[ERROR] Jour introuvable via aria-label : {label_target}")
+        driver.save_screenshot("erreur_jour_selection.png")
+        raise
+
+    # Heure/minute/seconde
+    hh, mm, ss = target.strftime("%H:%M:%S").split(":")
+    for suffix, val in (("hh", hh), ("mm", mm), ("ss", ss)):
+        champ = wait.until(lambda d: d.find_element(By.ID, f"GwtDateTimePicker_{suffix}"))
+        champ.clear()
+        champ.send_keys(val)
+        print(f"[INFO] Champ {suffix} rempli avec {val}")
+
+    # Valider
+    try:
+        row.find_element(By.CSS_SELECTOR, "td:nth-child(3)").click()
+        print("[INFO] Validation par clic hors calendrier.")
+    except:
+        champ_cal.send_keys(Keys.TAB)
+        print("[INFO] Validation par touche TAB.")
+
+    print(f"[INFO] Date prévisionnelle fixée à : {target.strftime('%d/%m/%Y %H:%M:%S')}")
+
+
+def cliquer_sur_numero_ticket(timeout=30):
+    from selenium.webdriver.support import expected_conditions as EC
+
     driver = get_driver()
     wait = get_wait()
     numero_ticket = get_numero_ticket_suite()
 
-    # la ligne du ticket
-    row_selector = f"tr[id^='row_u_savftth_'] td:nth-child(3)"
-    rows = driver.find_elements(By.CSS_SELECTOR, row_selector)
-    row = None
-    for cell in rows:
+    row_selector = f"tr[id^='row_u_savftth_'] td:nth-child(3) > a"
+    cellules = driver.find_elements(By.CSS_SELECTOR, row_selector)
+
+    for cell in cellules:
         if cell.text.strip() == numero_ticket:
-            row = cell.find_element(By.XPATH, "../..")
-            break
-    if not row:
-        raise Exception(f"Ligne du ticket {numero_ticket} introuvable")
-    time.sleep(15)
-    # prendre la date de création
-    date_creation_str = row.find_element(By.CSS_SELECTOR, "td:nth-child(5) div.datex.date-calendar").text.strip()
-    print(f"[DEBUG] Date de création lue : {date_creation_str}")
+            try:
+                driver.execute_script("arguments[0].scrollIntoView(true);", cell)
+                print(f"[DEBUG] Tentative de clic sur le numéro de ticket {numero_ticket}")
+                wait.until(EC.element_to_be_clickable(cell)).click()
+                print(f"[INFO] Clic réussi sur le ticket {numero_ticket}")
+                return
+            except Exception as e:
+                print(f"[ERROR] Échec du clic sur le numéro de ticket : {e}")
+                raise
+
+    raise Exception(f"Numéro de ticket {numero_ticket} introuvable dans la liste.")
+
+
+
+def attendre_motif_gel(motif_attendu="relance ddi1", timeout=500):
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
+    print(f"[DEBUG] Début de l'attente du motif de gel : {motif_attendu}")
+
+    for _ in range(timeout):
+        try:
+            champ = driver.find_element(By.ID, "u_savftth.u_geljustif")
+            selected = champ.find_element(By.CSS_SELECTOR, "option:checked").text.strip().lower()
+            print(f"[DEBUG] Motif gel actuel : {selected}")
+            if motif_attendu.lower() in selected:
+                print(f"[INFO] ✅ Motif gel attendu détecté : {motif_attendu}")
+                return
+
+            time.sleep(1)
+            bouton_enregistrer = driver.find_element(By.CSS_SELECTOR, "#sysverb_update_and_stay")
+            bouton_enregistrer.click()
+        except Exception as e:
+            print(f"[WARN] Lecture motif échouée : {e}")
+        time.sleep(1)
+
+    raise Exception(f"[ERROR] Motif gel '{motif_attendu}' non détecté après {timeout}s")
+
+def verifier_envoi_sms(version):
+    driver = get_driver()
+    wait = get_wait()
+
+    wait.until(lambda d: d.find_element(By.ID, "sn_form_inline_stream_entries"))
+    ul = driver.find_element(By.CSS_SELECTOR, "#sn_form_inline_stream_entries > ul.activities-form")
+    elements_li = ul.find_elements(By.CSS_SELECTOR, "li.h-card")
+
+    contenu_global = ""
+    for li in elements_li:
+        try:
+            metadata = li.find_element(By.CSS_SELECTOR, ".sn-card-component-time").text.lower()
+            if "work notes" in metadata:
+                bloc = li.find_element(By.CSS_SELECTOR, ".sn-card-component_summary")
+                contenu = bloc.text.strip().lower()
+                contenu_global += contenu + "\n"
+        except Exception:
+            continue
+
+    print("[DEBUG] Contenu global des notes de travail :\n" + contenu_global)
+
+    if "l'envoi du sms a été effectué avec succès" in contenu_global:
+        print("[INFO] ✅ SMS envoyé avec succès")
+    elif f"le sms ftth - ddi - {version}" in contenu_global:
+        print(f"[AVERTISSEMENT] ⚠️ SMS '{version.upper()}' non envoyé")
+    else:
+        print("[AVERTISSEMENT] ⚠️ Aucun message relatif au SMS trouvé")
+        
+def attendre_etat_actif(timeout=120):
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
+    for _ in range(timeout):
+        try:
+            select_etat = wait.until(lambda d: d.find_element(By.ID, "u_savftth.state"))
+            selected = Select(select_etat).first_selected_option.text.strip().lower()
+            print(f"[DEBUG] État actuel : {selected}")
+            if selected in ["actif", "active"]:
+                print("[INFO] État 'actif' détecté.")
+                return
+        except Exception as e:
+            print(f"[WARN] Problème de lecture état : {e}")
+        time.sleep(1)
+
+    raise TimeoutError("L'état du ticket n'est pas passé à 'Actif' dans le temps imparti.")
+
+def attendre_groupes_silo_et_affectation(timeout=600):
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
+    for _ in range(timeout):
+        try:
+            groupe_silo = wait.until(lambda d: d.find_element(By.ID, "u_savftth.u_groupe_silo")).get_attribute("value")
+            groupe_aff = wait.until(lambda d: d.find_element(By.ID, "sys_display.u_savftth.assignment_group")).get_attribute("value")
+            print(f"[DEBUG] Groupe Silo: {groupe_silo} | Groupe Affectation: {groupe_aff}")
+            if groupe_silo.strip() and groupe_aff.strip():
+                print("[INFO] Groupes correctement renseignés.")
+                return
+        except Exception as e:
+            print(f"[WARN] Problème de lecture groupe : {e}")
+        time.sleep(1)
+
+    raise TimeoutError("Groupes 'silo' ou 'affectation' non remplis après 10 minutes.")
+
+def ajouter_worknote(message="test DDI terminer"):
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
+    textarea = wait.until(lambda d: d.find_element(By.ID, "activity-stream-textarea"))
+    textarea.clear()
+    textarea.send_keys(message)
+    print(f"[INFO] Worknote ajoutée : {message}")
+
+def cliquer_sur_information_client_recu():
+    driver = get_driver()
+    wait = get_wait()
+    bouton = wait.until(lambda d: d.find_element(By.ID, "u_info_client_recu"))
+    bouton.click()
+    print("[INFO] Bouton 'Information Client Reçu' cliqué.")
+
+def recuperer_worknotes_sms():
+    driver = get_driver()
+    wait = get_wait()
+
+    wait.until(lambda d: d.find_element(By.ID, "sn_form_inline_stream_entries"))
+    ul = driver.find_element(By.CSS_SELECTOR, "#sn_form_inline_stream_entries > ul.activities-form")
+    elements_li = ul.find_elements(By.CSS_SELECTOR, "li.h-card")
+
+    contenu_global = []
+    for li in elements_li:
+        try:
+            metadata = li.find_element(By.CSS_SELECTOR, ".sn-card-component-time").text.lower()
+            if "work notes" in metadata:
+                bloc = li.find_element(By.CSS_SELECTOR, ".sn-card-component_summary")
+                contenu = bloc.text.strip().lower()
+                contenu_global.append(contenu)
+        except Exception:
+            continue
+
+    return contenu_global
+
+
+def verifier_sms_contient_texte(contenu_attendu: str):
+    logs = recuperer_worknotes_sms()
+    if not any(contenu_attendu in log for log in logs):
+        raise AssertionError(f"SMS attendu non trouvé dans les worknotes : '{contenu_attendu}'")
+    
+
+def recuperer_valeur_champ(champ_id: str):
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
     try:
-        date_creation = datetime.strptime(date_creation_str, "%d-%m-%Y %H:%M:%S")
-    except ValueError:
-        date_creation = datetime.strptime(date_creation_str, "%d-%m-%Y %H:%M")
-
-    date_target = (date_creation + timedelta(minutes=2)).replace(microsecond=0)
-    print(f"[INFO] Nouvelle date prévisionnelle = {date_target.strftime('%d/%m/%Y %H:%M:%S')}")
-    time.sleep(15)
-    # calendrier
-    champ_calendrier = row.find_element(By.CSS_SELECTOR, "td:nth-child(6) div.datex.date-calendar")
-    ActionChains(driver).double_click(champ_calendrier).perform()
-    print("[INFO] Double clic effectué sur le calendrier.")
-    time.sleep(1)
-
-    # sélection du jour
-    day_id = f"GwtDateTimePicker_day{date_target.day}"
-    driver.execute_script("""
-        const el = document.getElementById(arguments[0]);
-        if (el) {
-            el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-            el.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
-            el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-        }
-    """, day_id)
-
-    # sélection de l'heure
-    try:
-        heure, minute, seconde = date_target.strftime("%H:%M:%S").split(":")
-        champ_hh = driver.find_element(By.ID, "GwtDateTimePicker_hh")
-        champ_mm = driver.find_element(By.ID, "GwtDateTimePicker_mm")
-        champ_ss = driver.find_element(By.ID, "GwtDateTimePicker_ss")
-        champ_hh.clear(); champ_hh.send_keys(heure.zfill(2))
-        champ_mm.clear(); champ_mm.send_keys(minute.zfill(2))
-        champ_ss.clear(); champ_ss.send_keys(seconde.zfill(2))
-        print(f"[INFO] Heure {heure}:{minute}:{seconde} saisie avec succès.")
+        if champ_id.startswith("sys_display.") or champ_id.startswith("u_savftth."):
+            elem = wait.until(lambda d: d.find_element(By.ID, champ_id))
+        else:
+            elem = wait.until(lambda d: d.find_element(By.ID, f"u_savftth.{champ_id}"))
+        return elem.get_attribute("value").strip()
     except Exception as e:
-        print(f"[ERROR] Échec de la saisie de l’heure : {e}")
+        print(f"[ERREUR] Impossible de lire la valeur du champ {champ_id} : {e}")
+        return ""
 
-    # clic de validation hors calendrier
-    try:
-        cellule_numero = row.find_element(By.CSS_SELECTOR, "td:nth-child(3)")
-        cellule_numero.click()
-        print("[INFO] Validation de la date via clic hors calendrier.")
-    except Exception:
-        champ_calendrier.send_keys(Keys.TAB)
-        print("[INFO] Validation via touche TAB.")
 
-    print(f"[INFO] Date prévisionnelle fixée à : {date_target.strftime('%d/%m/%Y %H:%M:%S')}")
+def attendre_groupes(timeout: int = 600):
+    for _ in range(timeout):
+        groupe_silo = recuperer_valeur_champ("u_groupe_silo")
+        groupe_aff = recuperer_valeur_champ("assignment_group")
+        if groupe_silo and groupe_aff:
+            return
+        time.sleep(1)
+    raise TimeoutError("Les champs 'groupe silo' et/ou 'groupe d’affectation' ne sont pas remplis après 10 minutes.")
+
+
+def cliquer_sur_bouton_degeler():
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
+    bouton = wait.until(lambda d: d.find_element(By.ID, "u_degeler"))
+    driver.execute_script("arguments[0].scrollIntoView(true);", bouton)
+    time.sleep(0.5)
+    bouton.click()
+    print("[INFO] Bouton 'Dégeler' cliqué.")
+
+
+def ajouter_worknote_et_confirmer(texte: str = "test DDI terminer"):
+    input_worknote = get_driver().find_element(By.ID, "activity-stream-textarea")
+    input_worknote.send_keys(texte)
+    bouton_info_client = get_driver().find_element(By.ID, "u_info_client_recu")
+    bouton_info_client.click()

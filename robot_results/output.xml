@@ -1,334 +1,881 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.12.0 on win32)" generated="2025-06-30T10:00:48.631624" rpa="false" schemaversion="5">
-<suite id="s1" name="Test Incident" source="C:\Users\geams\OneDrive\Bureau\ProjetAlten\tests\test_incident.robot">
-<test id="s1-t1" name="Créer un ticket Jira et effectuer des actions post-création" line="5">
-<kw name="Créer un ticket Jira" owner="jira_keywords">
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-30T10:00:50.896530" level="INFO">${project} = {'key': 'AL'}</msg>
-<var>${project}</var>
-<arg>key=AL</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-30T10:00:50.896530" elapsed="0.000998"/>
+<robot generator="Robot 7.2.2 (Python 3.12.0 on win32)" generated="2025-07-07T14:27:04.213324" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Servicenow" source="C:\Users\geams\OneDrive\Bureau\ProjetAlten\tests\test_servicenow.robot">
+<kw name="Ouvrir le navigateur ServiceNow" owner="servicenow_keywords" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-07-07T14:27:04.497300" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
+<arg>${SERVICENOW_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-07-07T14:27:04.497300" elapsed="4.780529"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-30T10:00:50.897528" level="INFO">${issuetype} = {'name': 'Tâche'}</msg>
-<var>${issuetype}</var>
-<arg>name=Tâche</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-30T10:00:50.897528" elapsed="0.000000"/>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-07-07T14:27:09.277829" elapsed="0.063623"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-30T10:00:50.898533" level="INFO">${fields} = {'project': {'key': 'AL'}, 'summary': 'Incident de test depuis Robot Framework', 'description': "Ticket généré automatiquement pour test d'automatisation", 'issuetype': {'name': 'Tâche'}}</msg>
-<var>${fields}</var>
-<arg>project=${project}</arg>
-<arg>summary=Incident de test depuis Robot Framework</arg>
-<arg>description=Ticket généré automatiquement pour test d'automatisation</arg>
-<arg>issuetype=${issuetype}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-30T10:00:50.898533" elapsed="0.000000"/>
+<status status="PASS" start="2025-07-07T14:27:04.497136" elapsed="4.844316"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-30T10:00:50.899920" level="INFO">${data} = {'fields': {'project': {'key': 'AL'}, 'summary': 'Incident de test depuis Robot Framework', 'description': "Ticket généré automatiquement pour test d'automatisation", 'issuetype': {'name': 'Tâche'}}}</msg>
-<var>${data}</var>
-<arg>fields=${fields}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-30T10:00:50.899576" elapsed="0.000344"/>
+<test id="s1-t1" name="Création et vérifications d’un ticket sur ServiceNow" line="7">
+<kw name="Se connecter à ServiceNow" owner="servicenow_keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=user_name</arg>
+<arg>timeout=15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-07T14:27:09.344253" elapsed="0.054115"/>
 </kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-30T10:00:50.900769" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
-<var>${headers}</var>
-<arg>Content-Type=application/json</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-30T10:00:50.899920" elapsed="0.000938"/>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-07T14:27:09.399376" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
+<arg>id=user_name</arg>
+<arg>${SNOW_USERNAME}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-07T14:27:09.399376" elapsed="0.222060"/>
 </kw>
-<kw name="Create List" owner="BuiltIn">
-<msg time="2025-06-30T10:00:50.901584" level="INFO">${auth} = ['riadamine59@gmail.com', 'ATATT3xFfGF0umxAYyYCDL4J0e40B2MFxREek-9s9YUUeyNQeNcfyUtLCsXJ1ePuPJDrFw3VjhmgISz49c-qPqEmoPfMmJsJRiAenehdlUJcPPAEv9kpNjXlCleeboY3ALd4-pfGIHKLL_pYyKYhzIiIAkBy4HfHxHt0d6q4D3ZCe...</msg>
-<var>${auth}</var>
-<arg>${JIRA_USER}</arg>
-<arg>${JIRA_TOKEN}</arg>
-<doc>Returns a list containing given items.</doc>
-<status status="PASS" start="2025-06-30T10:00:50.901075" elapsed="0.000509"/>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-07T14:27:09.622449" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
+<arg>id=user_password</arg>
+<arg>${SNOW_PASSWORD}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-07T14:27:09.622449" elapsed="0.127498"/>
 </kw>
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-06-30T10:00:50.902201" level="INFO">Creating Session using : alias=jira, url=https://riadamine59.atlassian.net, headers={'Content-Type': 'application/json'},                     cookies={}, auth=&lt;requests.auth.HTTPBasicAuth object at 0x000001944B4EC740&gt;, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>jira</arg>
-<arg>${JIRA_URL}</arg>
-<arg>auth=${auth}</arg>
-<arg>headers=${headers}</arg>
-<arg>verify=False</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-06-30T10:00:50.901584" elapsed="0.001450"/>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-07-07T14:27:09.750950" level="INFO">Clicking button 'id=sysverb_login'.</msg>
+<arg>id=sysverb_login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-07T14:27:09.750950" elapsed="3.283315"/>
 </kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-06-30T10:00:53.326949" level="INFO">POST Request : url=https://riadamine59.atlassian.net/rest/api/2/issue 
- path_url=/rest/api/2/issue 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '219', 'Authorization': 'Basic cmlhZGFtaW5lNTlAZ21haWwuY29tOkFUQVRUM3hGZkdGMHVteEFZeVlDREw0SjBlNDBCMk1GeFJFZWstOXM5WVVVZXlOUWVOY2Z5VXRMQ3NYSjFlUHVQSkRyRnczVmpobWdJU3o0OWMtcVBxRW1vUGZNbUpzSlJpQWVuZWhkbFVKY1BQQUV2OWtwTmpYbENsZWVib1kzQUxkNC1wZkdJSEtMTF9wWXlLWWh6SWlJQWtCeTRIZkh4SHQwZDZxNEQzWkNlMUNmTEFNMVJUST1FQjU2NzYxOQ=='} 
- body=b'{"fields": {"project": {"key": "AL"}, "summary": "Incident de test depuis Robot Framework", "description": "Ticket g\\u00e9n\\u00e9r\\u00e9 automatiquement pour test d\'automatisation", "issuetype": {"name": "T\\u00e2che"}}}' 
- </msg>
-<msg time="2025-06-30T10:00:53.326949" level="INFO">POST Response : url=https://riadamine59.atlassian.net/rest/api/2/issue 
- status=201, reason=Created 
- headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Mon, 30 Jun 2025 09:00:52 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '56e1d2c07d485ef5a9cb23eb332333bc', 'Set-Cookie': 'atlassian.xsrf.token=97dbbd45a2145c2921afb6f03d7d3f9d17f629e2_lin; Path=/; SameSite=None; Secure', 'X-Aaccountid': '712020%3Ac146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4', 'Cache-Control': 'no-cache, no-store, no-transform', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '4b64049c7d164f95ba8a479f0627b7d1', 'Atl-Request-Id': '4b64049c-7d16-4f95-ba8a-479f0627b7d1', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 14ebdcf21d0310896336dbc3c885587c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MAD56-P1', 'X-Amz-Cf-Id': 'syFg-HWwaKbsVPq24rbHNLIwu609SCVdSMA6T7tOrJ3jqDD09MkKrQ==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=32,cdn-upstream-fbl;dur=2157,atl-edge;dur=2024,atl-edge-internal;dur=80,atl-edge-upstream;dur=1935,atl-edge-pop;desc="aws-eu-central-2",cdn-cache-miss,cdn-pop;desc="MAD56-P1",cdn-rid;desc="syFg-HWwaKbsVPq24rbHNLIwu609SCVdSMA6T7tOrJ3jqDD09MkKrQ==",cdn-downstream-fbl;dur=2160'} 
- body={"id":"10297","key":"AL-96","self":"https://riadamine59.atlassian.net/rest/api/2/issue/10297"} 
- </msg>
-<msg time="2025-06-30T10:00:53.326949" level="INFO">c:\Users\geams\OneDrive\Bureau\ProjetAlten\.venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'riadamine59.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
-  warnings.warn(</msg>
-<msg time="2025-06-30T10:00:53.326949" level="INFO">${response} = &lt;Response [201]&gt;</msg>
-<var>${response}</var>
-<arg>jira</arg>
-<arg>/rest/api/2/issue</arg>
-<arg>json=${data}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-06-30T10:00:50.903034" elapsed="2.423915"/>
+<status status="PASS" start="2025-07-07T14:27:09.343250" elapsed="3.692009"/>
 </kw>
-<kw name="Should Be Equal As Numbers" owner="BuiltIn">
-<msg time="2025-06-30T10:00:53.326949" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${response.status_code}</arg>
-<arg>201</arg>
-<doc>Fails if objects are unequal after converting them to real numbers.</doc>
-<status status="PASS" start="2025-06-30T10:00:53.326949" elapsed="0.007141"/>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:27:18.035581" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:27:13.035259" elapsed="5.000322"/>
 </kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-06-30T10:00:53.334090" level="INFO">${ticket_key} = AL-96</msg>
-<var>${ticket_key}</var>
-<arg>${response.json()["key"]}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-06-30T10:00:53.334090" elapsed="0.000000"/>
+<kw name="Naviguer à la création du ticket IU" owner="servicenow_keywords">
+<kw name="Cliquer Sur Bouton All" owner="navigation">
+<msg time="2025-07-07T14:27:18.208242" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
+Clic sur le bouton 'All' réussi.</msg>
+<status status="PASS" start="2025-07-07T14:27:18.036612" elapsed="0.171630"/>
+</kw>
+<kw name="Rechercher Et Selectionner Creer Iu" owner="navigation">
+<msg time="2025-07-07T14:27:19.240387" level="INFO">[1/30] Tentative d’accès à la barre de recherche contextuelle...
+Texte 'Créer IU' saisi dans la barre contextuelle.
+[1/30] Tentative de clic sur le favori 'Créer IU'...
+[2/30] Tentative de clic sur le favori 'Créer IU'...
+[3/30] Tentative de clic sur le favori 'Créer IU'...
+[4/30] Tentative de clic sur le favori 'Créer IU'...
+Clic sur 'Créer IU' dans les favoris réussi.</msg>
+<status status="PASS" start="2025-07-07T14:27:18.208242" elapsed="1.032145"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:27:18.036612" elapsed="1.204775"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:27:24.243579" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:27:19.242385" elapsed="5.001194"/>
+</kw>
+<kw name="Remplir les champs du ticket IU" owner="servicenow_keywords">
+<kw name="Remplir Champs Obligatoires Iu" owner="champs">
+<msg time="2025-07-07T14:27:42.653028" level="INFO">[1/30] Tentative de récupération de l’iframe principale...
+[INFO] Iframe principale trouvée et activée.
+Attente du champ catégorie dans le DOM...
+Attente du champ sous-catégorie dans le DOM...
+[WARN] Timeout d’attente de redirection. URL actuelle : https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3De68c0ed6c3e2a2104c5b2dd9d0013142%26sysparm_view%3D</msg>
+<msg time="2025-07-07T14:27:42.653028" level="INFO">${url} = https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3De68c0ed6c3e2a2104c5b2dd9d0013142%26sysparm_view%3D</msg>
+<var>${url}</var>
+<status status="PASS" start="2025-07-07T14:27:24.244485" elapsed="18.408543"/>
 </kw>
 <return>
-<value>${ticket_key}</value>
-<status status="PASS" start="2025-06-30T10:00:53.334090" elapsed="0.000000"/>
+<value>${url}</value>
+<status status="PASS" start="2025-07-07T14:27:42.653028" elapsed="0.000000"/>
 </return>
-<msg time="2025-06-30T10:00:53.334090" level="INFO">${ticket_key} = AL-96</msg>
-<var>${ticket_key}</var>
-<doc>Création d'un ticket Jira et retour de sa clé (ex: AL-79).</doc>
-<status status="PASS" start="2025-06-30T10:00:50.895530" elapsed="2.438560"/>
+<msg time="2025-07-07T14:27:42.654027" level="INFO">${url_ticket} = https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3De68c0ed6c3e2a2104c5b2dd9d0013142%26sysparm_view%3D</msg>
+<var>${url_ticket}</var>
+<status status="PASS" start="2025-07-07T14:27:24.244485" elapsed="18.409542"/>
 </kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2025-06-30T10:00:53.334090" level="INFO">"🔹 Ticket clé récupérée : AL-96"</msg>
-<arg>"🔹 Ticket clé récupérée : ${ticket_key}"</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-06-30T10:00:53.334090" elapsed="0.000000"/>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:27:47.654686" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:27:42.654027" elapsed="5.000659"/>
 </kw>
-<kw name="Lister les transitions disponibles" owner="jira_keywords">
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-06-30T10:00:53.700230" level="INFO">GET Request : url=https://riadamine59.atlassian.net/rest/api/2/issue/AL-96/transitions 
- path_url=/rest/api/2/issue/AL-96/transitions 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Cookie': 'atlassian.xsrf.token=97dbbd45a2145c2921afb6f03d7d3f9d17f629e2_lin', 'Authorization': 'Basic cmlhZGFtaW5lNTlAZ21haWwuY29tOkFUQVRUM3hGZkdGMHVteEFZeVlDREw0SjBlNDBCMk1GeFJFZWstOXM5WVVVZXlOUWVOY2Z5VXRMQ3NYSjFlUHVQSkRyRnczVmpobWdJU3o0OWMtcVBxRW1vUGZNbUpzSlJpQWVuZWhkbFVKY1BQQUV2OWtwTmpYbENsZWVib1kzQUxkNC1wZkdJSEtMTF9wWXlLWWh6SWlJQWtCeTRIZkh4SHQwZDZxNEQzWkNlMUNmTEFNMVJUST1FQjU2NzYxOQ=='} 
- body=None 
- </msg>
-<msg time="2025-06-30T10:00:53.700230" level="INFO">GET Response : url=https://riadamine59.atlassian.net/rest/api/2/issue/AL-96/transitions 
- status=200, reason=OK 
- headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Mon, 30 Jun 2025 09:00:52 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '28cd7b5f35718937bf4eb066b0032725', 'X-Aaccountid': '712020%3Ac146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4', 'Cache-Control': 'no-cache, no-store, no-transform', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': 'beaa160ed796438780c7f793789df4b0', 'Atl-Request-Id': 'beaa160e-d796-4387-80c7-f793789df4b0', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 14ebdcf21d0310896336dbc3c885587c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MAD56-P1', 'X-Amz-Cf-Id': 'blpZiHxX6Coj-6HslmRa2C615qVqYUkcO1Q7QlIvRPARKqLFEVQ-bQ==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=28,cdn-upstream-fbl;dur=320,atl-edge;dur=202,atl-edge-internal;dur=26,atl-edge-upstream;dur=175,atl-edge-pop;desc="aws-eu-central-2",cdn-cache-miss,cdn-pop;desc="MAD56-P1",cdn-rid;desc="blpZiHxX6Coj-6HslmRa2C615qVqYUkcO1Q7QlIvRPARKqLFEVQ-bQ==",cdn-downstream-fbl;dur=323'} 
- body={"expand":"transitions","transitions":[{"id":"151","name":"Done","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10002","description":"","iconUrl":"https://riadamine59.atlassian.net/","name":"Terminé(e)","id":"10002","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/3","id":3,"key":"done","colorName":"green","name":"Terminé"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false},{"id":"171","name":"Rejected","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10004","description":"","iconUrl":"https://riadamine59.atlassian.net/","name":"Rejeté","id":"10004","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/3","id":3,"key":"done","colorName":"green","name":"Terminé"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false},{"id":"181","name":"In Progress","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10001","description":"Ce ticket est en cours de traitement par la personne assignée.","iconUrl":"https://riadamine59.atlassian.net/","name":"En cours","id":"10001","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/4","id":4,"key":"indeterminate","colorName":"yellow","name":"En cours"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false},{"id":"191","name":"Cancelled","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10003","description":"","iconUrl":"https://riadamine59.atlassian.net/","name":"Annulé","id":"10003","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/3","id":3,"key":"done","colorName":"green","name":"Terminé"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false},{"id":"211","name":"In Review","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10005","description":"","iconUrl":"https://riadamine59.atlassian.net/","name":"Revue en cours","id":"10005","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/4","id":4,"key":"indeterminate","colorName":"yellow","name":"En cours"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false}]} 
- </msg>
-<msg time="2025-06-30T10:00:53.700230" level="INFO">c:\Users\geams\OneDrive\Bureau\ProjetAlten\.venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'riadamine59.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
-  warnings.warn(</msg>
-<msg time="2025-06-30T10:00:53.701312" level="INFO">${available_transitions} = &lt;Response [200]&gt;</msg>
-<var>${available_transitions}</var>
-<arg>jira</arg>
-<arg>/rest/api/2/issue/${ticket_key}/transitions</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-06-30T10:00:53.334090" elapsed="0.367222"/>
-</kw>
-<return>
-<value>${available_transitions.json()["transitions"]}</value>
-<status status="PASS" start="2025-06-30T10:00:53.701312" elapsed="0.000596"/>
-</return>
-<msg time="2025-06-30T10:00:53.702473" level="INFO">${transitions} = [{'id': '151', 'name': 'Done', 'to': {'self': 'https://riadamine59.atlassian.net/rest/api/2/status/10002', 'description': '', 'iconUrl': 'https://riadamine59.atlassian.net/', 'name': 'Terminé(e)', 'id...</msg>
-<var>${transitions}</var>
-<arg>${ticket_key}</arg>
-<status status="PASS" start="2025-06-30T10:00:53.334090" elapsed="0.368383"/>
-</kw>
-<kw name="Ajouter un commentaire" owner="jira_keywords">
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-30T10:00:53.704510" level="INFO">${data} = {'body': '"Ce ticket a été créé automatiquement via Robot Framework."'}</msg>
-<var>${data}</var>
-<arg>body=${commentaire}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-30T10:00:53.704510" elapsed="0.000000"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-06-30T10:00:54.136523" level="INFO">POST Request : url=https://riadamine59.atlassian.net/rest/api/2/issue/AL-96/comment 
- path_url=/rest/api/2/issue/AL-96/comment 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Cookie': 'atlassian.xsrf.token=97dbbd45a2145c2921afb6f03d7d3f9d17f629e2_lin', 'Content-Length': '93', 'Authorization': 'Basic cmlhZGFtaW5lNTlAZ21haWwuY29tOkFUQVRUM3hGZkdGMHVteEFZeVlDREw0SjBlNDBCMk1GeFJFZWstOXM5WVVVZXlOUWVOY2Z5VXRMQ3NYSjFlUHVQSkRyRnczVmpobWdJU3o0OWMtcVBxRW1vUGZNbUpzSlJpQWVuZWhkbFVKY1BQQUV2OWtwTmpYbENsZWVib1kzQUxkNC1wZkdJSEtMTF9wWXlLWWh6SWlJQWtCeTRIZkh4SHQwZDZxNEQzWkNlMUNmTEFNMVJUST1FQjU2NzYxOQ=='} 
- body=b'{"body": "\\"Ce ticket a \\u00e9t\\u00e9 cr\\u00e9\\u00e9 automatiquement via Robot Framework.\\""}' 
- </msg>
-<msg time="2025-06-30T10:00:54.136523" level="INFO">POST Response : url=https://riadamine59.atlassian.net/rest/api/2/issue/AL-96/comment 
- status=201, reason=Created 
- headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Mon, 30 Jun 2025 09:00:52 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': 'fcc8826253ff0d2d6b23ce8e3bb091a4', 'X-Aaccountid': '712020%3Ac146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4', 'Cache-Control': 'no-cache, no-store, no-transform', 'Location': 'https://riadamine59.atlassian.net/rest/api/2/issue/10297/comment/10165', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '553c6b9328224bb790e7872454bff47e', 'Atl-Request-Id': '553c6b93-2822-4bb7-90e7-872454bff47e', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 14ebdcf21d0310896336dbc3c885587c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MAD56-P1', 'X-Amz-Cf-Id': 'DlOnByc9h2_P9rVI_5M0AUeuZ-k_Zsi0dNnavBXYaok5G-j7fqPTRA==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=396,atl-edge;dur=370,atl-edge-internal;dur=15,atl-edge-upstream;dur=356,atl-edge-pop;desc="aws-eu-central-2",cdn-cache-miss,cdn-pop;desc="MAD56-P1",cdn-rid;desc="DlOnByc9h2_P9rVI_5M0AUeuZ-k_Zsi0dNnavBXYaok5G-j7fqPTRA==",cdn-downstream-fbl;dur=399'} 
- body={"self":"https://riadamine59.atlassian.net/rest/api/2/issue/10297/comment/10165","id":"10165","author":{"self":"https://riadamine59.atlassian.net/rest/api/2/user?accountId=712020%3Ac146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4","accountId":"712020:c146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4","emailAddress":"riadamine59@gmail.com","avatarUrls":{"48x48":"https://secure.gravatar.com/avatar/91107b565c24a90945b353d3b124c68f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRM-6.png","24x24":"https://secure.gravatar.com/avatar/91107b565c24a90945b353d3b124c68f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRM-6.png","16x16":"https://secure.gravatar.com/avatar/91107b565c24a90945b353d3b124c68f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRM-6.png","32x32":"https://secure.gravatar.com/avatar/91107b565c24a90945b353d3b124c68f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRM-6.png"},"displayName":"Riad El Moudden","active":true,"timeZone":"Africa/Casablanca","accountType":"atlassian"},"body":"\"Ce ticket a été créé automatiquement via Robot Framework.\"","updateAuthor":{"self":"https://riadamine59.atlassian.net/rest/api/2/user?accountId=712020%3Ac146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4","accountId":"712020:c146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4","emailAddress":"riadamine59@gmail.com","avatarUrls":{"48x48":"https://secure.gravatar.com/avatar/91107b565c24a90945b353d3b124c68f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRM-6.png","24x24":"https://secure.gravatar.com/avatar/91107b565c24a90945b353d3b124c68f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRM-6.png","16x16":"https://secure.gravatar.com/avatar/91107b565c24a90945b353d3b124c68f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRM-6.png","32x32":"https://secure.gravatar.com/avatar/91107b565c24a90945b353d3b124c68f?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRM-6.png"},"displayName":"Riad El Moudden","active":true,"timeZone":"Africa/Casablanca","accountType":"atlassian"},"created":"2025-06-30T10:00:52.771+0100","updated":"2025-06-30T10:00:52.771+0100","jsdPublic":true} 
- </msg>
-<msg time="2025-06-30T10:00:54.136523" level="INFO">c:\Users\geams\OneDrive\Bureau\ProjetAlten\.venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'riadamine59.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
-  warnings.warn(</msg>
-<msg time="2025-06-30T10:00:54.136523" level="INFO">${response} = &lt;Response [201]&gt;</msg>
-<var>${response}</var>
-<arg>jira</arg>
-<arg>/rest/api/2/issue/${ticket_key}/comment</arg>
-<arg>json=${data}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-06-30T10:00:53.705750" elapsed="0.430773"/>
-</kw>
-<kw name="Should Be Equal As Numbers" owner="BuiltIn">
-<msg time="2025-06-30T10:00:54.136523" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${response.status_code}</arg>
-<arg>201</arg>
-<doc>Fails if objects are unequal after converting them to real numbers.</doc>
-<status status="PASS" start="2025-06-30T10:00:54.136523" elapsed="0.000000"/>
-</kw>
-<arg>${ticket_key}</arg>
-<arg>"Ce ticket a été créé automatiquement via Robot Framework."</arg>
-<status status="PASS" start="2025-06-30T10:00:53.703513" elapsed="0.433010"/>
-</kw>
-<kw name="Mettre à jour le statut du ticket" owner="jira_keywords">
-<kw name="Lister les transitions disponibles" owner="jira_keywords">
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-06-30T10:00:54.361694" level="INFO">GET Request : url=https://riadamine59.atlassian.net/rest/api/2/issue/AL-96/transitions 
- path_url=/rest/api/2/issue/AL-96/transitions 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Cookie': 'atlassian.xsrf.token=97dbbd45a2145c2921afb6f03d7d3f9d17f629e2_lin', 'Authorization': 'Basic cmlhZGFtaW5lNTlAZ21haWwuY29tOkFUQVRUM3hGZkdGMHVteEFZeVlDREw0SjBlNDBCMk1GeFJFZWstOXM5WVVVZXlOUWVOY2Z5VXRMQ3NYSjFlUHVQSkRyRnczVmpobWdJU3o0OWMtcVBxRW1vUGZNbUpzSlJpQWVuZWhkbFVKY1BQQUV2OWtwTmpYbENsZWVib1kzQUxkNC1wZkdJSEtMTF9wWXlLWWh6SWlJQWtCeTRIZkh4SHQwZDZxNEQzWkNlMUNmTEFNMVJUST1FQjU2NzYxOQ=='} 
- body=None 
- </msg>
-<msg time="2025-06-30T10:00:54.361694" level="INFO">GET Response : url=https://riadamine59.atlassian.net/rest/api/2/issue/AL-96/transitions 
- status=200, reason=OK 
- headers={'Content-Type': 'application/json;charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Date': 'Mon, 30 Jun 2025 09:00:53 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '24de5104948b905feb15dc67582843b8', 'X-Aaccountid': '712020%3Ac146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4', 'Cache-Control': 'no-cache, no-store, no-transform', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '24f124d2f1f042779df4021bb3063ac5', 'Atl-Request-Id': '24f124d2-f1f0-4277-9df4-021bb3063ac5', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 14ebdcf21d0310896336dbc3c885587c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MAD56-P1', 'X-Amz-Cf-Id': '9zkRrPiaQz4jlOgsURSZyhzp2ZVP9HD_PA5zzdSNXFnguDCF3bTwkw==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=186,atl-edge;dur=158,atl-edge-internal;dur=19,atl-edge-upstream;dur=139,atl-edge-pop;desc="aws-eu-central-2",cdn-cache-miss,cdn-pop;desc="MAD56-P1",cdn-rid;desc="9zkRrPiaQz4jlOgsURSZyhzp2ZVP9HD_PA5zzdSNXFnguDCF3bTwkw==",cdn-downstream-fbl;dur=191'} 
- body={"expand":"transitions","transitions":[{"id":"151","name":"Done","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10002","description":"","iconUrl":"https://riadamine59.atlassian.net/","name":"Terminé(e)","id":"10002","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/3","id":3,"key":"done","colorName":"green","name":"Terminé"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false},{"id":"171","name":"Rejected","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10004","description":"","iconUrl":"https://riadamine59.atlassian.net/","name":"Rejeté","id":"10004","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/3","id":3,"key":"done","colorName":"green","name":"Terminé"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false},{"id":"181","name":"In Progress","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10001","description":"Ce ticket est en cours de traitement par la personne assignée.","iconUrl":"https://riadamine59.atlassian.net/","name":"En cours","id":"10001","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/4","id":4,"key":"indeterminate","colorName":"yellow","name":"En cours"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false},{"id":"191","name":"Cancelled","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10003","description":"","iconUrl":"https://riadamine59.atlassian.net/","name":"Annulé","id":"10003","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/3","id":3,"key":"done","colorName":"green","name":"Terminé"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false},{"id":"211","name":"In Review","to":{"self":"https://riadamine59.atlassian.net/rest/api/2/status/10005","description":"","iconUrl":"https://riadamine59.atlassian.net/","name":"Revue en cours","id":"10005","statusCategory":{"self":"https://riadamine59.atlassian.net/rest/api/2/statuscategory/4","id":4,"key":"indeterminate","colorName":"yellow","name":"En cours"}},"hasScreen":false,"isGlobal":true,"isInitial":false,"isAvailable":true,"isConditional":false,"isLooped":false}]} 
- </msg>
-<msg time="2025-06-30T10:00:54.361694" level="INFO">c:\Users\geams\OneDrive\Bureau\ProjetAlten\.venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'riadamine59.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
-  warnings.warn(</msg>
-<msg time="2025-06-30T10:00:54.377181" level="INFO">${available_transitions} = &lt;Response [200]&gt;</msg>
-<var>${available_transitions}</var>
-<arg>jira</arg>
-<arg>/rest/api/2/issue/${ticket_key}/transitions</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-06-30T10:00:54.136523" elapsed="0.240658"/>
-</kw>
-<return>
-<value>${available_transitions.json()["transitions"]}</value>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</return>
-<msg time="2025-06-30T10:00:54.377181" level="INFO">${transitions} = [{'id': '151', 'name': 'Done', 'to': {'self': 'https://riadamine59.atlassian.net/rest/api/2/status/10002', 'description': '', 'iconUrl': 'https://riadamine59.atlassian.net/', 'name': 'Terminé(e)', 'id...</msg>
-<var>${transitions}</var>
-<arg>${ticket_key}</arg>
-<status status="PASS" start="2025-06-30T10:00:54.136523" elapsed="0.240658"/>
-</kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-06-30T10:00:54.377181" level="INFO">${transition_id} = None</msg>
-<var>${transition_id}</var>
-<arg>None</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</kw>
-<for flavor="IN">
-<iter>
-<if>
-<branch type="IF" condition="'${transition[&quot;name&quot;]}' == '${transition_name}'">
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-06-30T10:00:54.377181" level="INFO">${transition_id} = 151</msg>
-<var>${transition_id}</var>
-<arg>${transition["id"]}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</kw>
-<break>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</break>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</branch>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</if>
-<var name="${transition}">{'id': '151', 'name': 'Done', 'to': {'self': 'https://riadamine59.atlassian.net/rest/api/2/status/10002', 'description': '', 'iconUrl': 'https://riadamine59.atlassian.net/', 'name': 'Terminé(e)', 'id'...</var>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</iter>
-<var>${transition}</var>
-<value>@{transitions}</value>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</for>
-<kw name="Run Keyword If" owner="BuiltIn">
-<arg>'${transition_id}' == 'None'</arg>
-<arg>Fail</arg>
-<arg>"Transition '${transition_name}' non trouvée."</arg>
-<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-30T10:00:54.377181" level="INFO">${transition_data} = {'id': '151'}</msg>
-<var>${transition_data}</var>
-<arg>id=${transition_id}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-30T10:00:54.377181" level="INFO">${data} = {'transition': {'id': '151'}}</msg>
-<var>${data}</var>
-<arg>transition=${transition_data}</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.000000"/>
-</kw>
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-06-30T10:00:55.103818" level="INFO">POST Request : url=https://riadamine59.atlassian.net/rest/api/2/issue/AL-96/transitions 
- path_url=/rest/api/2/issue/AL-96/transitions 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Cookie': 'atlassian.xsrf.token=97dbbd45a2145c2921afb6f03d7d3f9d17f629e2_lin', 'Content-Length': '29', 'Authorization': 'Basic cmlhZGFtaW5lNTlAZ21haWwuY29tOkFUQVRUM3hGZkdGMHVteEFZeVlDREw0SjBlNDBCMk1GeFJFZWstOXM5WVVVZXlOUWVOY2Z5VXRMQ3NYSjFlUHVQSkRyRnczVmpobWdJU3o0OWMtcVBxRW1vUGZNbUpzSlJpQWVuZWhkbFVKY1BQQUV2OWtwTmpYbENsZWVib1kzQUxkNC1wZkdJSEtMTF9wWXlLWWh6SWlJQWtCeTRIZkh4SHQwZDZxNEQzWkNlMUNmTEFNMVJUST1FQjU2NzYxOQ=='} 
- body=b'{"transition": {"id": "151"}}' 
- </msg>
-<msg time="2025-06-30T10:00:55.103818" level="INFO">POST Response : url=https://riadamine59.atlassian.net/rest/api/2/issue/AL-96/transitions 
- status=204, reason=No Content 
- headers={'Content-Type': 'text/html;charset=UTF-8', 'Connection': 'keep-alive', 'Date': 'Mon, 30 Jun 2025 09:00:53 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': '6c61c9fda1f745b70f2a29caba916774', 'X-Aaccountid': '712020%3Ac146a5a7-0bdb-43fd-9bd9-fe6a6b68fde4', 'Cache-Control': 'no-cache, no-store, no-transform', 'Vary': 'Accept-Encoding', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '407f2b87cda84ecd85ebf6332edb7aaf', 'Atl-Request-Id': '407f2b87-cda8-4ecd-85eb-f6332edb7aaf', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.001, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 14ebdcf21d0310896336dbc3c885587c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MAD56-P1', 'X-Amz-Cf-Id': 'O59sB6zvy-SUx8OdHem09QbPAkAz_ZoNHfmUWtCXTORqbtuva5l6Og==', 'Server-Timing': 'cdn-upstream-layer;desc="EDGE",cdn-upstream-dns;dur=0,cdn-upstream-connect;dur=0,cdn-upstream-fbl;dur=697,atl-edge;dur=667,atl-edge-internal;dur=15,atl-edge-upstream;dur=652,atl-edge-pop;desc="aws-eu-central-2",cdn-cache-miss,cdn-pop;desc="MAD56-P1",cdn-rid;desc="O59sB6zvy-SUx8OdHem09QbPAkAz_ZoNHfmUWtCXTORqbtuva5l6Og==",cdn-downstream-fbl;dur=701'} 
- body=None 
- </msg>
-<msg time="2025-06-30T10:00:55.103818" level="INFO">c:\Users\geams\OneDrive\Bureau\ProjetAlten\.venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'riadamine59.atlassian.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
-  warnings.warn(</msg>
-<msg time="2025-06-30T10:00:55.119431" level="INFO">${response} = &lt;Response [204]&gt;</msg>
-<var>${response}</var>
-<arg>jira</arg>
-<arg>/rest/api/2/issue/${ticket_key}/transitions</arg>
-<arg>json=${data}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-06-30T10:00:54.377181" elapsed="0.742250"/>
-</kw>
-<kw name="Should Be Equal As Numbers" owner="BuiltIn">
-<msg time="2025-06-30T10:00:55.119431" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${response.status_code}</arg>
-<arg>204</arg>
-<doc>Fails if objects are unequal after converting them to real numbers.</doc>
-<status status="PASS" start="2025-06-30T10:00:55.119431" elapsed="0.000000"/>
-</kw>
-<arg>${ticket_key}</arg>
-<arg>Done</arg>
-<status status="PASS" start="2025-06-30T10:00:54.136523" elapsed="0.982908"/>
-</kw>
-<kw name="Ajouter une pièce jointe" owner="jira_keywords">
-<kw name="Upload File" owner="JiraUpload">
-<msg time="2025-06-30T10:00:56.123407" level="INFO">✅ Pièce jointe ajoutée avec succès !</msg>
-<msg time="2025-06-30T10:00:56.123407" level="INFO">${result} = SUCCESS</msg>
-<var>${result}</var>
-<arg>${ticket_key}</arg>
-<arg>${file_path}</arg>
-<arg>${JIRA_USER}</arg>
-<arg>${JIRA_TOKEN}</arg>
-<status status="PASS" start="2025-06-30T10:00:55.119431" elapsed="1.003976"/>
-</kw>
-<arg>${ticket_key}</arg>
-<arg>${ATTACHMENT_PATH}</arg>
-<status status="PASS" start="2025-06-30T10:00:55.119431" elapsed="1.003976"/>
-</kw>
-<doc>Créer un ticket et ajouter un commentaire, mettre à jour le statut, et ajouter une pièce jointe.</doc>
-<status status="PASS" start="2025-06-30T10:00:50.893560" elapsed="5.229847"/>
+<doc>Simule la création d’un ticket LTT ServiceNow et vérifie l’ensemble des éléments requis.</doc>
+<status status="PASS" start="2025-07-07T14:27:09.341452" elapsed="38.313742"/>
 </test>
-<status status="PASS" start="2025-06-30T10:00:48.635161" elapsed="7.503699"/>
+<test id="s1-t2" name="DDI" line="16">
+<kw name="Forcer Raz et Mettre Le Ticket Actif" owner="servicenow_keywords">
+<kw name="Forcer Raz Et Mettre Ticket Actif" owner="ddi">
+<msg time="2025-07-07T14:27:48.889096" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.</msg>
+<status status="PASS" start="2025-07-07T14:27:47.657604" elapsed="1.231492"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:27:47.657604" elapsed="1.231492"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:27:53.890337" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:27:48.890100" elapsed="5.000237"/>
+</kw>
+<kw name="Affecter Ticket à l'utilisateur" owner="servicenow_keywords">
+<kw name="Affecter Ticket" owner="ddi">
+<arg>${login}</arg>
+<status status="PASS" start="2025-07-07T14:27:53.891363" elapsed="2.446422"/>
+</kw>
+<arg>Altst004 ALTST004</arg>
+<status status="PASS" start="2025-07-07T14:27:53.890337" elapsed="2.447959"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:28:01.339375" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:27:56.338425" elapsed="5.000950"/>
+</kw>
+<kw name="Lancer Demande Information" owner="servicenow_keywords">
+<kw name="Cliquer Sur Demande Information" owner="ddi">
+<status status="PASS" start="2025-07-07T14:28:01.340436" elapsed="0.662252"/>
+</kw>
+<kw name="Remplir Motif Et Worknote" owner="ddi">
+<status status="PASS" start="2025-07-07T14:28:02.002688" elapsed="0.699236"/>
+</kw>
+<kw name="Confirmer Demande Information" owner="ddi">
+<status status="PASS" start="2025-07-07T14:28:02.701924" elapsed="0.675046"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:28:01.339375" elapsed="2.037595"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:28:08.378107" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:28:03.377970" elapsed="5.000137"/>
+</kw>
+<kw name="Verification envoi SMS" owner="servicenow_keywords">
+<kw name="Verifier Etat Et Etape Technique" owner="ddi">
+<msg time="2025-07-07T14:28:08.464584" level="INFO">[DEBUG] État visible (label) : freezed
+[DEBUG] Étape technique : attente_client_ddi</msg>
+<status status="PASS" start="2025-07-07T14:28:08.379049" elapsed="0.085535"/>
+</kw>
+<kw name="Verifier Envoi Sms" owner="ddi">
+<msg time="2025-07-07T14:28:08.546821" level="INFO">[DEBUG] Contenu global des notes de travail :
+
+[AVERTISSEMENT] ⚠️ Aucun message relatif au SMS trouvé</msg>
+<arg>ddi</arg>
+<status status="PASS" start="2025-07-07T14:28:08.464584" elapsed="0.082237"/>
+</kw>
+<kw name="Recuperer Numero Ticket" owner="ddi">
+<msg time="2025-07-07T14:28:08.563503" level="INFO">${numero_ticket} = SAV-FTTH0007208976</msg>
+<msg time="2025-07-07T14:28:08.563503" level="INFO">[INFO] Numéro du ticket récupéré et stocké : SAV-FTTH0007208976</msg>
+<msg time="2025-07-07T14:28:08.563503" level="INFO">${numero_ticket} = SAV-FTTH0007208976</msg>
+<var>${numero_ticket}</var>
+<status status="PASS" start="2025-07-07T14:28:08.546821" elapsed="0.016682"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Le ticket est : ${numero_ticket}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-07-07T14:28:08.563503" elapsed="0.000998"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:28:08.379049" elapsed="0.185452"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:27:47.656204" elapsed="20.908297"/>
+</test>
+<test id="s1-t3" name="Date Prévisionnelle De Dégel" line="29">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:28:13.566926" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:28:08.565348" elapsed="5.001578"/>
+</kw>
+<kw name="Aller à l'URL du Ticket" owner="servicenow_keywords">
+<kw name="Aller À Lien Ticket" owner="ddi">
+<arg>${url}</arg>
+<status status="PASS" start="2025-07-07T14:28:13.567911" elapsed="0.398472"/>
+</kw>
+<arg>https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/%24pa_dashboard.do</arg>
+<status status="PASS" start="2025-07-07T14:28:13.567911" elapsed="0.398472"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:28:23.967695" level="INFO">Slept 10 seconds.</msg>
+<arg>time_=10</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:28:13.967383" elapsed="10.000312"/>
+</kw>
+<kw name="Aller à la Vue des Tickets SAV" owner="servicenow_keywords">
+<kw name="Cliquer Sur Bouton All" owner="navigation">
+<msg time="2025-07-07T14:28:23.992597" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
+Clic sur le bouton 'All' réussi.</msg>
+<status status="PASS" start="2025-07-07T14:28:23.968231" elapsed="0.024366"/>
+</kw>
+<kw name="Rechercher Et Selectionner Vue Tickets Sav" owner="ddi">
+<msg time="2025-07-07T14:28:24.832840" level="INFO">[1/30] Accès à la barre de recherche contextuelle...
+[OK] Saisie dans la barre contextuelle réussie.
+[1/30] Clic sur l'élément 'ticket SAV - tickets ouverts SAV FTTH (BO)'...
+[2/30] Clic sur l'élément 'ticket SAV - tickets ouverts SAV FTTH (BO)'...
+[OK] Clic sur la vue 'ticket SAV...' réussi.</msg>
+<status status="PASS" start="2025-07-07T14:28:23.992597" elapsed="0.840243"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:28:23.968231" elapsed="0.864609"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:28:29.834054" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:28:24.833357" elapsed="5.000697"/>
+</kw>
+<kw name="Rechercher et Modifier le Ticket DDI1" owner="servicenow_keywords">
+<kw name="Rechercher Ticket Par Numero" owner="ddi">
+<msg time="2025-07-07T14:28:30.239858" level="INFO">[1/30] Tentative de récupération de l’iframe principale...
+[INFO] Iframe principale trouvée et activée.
+[INFO] Recherche du ticket SAV-FTTH0007208976 effectuée.</msg>
+<status status="PASS" start="2025-07-07T14:28:29.835013" elapsed="0.404845"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:28:29.834054" elapsed="0.405804"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:28:35.241090" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:28:30.240858" elapsed="5.000232"/>
+</kw>
+<kw name="Modifier Date Previsionnelle Via Calendrier" owner="ddi">
+<msg time="2025-07-07T14:28:36.966437" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.
+[DEBUG] Now local = 07/07/2025 14:28:35
+[DEBUG] Target date = 07/07/2025 15:30:35
+[INFO] Double clic effectué sur le calendrier.
+[INFO] Calendrier bien ouvert (champ heure visible).
+[DEBUG] aria-label attendu = Monday, July 7, 2025
+[INFO] Jour sélectionné avec aria-label : Monday, July 7, 2025
+[INFO] Champ hh rempli avec 15
+[INFO] Champ mm rempli avec 30
+[INFO] Champ ss rempli avec 35
+[INFO] Validation par clic hors calendrier.
+[INFO] Date prévisionnelle fixée à : 07/07/2025 15:30:35</msg>
+<status status="PASS" start="2025-07-07T14:28:35.242104" elapsed="1.724333"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:28:08.565348" elapsed="28.401089"/>
+</test>
+<test id="s1-t4" name="Relance DDI1" line="39">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:28:41.970278" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:28:36.968403" elapsed="5.001875"/>
+</kw>
+<kw name="Cliquer Sur Numero Ticket" owner="ddi">
+<msg time="2025-07-07T14:28:42.119788" level="INFO">[DEBUG] Tentative de clic sur le numéro de ticket SAV-FTTH0007208976
+[INFO] Clic réussi sur le ticket SAV-FTTH0007208976</msg>
+<status status="PASS" start="2025-07-07T14:28:41.970278" elapsed="0.149510"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:28:47.121253" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:28:42.120789" elapsed="5.000464"/>
+</kw>
+<kw name="Attendre Le Motif Du Gel" owner="servicenow_keywords">
+<kw name="Attendre Motif Gel" owner="ddi">
+<msg time="2025-07-07T14:33:26.916631" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.
+[DEBUG] Début de l'attente du motif de gel : relance ddi1
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: stale element reference: stale element not found
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff6585bffe4]
+	(No symbol) [0x0x7ff6585beab3]
+	(No symbol) [0x0x7ff6585b22c1]
+	(No symbol) [0x0x7ff6585b018f]
+	(No symbol) [0x0x7ff6585b460c]
+	(No symbol) [0x0x7ff6585b46df]
+	(No symbol) [0x0x7ff65860296d]
+	(No symbol) [0x0x7ff6585f35c0]
+	(No symbol) [0x0x7ff658628b8a]
+	(No symbol) [0x0x7ff6585f2f06]
+	(No symbol) [0x0x7ff658628da0]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: stale element reference: stale element not found
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff6585bffe4]
+	(No symbol) [0x0x7ff6585beab3]
+	(No symbol) [0x0x7ff6585b22c1]
+	(No symbol) [0x0x7ff6585b018f]
+	(No symbol) [0x0x7ff6585b460c]
+	(No symbol) [0x0x7ff6585b46df]
+	(No symbol) [0x0x7ff65860865b]
+	(No symbol) [0x0x7ff658605b81]
+	(No symbol) [0x0x7ff658603151]
+	(No symbol) [0x0x7ff658602041]
+	(No symbol) [0x0x7ff6585f3654]
+	(No symbol) [0x0x7ff658628b8a]
+	(No symbol) [0x0x7ff6585f2f06]
+	(No symbol) [0x0x7ff658628da0]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: stale element reference: stale element not found
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff6585bffe4]
+	(No symbol) [0x0x7ff6585beab3]
+	(No symbol) [0x0x7ff6585b22c1]
+	(No symbol) [0x0x7ff6585b018f]
+	(No symbol) [0x0x7ff6585b460c]
+	(No symbol) [0x0x7ff6585b46df]
+	(No symbol) [0x0x7ff658602cf7]
+	(No symbol) [0x0x7ff658601e01]
+	(No symbol) [0x0x7ff6585f3a06]
+	(No symbol) [0x0x7ff658628b8a]
+	(No symbol) [0x0x7ff6585f2f06]
+	(No symbol) [0x0x7ff658628da0]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: unknown error: unhandled inspector error: {"code":-32000,"message":"Node with given id does not belong to the document"}
+  (Session info: chrome=137.0.7151.120)
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff6585963c0]
+	(No symbol) [0x0x7ff658594ae0]
+	(No symbol) [0x0x7ff65859538f]
+	(No symbol) [0x0x7ff6585bd701]
+	(No symbol) [0x0x7ff6585c0403]
+	(No symbol) [0x0x7ff6585beab3]
+	(No symbol) [0x0x7ff6585b22c1]
+	(No symbol) [0x0x7ff6585b018f]
+	(No symbol) [0x0x7ff6585b460c]
+	(No symbol) [0x0x7ff6585b46df]
+	(No symbol) [0x0x7ff65860296d]
+	(No symbol) [0x0x7ff6585f35c0]
+	(No symbol) [0x0x7ff658628b8a]
+	(No symbol) [0x0x7ff6585f2f06]
+	(No symbol) [0x0x7ff658628da0]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
+  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : demande d'information
+[DEBUG] Motif gel actuel : 
+[DEBUG] Motif gel actuel : 
+[DEBUG] Motif gel actuel : relance ddi1
+[INFO] ✅ Motif gel attendu détecté : relance ddi1</msg>
+<arg>${motif}</arg>
+<status status="PASS" start="2025-07-07T14:28:47.122231" elapsed="279.794400"/>
+</kw>
+<arg>relance ddi1</arg>
+<status status="PASS" start="2025-07-07T14:28:47.122231" elapsed="279.795423"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-07-07T14:33:31.918205" level="INFO">Slept 5 seconds.</msg>
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-07-07T14:33:26.917801" elapsed="5.001404"/>
+</kw>
+<kw name="Vérifier Envoi SMS" owner="servicenow_keywords">
+<kw name="Verifier Envoi Sms" owner="ddi">
+<msg time="2025-07-07T14:33:32.244796" level="INFO">[DEBUG] Contenu global des notes de travail :
+liste des communications :
+
+sms - le sms ftth - ddi - relance1 n'a pas été envoyé
+dégel automatique du ticket.
+liste des communications :
+
+sms - le sms ftth - ddi - demande d'information n'a pas été envoyé
+
+serveur vocal interactif - la communication ivr n'a pas été effectuée : 26
+gel du ticket automatique en attente de demande d'information client
+test ddi
+l'enrichissement des données est incomplet:
+brand,service,offer label,client case number,client status,subscription type,client login,title,email,home phone,id srv,pto,building operator,postal code,slot,fiber,pm address,city,pbo,pm type,tube,coupler,module position,outlet prestation reference,id link,panel id,pm port,pm,ont id,oi module name,pm engineering type,address,id oss,olt,zone type,pon port,external id
+
+[AVERTISSEMENT] ⚠️ Aucun message relatif au SMS trouvé</msg>
+<arg>ddi1</arg>
+<status status="PASS" start="2025-07-07T14:33:31.920202" elapsed="0.324594"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:33:31.920202" elapsed="0.324594"/>
+</kw>
+<kw name="Recuperer Numero Ticket" owner="ddi">
+<msg time="2025-07-07T14:33:32.258999" level="INFO">${numero_ticket} = SAV-FTTH0007208976</msg>
+<msg time="2025-07-07T14:33:32.258999" level="INFO">[INFO] Numéro du ticket récupéré et stocké : SAV-FTTH0007208976</msg>
+<status status="PASS" start="2025-07-07T14:33:32.244796" elapsed="0.014203"/>
+</kw>
+<status status="PASS" start="2025-07-07T14:28:36.968403" elapsed="295.290596"/>
+</test>
+<test id="s1-t5" name="Relance DDI2" line="48">
+<kw name="Aller à l'URL du Ticket" owner="servicenow_keywords">
+<kw name="Aller À Lien Ticket" owner="ddi">
+<arg>${url}</arg>
+<status status="PASS" start="2025-07-07T14:33:32.261041" elapsed="0.332380"/>
+</kw>
+<arg>https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/%24pa_dashboard.do</arg>
+<status status="PASS" start="2025-07-07T14:33:32.261041" elapsed="0.332380"/>
+</kw>
+<kw name="Rechercher Ticket Par Numero" owner="ddi">
+<msg time="2025-07-07T14:33:53.611734" level="INFO">[1/30] Tentative de récupération de l’iframe principale...
+[INFO] Iframe principale trouvée et activée.</msg>
+<msg time="2025-07-07T14:33:53.612747" level="FAIL">TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+</msg>
+<status status="FAIL" start="2025-07-07T14:33:32.594421" elapsed="21.020337">TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+</status>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>time_=5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2025-07-07T14:33:53.615733" elapsed="0.000000"/>
+</kw>
+<kw name="Modifier Date Previsionnelle Via Calendrier" owner="ddi">
+<status status="NOT RUN" start="2025-07-07T14:33:53.615733" elapsed="0.000000"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>time_=10</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2025-07-07T14:33:53.616731" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Motif Gel" owner="ddi">
+<arg>relance ddi2</arg>
+<status status="NOT RUN" start="2025-07-07T14:33:53.616731" elapsed="0.000000"/>
+</kw>
+<kw name="Vérifier Envoi SMS" owner="servicenow_keywords">
+<status status="NOT RUN" start="2025-07-07T14:33:53.617810" elapsed="0.000194"/>
+</kw>
+<kw name="Cliquer Sur Bouton Degeler" owner="servicenow_keywords">
+<status status="NOT RUN" start="2025-07-07T14:33:53.618004" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Etat Ticket" owner="servicenow_keywords">
+<status status="NOT RUN" start="2025-07-07T14:33:53.618004" elapsed="0.000000"/>
+</kw>
+<kw name="Attendre Groupes Silo Et Affectation" owner="servicenow_keywords">
+<status status="NOT RUN" start="2025-07-07T14:33:53.619447" elapsed="0.000000"/>
+</kw>
+<kw name="Affecter Ticket à l'utilisateur" owner="servicenow_keywords">
+<arg>altst004</arg>
+<status status="NOT RUN" start="2025-07-07T14:33:53.619447" elapsed="0.000000"/>
+</kw>
+<kw name="Ajouter Worknote et Confirmer Information Client" owner="servicenow_keywords">
+<status status="NOT RUN" start="2025-07-07T14:33:53.620459" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-07-07T14:33:32.260032" elapsed="21.360427">TimeoutException: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0x7ff6587ecda5+78885]
+	GetHandleVerifier [0x0x7ff6587ece00+78976]
+	(No symbol) [0x0x7ff6585a9bca]
+	(No symbol) [0x0x7ff658600766]
+	(No symbol) [0x0x7ff658600a1c]
+	(No symbol) [0x0x7ff658654467]
+	(No symbol) [0x0x7ff658628bcf]
+	(No symbol) [0x0x7ff65865122f]
+	(No symbol) [0x0x7ff658628963]
+	(No symbol) [0x0x7ff6585f16b1]
+	(No symbol) [0x0x7ff6585f2443]
+	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
+	GetHandleVerifier [0x0x7ff658abf33d+3037629]
+	GetHandleVerifier [0x0x7ff658ade592+3165202]
+	GetHandleVerifier [0x0x7ff65880730e+186766]
+	GetHandleVerifier [0x0x7ff65880eb3f+217535]
+	GetHandleVerifier [0x0x7ff6587f59b4+114740]
+	GetHandleVerifier [0x0x7ff6587f5b69+115177]
+	GetHandleVerifier [0x0x7ff6587dc368+10728]
+	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
+	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
+</status>
+</test>
+<status status="FAIL" start="2025-07-07T14:27:04.215324" elapsed="409.408134"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="4" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Test Incident" id="s1" pass="1" fail="0" skip="0">Test Incident</stat>
+<stat name="Test Servicenow" id="s1" pass="4" fail="1" skip="0">Test Servicenow</stat>
 </suite>
 </statistics>
 <errors>

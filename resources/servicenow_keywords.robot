@@ -42,7 +42,7 @@ Lancer Demande Information
 
 Verification envoi SMS
     Verifier Etat Et Etape Technique
-    Verifier Envoi Sms
+    Verifier Envoi Sms    ddi
     ${numero_ticket}=    Recuperer Numero Ticket
     Log To Console    Le ticket est : ${numero_ticket}
 
@@ -54,6 +54,28 @@ Aller à la Vue des Tickets SAV
 Rechercher et Modifier le Ticket DDI1
     Rechercher Ticket Par Numero
 
-#Attendre Et Vérifier Relance DDI1
-    #Attendre Motif Gel Relance DDI1
-    #Verifier SMS Relance DDI1
+Cliquer Sur Le Numero Ticket
+    Cliquer Sur Numero Ticket
+
+Attendre Le Motif Du Gel
+    [Arguments]    ${motif}
+    Attendre Motif Gel    ${motif}
+
+Vérifier Envoi SMS
+    Verifier Envoi Sms    ddi1
+
+Attendre Etat Ticket
+    Attendre Etat Actif
+
+Attendre Groupes Silo Et Affectation
+    Attendre Groupes
+
+Cliquer Sur Bouton Degeler
+    Cliquer Sur Bouton Degeler
+
+Cliquer Sur Information Client Reçu
+    Cliquer Sur Information Client Recu
+
+Ajouter Worknote et Confirmer Information Client
+    Ajouter Worknote et Confirmer
+
