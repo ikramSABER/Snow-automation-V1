@@ -21,7 +21,7 @@ Naviguer à la création du ticket IU
     Rechercher Et Selectionner Creer Iu
 
 Remplir les champs du ticket IU
-    ${url}=    Remplir Champs Obligatoires IU
+    ${url}=    Remplir Champs Obligatoires IU    610000000075
     RETURN    ${url}
 
 Aller à l'URL du Ticket
@@ -61,21 +61,20 @@ Attendre Le Motif Du Gel
     [Arguments]    ${motif}
     Attendre Motif Gel    ${motif}
 
-Vérifier Envoi SMS
+Rechercher et Modifier le Ticket DDI2
+    Rechercher Ticket Par Numero
+
+Vérifier Envoi SMS DDI1
     Verifier Envoi Sms    ddi1
 
-Attendre Etat Ticket
-    Attendre Etat Actif
+Vérifier Envoi SMS DDI2
+    Verifier Envoi Sms    ddi2
 
-Attendre Groupes Silo Et Affectation
-    Attendre Groupes
-
-Cliquer Sur Bouton Degeler
+Cliquer Sur Bouton Dégeler
     Cliquer Sur Bouton Degeler
 
-Cliquer Sur Information Client Reçu
-    Cliquer Sur Information Client Recu
+Attendre Que L'État Devienne Actif
+    Attendre Etat Actif
 
-Ajouter Worknote et Confirmer Information Client
-    Ajouter Worknote et Confirmer
-
+Patienter Que Les Groupes Soient Remplis
+    Patienter Groupes Chargés

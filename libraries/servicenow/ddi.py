@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from utils import get_driver, get_wait
 from navigation import switch_to_main_iframe
 from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import InvalidElementStateException
 import time
 from selenium.webdriver.common.action_chains import ActionChains
 from datetime import datetime, timedelta
@@ -51,22 +52,47 @@ def forcer_raz_et_mettre_ticket_actif():
     bouton_enregistrer.click()
 
 
-def affecter_ticket(login="Altst004 ALTST004"):
+def affecter_ticket(login="Altst004 ALTST004", max_retry=5):
     driver = get_driver()
     wait = get_wait()
 
-    assigned_to_input = wait.until(
-        lambda d: d.find_element(By.CSS_SELECTOR, "#sys_display\\.u_savftth\\.assigned_to")
-    )
-    assigned_to_input.clear()
-    assigned_to_input.send_keys(login)
-    time.sleep(1)
-    assigned_to_input.send_keys(Keys.TAB)
+    for attempt in range(max_retry):
+        try:
+            assigned_to_input = wait.until(
+                lambda d: d.find_element(By.CSS_SELECTOR, "#sys_display\\.u_savftth\\.assigned_to")
+            )
 
-    time.sleep(1)
+            # Vérification si le champ est activé
+            if not assigned_to_input.is_enabled():
+                raise Exception("[ERROR] Champ 'assigned_to' désactivé.")
 
-    bouton_enregistrer = driver.find_element(By.CSS_SELECTOR, "#sysverb_update_and_stay")
-    bouton_enregistrer.click()
+            # Optionnel : clean JS en cas d’échec de clear classique
+            try:
+                assigned_to_input.clear()
+            except InvalidElementStateException:
+                driver.execute_script("arguments[0].value = '';", assigned_to_input)
+
+            assigned_to_input.send_keys(login)
+            time.sleep(1)
+            assigned_to_input.send_keys(Keys.TAB)
+
+            time.sleep(1)
+
+            bouton_enregistrer = wait.until(
+                lambda d: d.find_element(By.CSS_SELECTOR, "#sysverb_update_and_stay")
+            )
+            bouton_enregistrer.click()
+            print(f"[INFO] ✅ Affectation du ticket à {login} réussie.")
+            return
+
+        except InvalidElementStateException as e:
+            print(f"[WARN] Tentative {attempt + 1}/{max_retry} échouée (champ non interactif). Retry...")
+            time.sleep(2)
+        except Exception as e:
+            print(f"[ERROR] Erreur imprévue pendant l'affectation : {e}")
+            raise
+
+    raise Exception(f"[FAIL] Impossible d’affecter le ticket à {login} après {max_retry} tentatives.")
 
 def cliquer_sur_demande_information():
     driver = get_driver()
@@ -380,7 +406,7 @@ def modifier_date_previsionnelle_via_calendrier():
     print(f"[INFO] Date prévisionnelle fixée à : {target.strftime('%d/%m/%Y %H:%M:%S')}")
 
 
-def cliquer_sur_numero_ticket(timeout=30):
+def cliquer_sur_numero_ticket(timeout=40):
     from selenium.webdriver.support import expected_conditions as EC
 
     driver = get_driver()
@@ -458,130 +484,76 @@ def verifier_envoi_sms(version):
         print(f"[AVERTISSEMENT] ⚠️ SMS '{version.upper()}' non envoyé")
     else:
         print("[AVERTISSEMENT] ⚠️ Aucun message relatif au SMS trouvé")
-        
-def attendre_etat_actif(timeout=120):
-    driver = get_driver()
-    wait = get_wait()
-    switch_to_main_iframe()
-
-    for _ in range(timeout):
-        try:
-            select_etat = wait.until(lambda d: d.find_element(By.ID, "u_savftth.state"))
-            selected = Select(select_etat).first_selected_option.text.strip().lower()
-            print(f"[DEBUG] État actuel : {selected}")
-            if selected in ["actif", "active"]:
-                print("[INFO] État 'actif' détecté.")
-                return
-        except Exception as e:
-            print(f"[WARN] Problème de lecture état : {e}")
-        time.sleep(1)
-
-    raise TimeoutError("L'état du ticket n'est pas passé à 'Actif' dans le temps imparti.")
-
-def attendre_groupes_silo_et_affectation(timeout=600):
-    driver = get_driver()
-    wait = get_wait()
-    switch_to_main_iframe()
-
-    for _ in range(timeout):
-        try:
-            groupe_silo = wait.until(lambda d: d.find_element(By.ID, "u_savftth.u_groupe_silo")).get_attribute("value")
-            groupe_aff = wait.until(lambda d: d.find_element(By.ID, "sys_display.u_savftth.assignment_group")).get_attribute("value")
-            print(f"[DEBUG] Groupe Silo: {groupe_silo} | Groupe Affectation: {groupe_aff}")
-            if groupe_silo.strip() and groupe_aff.strip():
-                print("[INFO] Groupes correctement renseignés.")
-                return
-        except Exception as e:
-            print(f"[WARN] Problème de lecture groupe : {e}")
-        time.sleep(1)
-
-    raise TimeoutError("Groupes 'silo' ou 'affectation' non remplis après 10 minutes.")
-
-def ajouter_worknote(message="test DDI terminer"):
-    driver = get_driver()
-    wait = get_wait()
-    switch_to_main_iframe()
-
-    textarea = wait.until(lambda d: d.find_element(By.ID, "activity-stream-textarea"))
-    textarea.clear()
-    textarea.send_keys(message)
-    print(f"[INFO] Worknote ajoutée : {message}")
-
-def cliquer_sur_information_client_recu():
-    driver = get_driver()
-    wait = get_wait()
-    bouton = wait.until(lambda d: d.find_element(By.ID, "u_info_client_recu"))
-    bouton.click()
-    print("[INFO] Bouton 'Information Client Reçu' cliqué.")
-
-def recuperer_worknotes_sms():
-    driver = get_driver()
-    wait = get_wait()
-
-    wait.until(lambda d: d.find_element(By.ID, "sn_form_inline_stream_entries"))
-    ul = driver.find_element(By.CSS_SELECTOR, "#sn_form_inline_stream_entries > ul.activities-form")
-    elements_li = ul.find_elements(By.CSS_SELECTOR, "li.h-card")
-
-    contenu_global = []
-    for li in elements_li:
-        try:
-            metadata = li.find_element(By.CSS_SELECTOR, ".sn-card-component-time").text.lower()
-            if "work notes" in metadata:
-                bloc = li.find_element(By.CSS_SELECTOR, ".sn-card-component_summary")
-                contenu = bloc.text.strip().lower()
-                contenu_global.append(contenu)
-        except Exception:
-            continue
-
-    return contenu_global
-
-
-def verifier_sms_contient_texte(contenu_attendu: str):
-    logs = recuperer_worknotes_sms()
-    if not any(contenu_attendu in log for log in logs):
-        raise AssertionError(f"SMS attendu non trouvé dans les worknotes : '{contenu_attendu}'")
-    
-
-def recuperer_valeur_champ(champ_id: str):
-    driver = get_driver()
-    wait = get_wait()
-    switch_to_main_iframe()
-
-    try:
-        if champ_id.startswith("sys_display.") or champ_id.startswith("u_savftth."):
-            elem = wait.until(lambda d: d.find_element(By.ID, champ_id))
-        else:
-            elem = wait.until(lambda d: d.find_element(By.ID, f"u_savftth.{champ_id}"))
-        return elem.get_attribute("value").strip()
-    except Exception as e:
-        print(f"[ERREUR] Impossible de lire la valeur du champ {champ_id} : {e}")
-        return ""
-
-
-def attendre_groupes(timeout: int = 600):
-    for _ in range(timeout):
-        groupe_silo = recuperer_valeur_champ("u_groupe_silo")
-        groupe_aff = recuperer_valeur_champ("assignment_group")
-        if groupe_silo and groupe_aff:
-            return
-        time.sleep(1)
-    raise TimeoutError("Les champs 'groupe silo' et/ou 'groupe d’affectation' ne sont pas remplis après 10 minutes.")
-
 
 def cliquer_sur_bouton_degeler():
     driver = get_driver()
     wait = get_wait()
     switch_to_main_iframe()
 
-    bouton = wait.until(lambda d: d.find_element(By.ID, "u_degeler"))
+    bouton = wait.until(lambda d: d.find_element(By.ID, "u_ticketsav_unfreeze"))
     driver.execute_script("arguments[0].scrollIntoView(true);", bouton)
     time.sleep(0.5)
     bouton.click()
     print("[INFO] Bouton 'Dégeler' cliqué.")
 
 
-def ajouter_worknote_et_confirmer(texte: str = "test DDI terminer"):
-    input_worknote = get_driver().find_element(By.ID, "activity-stream-textarea")
-    input_worknote.send_keys(texte)
-    bouton_info_client = get_driver().find_element(By.ID, "u_info_client_recu")
-    bouton_info_client.click()
+def attendre_etat_actif(timeout=60):
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
+    for i in range(timeout):
+        try:
+            etat_elem = wait.until(lambda d: d.find_element(By.ID, "u_savftth.state"))
+            selected = Select(etat_elem).first_selected_option.text.strip().lower()
+            print(f"[DEBUG] État actuel : {selected}")
+            if "actif" in selected or "active" in selected:
+                print("[INFO] ✅ État est devenu 'Actif'")
+                return
+        except Exception as e:
+            print(f"[WARN] Tentative {i+1}/{timeout} - Échec lecture état : {e}")
+        time.sleep(1)
+    raise Exception("⛔ L'état 'Actif' n'a pas été atteint dans le délai imparti.")
+
+def patienter_groupes_chargés(timeout=600):  # 10 min max
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
+    for i in range(timeout):
+        try:
+            champ_affectation = driver.find_element(By.ID, "sys_display.u_savftth.assignment_group")
+            champ_silo = driver.find_element(By.ID, "sys_display.u_savftth.u_silo_group")
+
+            val_affectation = champ_affectation.get_attribute("value").strip()
+            val_silo = champ_silo.get_attribute("value").strip()
+
+            print(f"[DEBUG] t+{i}s | Affectation: '{val_affectation}' | Silo: '{val_silo}'")
+
+            if val_affectation and val_silo:
+                print(f"[INFO] ✅ Groupes détectés : Affectation = '{val_affectation}', Silo = '{val_silo}'")
+                return
+        except Exception as e:
+            print(f"[WARN] Erreur lors de la lecture des champs : {e}")
+
+        time.sleep(1)
+        bouton_enregistrer = driver.find_element(By.CSS_SELECTOR, "#sysverb_update_and_stay")
+        bouton_enregistrer.click()
+
+    raise Exception("⛔ Les groupes assignés (affectation ou silo) n'ont pas été chargés à temps.")
+
+
+
+def ajouter_worknote_et_confirmer(message="test DDI terminée"):
+    driver = get_driver()
+    wait = get_wait()
+    switch_to_main_iframe()
+
+    textarea = wait.until(lambda d: d.find_element(By.ID, "activity-stream-work_notes-textarea"))
+    textarea.clear()
+    textarea.send_keys(message)
+    print(f"[INFO] ✅ Worknote saisie : {message}")
+
+    bouton = wait.until(lambda d: d.find_element(By.ID, "sysverb_update_and_stay"))
+    bouton.click()
+    print("[INFO] Bouton 'Enregistrer' cliqué après saisie de worknote.")

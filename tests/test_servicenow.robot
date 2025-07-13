@@ -37,10 +37,38 @@ Date Prévisionnelle De Dégel
     Modifier Date Previsionnelle Via Calendrier
 
 Relance DDI1
-    Sleep    time_=5
     Cliquer Sur Numero Ticket
     Sleep    time_=5
     Attendre Le Motif Du Gel    relance ddi1
     Sleep    time_=5
-    Vérifier Envoi SMS
+    Vérifier Envoi SMS DDI1
     Recuperer Numero Ticket
+
+Date Prévisionnelle De Dégel 2 (Avant relance DDI2)
+    Sleep    time_=5
+    Aller à l'URL du Ticket    https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/%24pa_dashboard.do
+    Sleep    time_=5
+    Aller à la Vue des Tickets SAV
+    Sleep    time_=5
+    Rechercher et Modifier le Ticket DDI2
+    Sleep    time_=5
+    Modifier Date Previsionnelle Via Calendrier
+
+Relance DDI2
+    Sleep    5
+    Cliquer Sur Numero Ticket
+    Sleep    5
+    Attendre Le Motif Du Gel    relance ddi2
+    Sleep    5
+    Vérifier Envoi SMS DDI2
+    Sleep    time_=5
+    Cliquer Sur Bouton Dégeler
+    Sleep    time_=5
+    Attendre Que L'État Devienne Actif
+    Sleep    time_=5
+    Patienter Que Les Groupes Soient Remplis
+    Sleep    time_=5
+
+    Affecter Ticket à l'utilisateur    altst004
+    Sleep    time_=5
+    Ajouter Worknote Et Confirmer    test DDI terminée

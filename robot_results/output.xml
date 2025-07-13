@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.12.0 on win32)" generated="2025-07-07T14:27:04.213324" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2.2 (Python 3.12.0 on win32)" generated="2025-07-13T22:48:52.051438" rpa="false" schemaversion="5">
 <suite id="s1" name="Test Servicenow" source="C:\Users\geams\OneDrive\Bureau\ProjetAlten\tests\test_servicenow.robot">
 <kw name="Ouvrir le navigateur ServiceNow" owner="servicenow_keywords" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-07-07T14:27:04.497300" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
+<msg time="2025-07-13T22:48:52.271084" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
 <arg>${SERVICENOW_URL}</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-07-07T14:27:04.497300" elapsed="4.780529"/>
+<status status="PASS" start="2025-07-13T22:48:52.271084" elapsed="6.727922"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-07-07T14:27:09.277829" elapsed="0.063623"/>
+<status status="PASS" start="2025-07-13T22:48:58.999006" elapsed="0.025996"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:27:04.497136" elapsed="4.844316"/>
+<status status="PASS" start="2025-07-13T22:48:52.271084" elapsed="6.753918"/>
 </kw>
 <test id="s1-t1" name="Création et vérifications d’un ticket sur ServiceNow" line="7">
 <kw name="Se connecter à ServiceNow" owner="servicenow_keywords">
@@ -21,259 +21,263 @@
 <arg>id=user_name</arg>
 <arg>timeout=15s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-07-07T14:27:09.344253" elapsed="0.054115"/>
+<status status="PASS" start="2025-07-13T22:48:59.026379" elapsed="0.026917"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-07-07T14:27:09.399376" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
+<msg time="2025-07-13T22:48:59.053296" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
 <arg>id=user_name</arg>
 <arg>${SNOW_USERNAME}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-07-07T14:27:09.399376" elapsed="0.222060"/>
+<status status="PASS" start="2025-07-13T22:48:59.053296" elapsed="0.104827"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-07-07T14:27:09.622449" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
+<msg time="2025-07-13T22:48:59.158123" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>${SNOW_PASSWORD}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-07-07T14:27:09.622449" elapsed="0.127498"/>
+<status status="PASS" start="2025-07-13T22:48:59.158123" elapsed="0.104029"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-07-07T14:27:09.750950" level="INFO">Clicking button 'id=sysverb_login'.</msg>
+<msg time="2025-07-13T22:48:59.263150" level="INFO">Clicking button 'id=sysverb_login'.</msg>
 <arg>id=sysverb_login</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-07-07T14:27:09.750950" elapsed="3.283315"/>
+<status status="PASS" start="2025-07-13T22:48:59.263150" elapsed="7.567230"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:27:09.343250" elapsed="3.692009"/>
+<status status="PASS" start="2025-07-13T22:48:59.026379" elapsed="7.804001"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:27:18.035581" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:49:11.831663" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:27:13.035259" elapsed="5.000322"/>
+<status status="PASS" start="2025-07-13T22:49:06.831379" elapsed="5.000284"/>
 </kw>
 <kw name="Naviguer à la création du ticket IU" owner="servicenow_keywords">
 <kw name="Cliquer Sur Bouton All" owner="navigation">
-<msg time="2025-07-07T14:27:18.208242" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
+<msg time="2025-07-13T22:49:11.849909" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
 Clic sur le bouton 'All' réussi.</msg>
-<status status="PASS" start="2025-07-07T14:27:18.036612" elapsed="0.171630"/>
+<status status="PASS" start="2025-07-13T22:49:11.832401" elapsed="0.017508"/>
 </kw>
 <kw name="Rechercher Et Selectionner Creer Iu" owner="navigation">
-<msg time="2025-07-07T14:27:19.240387" level="INFO">[1/30] Tentative d’accès à la barre de recherche contextuelle...
+<msg time="2025-07-13T22:49:14.809735" level="INFO">[1/30] Tentative d’accès à la barre de recherche contextuelle...
 Texte 'Créer IU' saisi dans la barre contextuelle.
 [1/30] Tentative de clic sur le favori 'Créer IU'...
 [2/30] Tentative de clic sur le favori 'Créer IU'...
 [3/30] Tentative de clic sur le favori 'Créer IU'...
 [4/30] Tentative de clic sur le favori 'Créer IU'...
+[5/30] Tentative de clic sur le favori 'Créer IU'...
+[6/30] Tentative de clic sur le favori 'Créer IU'...
+[7/30] Tentative de clic sur le favori 'Créer IU'...
+[8/30] Tentative de clic sur le favori 'Créer IU'...
+[9/30] Tentative de clic sur le favori 'Créer IU'...
 Clic sur 'Créer IU' dans les favoris réussi.</msg>
-<status status="PASS" start="2025-07-07T14:27:18.208242" elapsed="1.032145"/>
+<status status="PASS" start="2025-07-13T22:49:11.849909" elapsed="2.959826"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:27:18.036612" elapsed="1.204775"/>
+<status status="PASS" start="2025-07-13T22:49:11.832401" elapsed="2.977334"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:27:24.243579" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:49:19.811589" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:27:19.242385" elapsed="5.001194"/>
+<status status="PASS" start="2025-07-13T22:49:14.809735" elapsed="5.001854"/>
 </kw>
 <kw name="Remplir les champs du ticket IU" owner="servicenow_keywords">
 <kw name="Remplir Champs Obligatoires Iu" owner="champs">
-<msg time="2025-07-07T14:27:42.653028" level="INFO">[1/30] Tentative de récupération de l’iframe principale...
+<msg time="2025-07-13T22:49:42.781481" level="INFO">[1/30] Tentative de récupération de l’iframe principale...
 [INFO] Iframe principale trouvée et activée.
+[INFO] ID Contrat rempli : 610000000074
 Attente du champ catégorie dans le DOM...
 Attente du champ sous-catégorie dans le DOM...
-[WARN] Timeout d’attente de redirection. URL actuelle : https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3De68c0ed6c3e2a2104c5b2dd9d0013142%26sysparm_view%3D</msg>
-<msg time="2025-07-07T14:27:42.653028" level="INFO">${url} = https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3De68c0ed6c3e2a2104c5b2dd9d0013142%26sysparm_view%3D</msg>
+[WARN] Timeout d’attente de redirection. URL actuelle : https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3Da5f8765887feae10e93e433d8bbb35da%26sysparm_view%3D</msg>
+<msg time="2025-07-13T22:49:42.781481" level="INFO">${url} = https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3Da5f8765887feae10e93e433d8bbb35da%26sysparm_view%3D</msg>
 <var>${url}</var>
-<status status="PASS" start="2025-07-07T14:27:24.244485" elapsed="18.408543"/>
+<arg>610000000074</arg>
+<status status="PASS" start="2025-07-13T22:49:19.811589" elapsed="22.969892"/>
 </kw>
 <return>
 <value>${url}</value>
-<status status="PASS" start="2025-07-07T14:27:42.653028" elapsed="0.000000"/>
+<status status="PASS" start="2025-07-13T22:49:42.781481" elapsed="0.000000"/>
 </return>
-<msg time="2025-07-07T14:27:42.654027" level="INFO">${url_ticket} = https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3De68c0ed6c3e2a2104c5b2dd9d0013142%26sysparm_view%3D</msg>
+<msg time="2025-07-13T22:49:42.782523" level="INFO">${url_ticket} = https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/u_savftth.do%3Fsys_id%3Da5f8765887feae10e93e433d8bbb35da%26sysparm_view%3D</msg>
 <var>${url_ticket}</var>
-<status status="PASS" start="2025-07-07T14:27:24.244485" elapsed="18.409542"/>
+<status status="PASS" start="2025-07-13T22:49:19.811589" elapsed="22.970934"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:27:47.654686" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:49:47.783451" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:27:42.654027" elapsed="5.000659"/>
+<status status="PASS" start="2025-07-13T22:49:42.782523" elapsed="5.000928"/>
 </kw>
 <doc>Simule la création d’un ticket LTT ServiceNow et vérifie l’ensemble des éléments requis.</doc>
-<status status="PASS" start="2025-07-07T14:27:09.341452" elapsed="38.313742"/>
+<status status="PASS" start="2025-07-13T22:48:59.025002" elapsed="48.759439"/>
 </test>
 <test id="s1-t2" name="DDI" line="16">
 <kw name="Forcer Raz et Mettre Le Ticket Actif" owner="servicenow_keywords">
 <kw name="Forcer Raz Et Mettre Ticket Actif" owner="ddi">
-<msg time="2025-07-07T14:27:48.889096" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.</msg>
-<status status="PASS" start="2025-07-07T14:27:47.657604" elapsed="1.231492"/>
+<msg time="2025-07-13T22:49:52.190050" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.</msg>
+<status status="PASS" start="2025-07-13T22:49:47.786439" elapsed="4.403611"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:27:47.657604" elapsed="1.231492"/>
+<status status="PASS" start="2025-07-13T22:49:47.786439" elapsed="4.403611"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:27:53.890337" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:49:57.191605" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:27:48.890100" elapsed="5.000237"/>
+<status status="PASS" start="2025-07-13T22:49:52.191215" elapsed="5.000390"/>
 </kw>
 <kw name="Affecter Ticket à l'utilisateur" owner="servicenow_keywords">
 <kw name="Affecter Ticket" owner="ddi">
+<msg time="2025-07-13T22:50:02.797041" level="INFO">[INFO] ✅ Affectation du ticket à Altst004 ALTST004 réussie.</msg>
 <arg>${login}</arg>
-<status status="PASS" start="2025-07-07T14:27:53.891363" elapsed="2.446422"/>
+<status status="PASS" start="2025-07-13T22:49:57.192614" elapsed="5.604427"/>
 </kw>
 <arg>Altst004 ALTST004</arg>
-<status status="PASS" start="2025-07-07T14:27:53.890337" elapsed="2.447959"/>
+<status status="PASS" start="2025-07-13T22:49:57.191605" elapsed="5.606434"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:28:01.339375" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:50:07.799320" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:27:56.338425" elapsed="5.000950"/>
+<status status="PASS" start="2025-07-13T22:50:02.798039" elapsed="5.001281"/>
 </kw>
 <kw name="Lancer Demande Information" owner="servicenow_keywords">
 <kw name="Cliquer Sur Demande Information" owner="ddi">
-<status status="PASS" start="2025-07-07T14:28:01.340436" elapsed="0.662252"/>
+<status status="PASS" start="2025-07-13T22:50:07.800151" elapsed="0.635174"/>
 </kw>
 <kw name="Remplir Motif Et Worknote" owner="ddi">
-<status status="PASS" start="2025-07-07T14:28:02.002688" elapsed="0.699236"/>
+<status status="PASS" start="2025-07-13T22:50:08.435325" elapsed="0.684068"/>
 </kw>
 <kw name="Confirmer Demande Information" owner="ddi">
-<status status="PASS" start="2025-07-07T14:28:02.701924" elapsed="0.675046"/>
+<status status="PASS" start="2025-07-13T22:50:09.120438" elapsed="0.642017"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:28:01.339375" elapsed="2.037595"/>
+<status status="PASS" start="2025-07-13T22:50:07.800151" elapsed="1.962304"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:28:08.378107" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:50:14.763803" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:28:03.377970" elapsed="5.000137"/>
+<status status="PASS" start="2025-07-13T22:50:09.763452" elapsed="5.000351"/>
 </kw>
 <kw name="Verification envoi SMS" owner="servicenow_keywords">
 <kw name="Verifier Etat Et Etape Technique" owner="ddi">
-<msg time="2025-07-07T14:28:08.464584" level="INFO">[DEBUG] État visible (label) : freezed
+<msg time="2025-07-13T22:50:14.914354" level="INFO">[DEBUG] État visible (label) : freezed
 [DEBUG] Étape technique : attente_client_ddi</msg>
-<status status="PASS" start="2025-07-07T14:28:08.379049" elapsed="0.085535"/>
+<status status="PASS" start="2025-07-13T22:50:14.764820" elapsed="0.149534"/>
 </kw>
 <kw name="Verifier Envoi Sms" owner="ddi">
-<msg time="2025-07-07T14:28:08.546821" level="INFO">[DEBUG] Contenu global des notes de travail :
+<msg time="2025-07-13T22:50:15.001033" level="INFO">[DEBUG] Contenu global des notes de travail :
+l'enrichissement des données est incomplet:
+brand,service,offer label,client case number,client status,subscription type,client login,title,email,home phone,id srv,pto,building operator,postal code,slot,fiber,pm address,city,pbo,pm type,tube,coupler,module position,outlet prestation reference,id link,panel id,pm port,pm,ont id,oi module name,pm engineering type,address,id oss,olt,zone type,pon port,external id
 
 [AVERTISSEMENT] ⚠️ Aucun message relatif au SMS trouvé</msg>
 <arg>ddi</arg>
-<status status="PASS" start="2025-07-07T14:28:08.464584" elapsed="0.082237"/>
+<status status="PASS" start="2025-07-13T22:50:14.914354" elapsed="0.086679"/>
 </kw>
 <kw name="Recuperer Numero Ticket" owner="ddi">
-<msg time="2025-07-07T14:28:08.563503" level="INFO">${numero_ticket} = SAV-FTTH0007208976</msg>
-<msg time="2025-07-07T14:28:08.563503" level="INFO">[INFO] Numéro du ticket récupéré et stocké : SAV-FTTH0007208976</msg>
-<msg time="2025-07-07T14:28:08.563503" level="INFO">${numero_ticket} = SAV-FTTH0007208976</msg>
+<msg time="2025-07-13T22:50:15.014482" level="INFO">${numero_ticket} = SAV-FTTH0007208985</msg>
+<msg time="2025-07-13T22:50:15.014482" level="INFO">[INFO] Numéro du ticket récupéré et stocké : SAV-FTTH0007208985</msg>
+<msg time="2025-07-13T22:50:15.014482" level="INFO">${numero_ticket} = SAV-FTTH0007208985</msg>
 <var>${numero_ticket}</var>
-<status status="PASS" start="2025-07-07T14:28:08.546821" elapsed="0.016682"/>
+<status status="PASS" start="2025-07-13T22:50:15.001033" elapsed="0.013449"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Le ticket est : ${numero_ticket}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-07-07T14:28:08.563503" elapsed="0.000998"/>
+<status status="PASS" start="2025-07-13T22:50:15.014482" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:28:08.379049" elapsed="0.185452"/>
+<status status="PASS" start="2025-07-13T22:50:14.764820" elapsed="0.250661"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:27:47.656204" elapsed="20.908297"/>
+<status status="PASS" start="2025-07-13T22:49:47.785450" elapsed="27.230031"/>
 </test>
 <test id="s1-t3" name="Date Prévisionnelle De Dégel" line="29">
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:28:13.566926" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:50:20.016643" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:28:08.565348" elapsed="5.001578"/>
+<status status="PASS" start="2025-07-13T22:50:15.016481" elapsed="5.000162"/>
 </kw>
 <kw name="Aller à l'URL du Ticket" owner="servicenow_keywords">
 <kw name="Aller À Lien Ticket" owner="ddi">
 <arg>${url}</arg>
-<status status="PASS" start="2025-07-07T14:28:13.567911" elapsed="0.398472"/>
+<status status="PASS" start="2025-07-13T22:50:20.017651" elapsed="0.365251"/>
 </kw>
 <arg>https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/%24pa_dashboard.do</arg>
-<status status="PASS" start="2025-07-07T14:28:13.567911" elapsed="0.398472"/>
+<status status="PASS" start="2025-07-13T22:50:20.017651" elapsed="0.365251"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:28:23.967695" level="INFO">Slept 10 seconds.</msg>
+<msg time="2025-07-13T22:50:30.383404" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:28:13.967383" elapsed="10.000312"/>
+<status status="PASS" start="2025-07-13T22:50:20.382902" elapsed="10.000502"/>
 </kw>
 <kw name="Aller à la Vue des Tickets SAV" owner="servicenow_keywords">
 <kw name="Cliquer Sur Bouton All" owner="navigation">
-<msg time="2025-07-07T14:28:23.992597" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
+<msg time="2025-07-13T22:50:30.422886" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
 Clic sur le bouton 'All' réussi.</msg>
-<status status="PASS" start="2025-07-07T14:28:23.968231" elapsed="0.024366"/>
+<status status="PASS" start="2025-07-13T22:50:30.383404" elapsed="0.039482"/>
 </kw>
 <kw name="Rechercher Et Selectionner Vue Tickets Sav" owner="ddi">
-<msg time="2025-07-07T14:28:24.832840" level="INFO">[1/30] Accès à la barre de recherche contextuelle...
+<msg time="2025-07-13T22:50:31.046759" level="INFO">[1/30] Accès à la barre de recherche contextuelle...
 [OK] Saisie dans la barre contextuelle réussie.
 [1/30] Clic sur l'élément 'ticket SAV - tickets ouverts SAV FTTH (BO)'...
 [2/30] Clic sur l'élément 'ticket SAV - tickets ouverts SAV FTTH (BO)'...
 [OK] Clic sur la vue 'ticket SAV...' réussi.</msg>
-<status status="PASS" start="2025-07-07T14:28:23.992597" elapsed="0.840243"/>
+<status status="PASS" start="2025-07-13T22:50:30.422886" elapsed="0.623873"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:28:23.968231" elapsed="0.864609"/>
+<status status="PASS" start="2025-07-13T22:50:30.383404" elapsed="0.663355"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:28:29.834054" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:50:36.048382" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:28:24.833357" elapsed="5.000697"/>
+<status status="PASS" start="2025-07-13T22:50:31.047758" elapsed="5.000624"/>
 </kw>
 <kw name="Rechercher et Modifier le Ticket DDI1" owner="servicenow_keywords">
 <kw name="Rechercher Ticket Par Numero" owner="ddi">
-<msg time="2025-07-07T14:28:30.239858" level="INFO">[1/30] Tentative de récupération de l’iframe principale...
+<msg time="2025-07-13T22:50:36.681538" level="INFO">[1/30] Tentative de récupération de l’iframe principale...
 [INFO] Iframe principale trouvée et activée.
-[INFO] Recherche du ticket SAV-FTTH0007208976 effectuée.</msg>
-<status status="PASS" start="2025-07-07T14:28:29.835013" elapsed="0.404845"/>
+[INFO] Recherche du ticket SAV-FTTH0007208985 effectuée.</msg>
+<status status="PASS" start="2025-07-13T22:50:36.048382" elapsed="0.633596"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:28:29.834054" elapsed="0.405804"/>
+<status status="PASS" start="2025-07-13T22:50:36.048382" elapsed="0.633967"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:28:35.241090" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:50:41.684320" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:28:30.240858" elapsed="5.000232"/>
+<status status="PASS" start="2025-07-13T22:50:36.682618" elapsed="5.001702"/>
 </kw>
 <kw name="Modifier Date Previsionnelle Via Calendrier" owner="ddi">
-<msg time="2025-07-07T14:28:36.966437" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.
-[DEBUG] Now local = 07/07/2025 14:28:35
-[DEBUG] Target date = 07/07/2025 15:30:35
+<msg time="2025-07-13T22:50:43.708184" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.
+[DEBUG] Now local = 13/07/2025 22:50:41
+[DEBUG] Target date = 13/07/2025 23:52:41
 [INFO] Double clic effectué sur le calendrier.
 [INFO] Calendrier bien ouvert (champ heure visible).
-[DEBUG] aria-label attendu = Monday, July 7, 2025
-[INFO] Jour sélectionné avec aria-label : Monday, July 7, 2025
-[INFO] Champ hh rempli avec 15
-[INFO] Champ mm rempli avec 30
-[INFO] Champ ss rempli avec 35
+[DEBUG] aria-label attendu = Sunday, July 13, 2025
+[INFO] Jour sélectionné avec aria-label : Sunday, July 13, 2025
+[INFO] Champ hh rempli avec 23
+[INFO] Champ mm rempli avec 52
+[INFO] Champ ss rempli avec 41
 [INFO] Validation par clic hors calendrier.
-[INFO] Date prévisionnelle fixée à : 07/07/2025 15:30:35</msg>
-<status status="PASS" start="2025-07-07T14:28:35.242104" elapsed="1.724333"/>
+[INFO] Date prévisionnelle fixée à : 13/07/2025 23:52:41</msg>
+<status status="PASS" start="2025-07-13T22:50:41.684320" elapsed="2.024889"/>
 </kw>
-<status status="PASS" start="2025-07-07T14:28:08.565348" elapsed="28.401089"/>
+<status status="PASS" start="2025-07-13T22:50:15.016481" elapsed="28.692728"/>
 </test>
 <test id="s1-t4" name="Relance DDI1" line="39">
-<kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:28:41.970278" level="INFO">Slept 5 seconds.</msg>
-<arg>time_=5</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:28:36.968403" elapsed="5.001875"/>
-</kw>
 <kw name="Cliquer Sur Numero Ticket" owner="ddi">
-<msg time="2025-07-07T14:28:42.119788" level="INFO">[DEBUG] Tentative de clic sur le numéro de ticket SAV-FTTH0007208976
-[INFO] Clic réussi sur le ticket SAV-FTTH0007208976</msg>
-<status status="PASS" start="2025-07-07T14:28:41.970278" elapsed="0.149510"/>
+<msg time="2025-07-13T22:50:46.468910" level="INFO">[DEBUG] Tentative de clic sur le numéro de ticket SAV-FTTH0007208985
+[INFO] Clic réussi sur le ticket SAV-FTTH0007208985</msg>
+<status status="PASS" start="2025-07-13T22:50:43.711644" elapsed="2.758295"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:28:47.121253" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-13T22:50:51.471714" level="INFO">Slept 5 seconds.</msg>
 <arg>time_=5</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:28:42.120789" elapsed="5.000464"/>
+<status status="PASS" start="2025-07-13T22:50:46.470940" elapsed="5.000774"/>
 </kw>
 <kw name="Attendre Le Motif Du Gel" owner="servicenow_keywords">
 <kw name="Attendre Motif Gel" owner="ddi">
-<msg time="2025-07-07T14:33:26.916631" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.
+<msg time="2025-07-13T22:51:46.510475" level="INFO">[INFO] Déjà dans l’iframe, aucune action nécessaire.
 [DEBUG] Début de l'attente du motif de gel : relance ddi1
 [DEBUG] Motif gel actuel : demande d'information
 [DEBUG] Motif gel actuel : demande d'information
@@ -284,600 +288,8 @@ Clic sur le bouton 'All' réussi.</msg>
 [DEBUG] Motif gel actuel : demande d'information
 [DEBUG] Motif gel actuel : demande d'information
 [DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: stale element reference: stale element not found
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff6585bffe4]
-	(No symbol) [0x0x7ff6585beab3]
-	(No symbol) [0x0x7ff6585b22c1]
-	(No symbol) [0x0x7ff6585b018f]
-	(No symbol) [0x0x7ff6585b460c]
-	(No symbol) [0x0x7ff6585b46df]
-	(No symbol) [0x0x7ff65860296d]
-	(No symbol) [0x0x7ff6585f35c0]
-	(No symbol) [0x0x7ff658628b8a]
-	(No symbol) [0x0x7ff6585f2f06]
-	(No symbol) [0x0x7ff658628da0]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: stale element reference: stale element not found
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff6585bffe4]
-	(No symbol) [0x0x7ff6585beab3]
-	(No symbol) [0x0x7ff6585b22c1]
-	(No symbol) [0x0x7ff6585b018f]
-	(No symbol) [0x0x7ff6585b460c]
-	(No symbol) [0x0x7ff6585b46df]
-	(No symbol) [0x0x7ff65860865b]
-	(No symbol) [0x0x7ff658605b81]
-	(No symbol) [0x0x7ff658603151]
-	(No symbol) [0x0x7ff658602041]
-	(No symbol) [0x0x7ff6585f3654]
-	(No symbol) [0x0x7ff658628b8a]
-	(No symbol) [0x0x7ff6585f2f06]
-	(No symbol) [0x0x7ff658628da0]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: stale element reference: stale element not found
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff6585bffe4]
-	(No symbol) [0x0x7ff6585beab3]
-	(No symbol) [0x0x7ff6585b22c1]
-	(No symbol) [0x0x7ff6585b018f]
-	(No symbol) [0x0x7ff6585b460c]
-	(No symbol) [0x0x7ff6585b46df]
-	(No symbol) [0x0x7ff658602cf7]
-	(No symbol) [0x0x7ff658601e01]
-	(No symbol) [0x0x7ff6585f3a06]
-	(No symbol) [0x0x7ff658628b8a]
-	(No symbol) [0x0x7ff6585f2f06]
-	(No symbol) [0x0x7ff658628da0]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: unknown error: unhandled inspector error: {"code":-32000,"message":"Node with given id does not belong to the document"}
-  (Session info: chrome=137.0.7151.120)
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff6585963c0]
-	(No symbol) [0x0x7ff658594ae0]
-	(No symbol) [0x0x7ff65859538f]
-	(No symbol) [0x0x7ff6585bd701]
-	(No symbol) [0x0x7ff6585c0403]
-	(No symbol) [0x0x7ff6585beab3]
-	(No symbol) [0x0x7ff6585b22c1]
-	(No symbol) [0x0x7ff6585b018f]
-	(No symbol) [0x0x7ff6585b460c]
-	(No symbol) [0x0x7ff6585b46df]
-	(No symbol) [0x0x7ff65860296d]
-	(No symbol) [0x0x7ff6585f35c0]
-	(No symbol) [0x0x7ff658628b8a]
-	(No symbol) [0x0x7ff6585f2f06]
-	(No symbol) [0x0x7ff658628da0]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[WARN] Lecture motif échouée : Message: no such element: Unable to locate element: {"method":"css selector","selector":"#sysverb_update_and_stay"}
-  (Session info: chrome=137.0.7151.120); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : demande d'information
-[DEBUG] Motif gel actuel : 
-[DEBUG] Motif gel actuel : 
-[DEBUG] Motif gel actuel : relance ddi1
-[INFO] ✅ Motif gel attendu détecté : relance ddi1</msg>
-<arg>${motif}</arg>
-<status status="PASS" start="2025-07-07T14:28:47.122231" elapsed="279.794400"/>
-</kw>
-<arg>relance ddi1</arg>
-<status status="PASS" start="2025-07-07T14:28:47.122231" elapsed="279.795423"/>
-</kw>
-<kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-07T14:33:31.918205" level="INFO">Slept 5 seconds.</msg>
-<arg>time_=5</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-07T14:33:26.917801" elapsed="5.001404"/>
-</kw>
-<kw name="Vérifier Envoi SMS" owner="servicenow_keywords">
-<kw name="Verifier Envoi Sms" owner="ddi">
-<msg time="2025-07-07T14:33:32.244796" level="INFO">[DEBUG] Contenu global des notes de travail :
-liste des communications :
-
-sms - le sms ftth - ddi - relance1 n'a pas été envoyé
-dégel automatique du ticket.
-liste des communications :
-
-sms - le sms ftth - ddi - demande d'information n'a pas été envoyé
-
-serveur vocal interactif - la communication ivr n'a pas été effectuée : 26
-gel du ticket automatique en attente de demande d'information client
-test ddi
-l'enrichissement des données est incomplet:
-brand,service,offer label,client case number,client status,subscription type,client login,title,email,home phone,id srv,pto,building operator,postal code,slot,fiber,pm address,city,pbo,pm type,tube,coupler,module position,outlet prestation reference,id link,panel id,pm port,pm,ont id,oi module name,pm engineering type,address,id oss,olt,zone type,pon port,external id
-
-[AVERTISSEMENT] ⚠️ Aucun message relatif au SMS trouvé</msg>
-<arg>ddi1</arg>
-<status status="PASS" start="2025-07-07T14:33:31.920202" elapsed="0.324594"/>
-</kw>
-<status status="PASS" start="2025-07-07T14:33:31.920202" elapsed="0.324594"/>
-</kw>
-<kw name="Recuperer Numero Ticket" owner="ddi">
-<msg time="2025-07-07T14:33:32.258999" level="INFO">${numero_ticket} = SAV-FTTH0007208976</msg>
-<msg time="2025-07-07T14:33:32.258999" level="INFO">[INFO] Numéro du ticket récupéré et stocké : SAV-FTTH0007208976</msg>
-<status status="PASS" start="2025-07-07T14:33:32.244796" elapsed="0.014203"/>
-</kw>
-<status status="PASS" start="2025-07-07T14:28:36.968403" elapsed="295.290596"/>
-</test>
-<test id="s1-t5" name="Relance DDI2" line="48">
-<kw name="Aller à l'URL du Ticket" owner="servicenow_keywords">
-<kw name="Aller À Lien Ticket" owner="ddi">
-<arg>${url}</arg>
-<status status="PASS" start="2025-07-07T14:33:32.261041" elapsed="0.332380"/>
-</kw>
-<arg>https://bouyguestelecomltt3.service-now.com/now/nav/ui/classic/params/target/%24pa_dashboard.do</arg>
-<status status="PASS" start="2025-07-07T14:33:32.261041" elapsed="0.332380"/>
-</kw>
-<kw name="Rechercher Ticket Par Numero" owner="ddi">
-<msg time="2025-07-07T14:33:53.611734" level="INFO">[1/30] Tentative de récupération de l’iframe principale...
-[INFO] Iframe principale trouvée et activée.</msg>
-<msg time="2025-07-07T14:33:53.612747" level="FAIL">TimeoutException: Message: 
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-</msg>
-<status status="FAIL" start="2025-07-07T14:33:32.594421" elapsed="21.020337">TimeoutException: Message: 
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-</status>
-</kw>
-<kw name="Sleep" owner="BuiltIn">
-<arg>time_=5</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-07-07T14:33:53.615733" elapsed="0.000000"/>
-</kw>
-<kw name="Modifier Date Previsionnelle Via Calendrier" owner="ddi">
-<status status="NOT RUN" start="2025-07-07T14:33:53.615733" elapsed="0.000000"/>
-</kw>
-<kw name="Sleep" owner="BuiltIn">
-<arg>time_=10</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-07-07T14:33:53.616731" elapsed="0.000000"/>
-</kw>
-<kw name="Attendre Motif Gel" owner="ddi">
-<arg>relance ddi2</arg>
-<status status="NOT RUN" start="2025-07-07T14:33:53.616731" elapsed="0.000000"/>
-</kw>
-<kw name="Vérifier Envoi SMS" owner="servicenow_keywords">
-<status status="NOT RUN" start="2025-07-07T14:33:53.617810" elapsed="0.000194"/>
-</kw>
-<kw name="Cliquer Sur Bouton Degeler" owner="servicenow_keywords">
-<status status="NOT RUN" start="2025-07-07T14:33:53.618004" elapsed="0.000000"/>
-</kw>
-<kw name="Attendre Etat Ticket" owner="servicenow_keywords">
-<status status="NOT RUN" start="2025-07-07T14:33:53.618004" elapsed="0.000000"/>
-</kw>
-<kw name="Attendre Groupes Silo Et Affectation" owner="servicenow_keywords">
-<status status="NOT RUN" start="2025-07-07T14:33:53.619447" elapsed="0.000000"/>
-</kw>
-<kw name="Affecter Ticket à l'utilisateur" owner="servicenow_keywords">
-<arg>altst004</arg>
-<status status="NOT RUN" start="2025-07-07T14:33:53.619447" elapsed="0.000000"/>
-</kw>
-<kw name="Ajouter Worknote et Confirmer Information Client" owner="servicenow_keywords">
-<status status="NOT RUN" start="2025-07-07T14:33:53.620459" elapsed="0.000000"/>
-</kw>
-<status status="FAIL" start="2025-07-07T14:33:32.260032" elapsed="21.360427">TimeoutException: Message: 
-Stacktrace:
-	GetHandleVerifier [0x0x7ff6587ecda5+78885]
-	GetHandleVerifier [0x0x7ff6587ece00+78976]
-	(No symbol) [0x0x7ff6585a9bca]
-	(No symbol) [0x0x7ff658600766]
-	(No symbol) [0x0x7ff658600a1c]
-	(No symbol) [0x0x7ff658654467]
-	(No symbol) [0x0x7ff658628bcf]
-	(No symbol) [0x0x7ff65865122f]
-	(No symbol) [0x0x7ff658628963]
-	(No symbol) [0x0x7ff6585f16b1]
-	(No symbol) [0x0x7ff6585f2443]
-	GetHandleVerifier [0x0x7ff658ac4eed+3061101]
-	GetHandleVerifier [0x0x7ff658abf33d+3037629]
-	GetHandleVerifier [0x0x7ff658ade592+3165202]
-	GetHandleVerifier [0x0x7ff65880730e+186766]
-	GetHandleVerifier [0x0x7ff65880eb3f+217535]
-	GetHandleVerifier [0x0x7ff6587f59b4+114740]
-	GetHandleVerifier [0x0x7ff6587f5b69+115177]
-	GetHandleVerifier [0x0x7ff6587dc368+10728]
-	BaseThreadInitThunk [0x0x7ffd10aa7374+20]
-	RtlUserThreadStart [0x0x7ffd11ffcc91+33]
-</status>
-</test>
-<status status="FAIL" start="2025-07-07T14:27:04.215324" elapsed="409.408134"/>
-</suite>
-<statistics>
-<total>
-<stat pass="4" fail="1" skip="0">All Tests</stat>
-</total>
-<tag>
-</tag>
-<suite>
-<stat name="Test Servicenow" id="s1" pass="4" fail="1" skip="0">Test Servicenow</stat>
-</suite>
-</statistics>
+[WARN] Lecture motif échouée : Execution terminated by signal</msg>
 <errors>
+<msg time="2025-07-13T22:51:46.510475" level="ERROR">Execution stopped by user.</msg>
 </errors>
 </robot>
