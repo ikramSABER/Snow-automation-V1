@@ -5,16 +5,17 @@ from utils import get_driver, get_wait
 from robot.libraries.BuiltIn import BuiltIn
 from navigation import switch_to_main_iframe
 
-def remplir_champ_input_id_contrat():
+def remplir_champ_input_id_contrat(id_contrat):
     driver = get_driver()
     wait = get_wait()
     champ_input_id = "IO:7ed859fc37b0de008c8c2b2943990ee3"
     wait.until(EC.presence_of_element_located((By.ID, champ_input_id)))
     driver.execute_script(f"""
         let el = document.querySelector("[id='{champ_input_id}']");
-        el.value = "610000000033";
+        el.value = "{id_contrat}";
         el.dispatchEvent(new Event('change', {{ bubbles: true }}));
     """)
+    print(f"[INFO] ID Contrat rempli : {id_contrat}")
 
 def remplir_champ_origine():
     driver = get_driver()
@@ -236,10 +237,10 @@ def attendre_redirection_et_obtenir_url_ticket():
         return current_url  # on retourne quand même quelque chose
 
 
-def remplir_champs_obligatoires_iu():
+def remplir_champs_obligatoires_iu(id_contrat):
     switch_to_main_iframe()
 
-    remplir_champ_input_id_contrat() 
+    remplir_champ_input_id_contrat(id_contrat) 
     remplir_champ_technologie()
     attendre_et_remplir_categorie()        
     attendre_et_remplir_sous_categorie()

@@ -21,7 +21,7 @@ Naviguer à la création du ticket IU
     Rechercher Et Selectionner Creer Iu
 
 Remplir les champs du ticket IU
-    ${url}=    Remplir Champs Obligatoires IU
+    ${url}=    Remplir Champs Obligatoires IU    610000000075
     RETURN    ${url}
 
 Aller à l'URL du Ticket
@@ -42,21 +42,39 @@ Lancer Demande Information
 
 Verification envoi SMS
     Verifier Etat Et Etape Technique
-    Verifier Envoi Sms
+    Verifier Envoi Sms    ddi
     ${numero_ticket}=    Recuperer Numero Ticket
     Log To Console    Le ticket est : ${numero_ticket}
 
 
 Aller à la Vue des Tickets SAV
     Cliquer Sur Bouton All
-    Sleep    time_=5
     Rechercher Et Selectionner Vue Tickets SAV
 
 Rechercher et Modifier le Ticket DDI1
     Rechercher Ticket Par Numero
-    #Modifier Date Degel Via Calendrier    SAV-FTTH0008669277
-    #Cliquer Sur Lien Ticket    ${numero_ticket}
 
-Attendre Et Vérifier Relance DDI1
-    Attendre Motif Gel Relance DDI1
-    Verifier SMS Relance DDI1
+Cliquer Sur Le Numero Ticket
+    Cliquer Sur Numero Ticket
+
+Attendre Le Motif Du Gel
+    [Arguments]    ${motif}
+    Attendre Motif Gel    ${motif}
+
+Rechercher et Modifier le Ticket DDI2
+    Rechercher Ticket Par Numero
+
+Vérifier Envoi SMS DDI1
+    Verifier Envoi Sms    ddi1
+
+Vérifier Envoi SMS DDI2
+    Verifier Envoi Sms    ddi2
+
+Cliquer Sur Bouton Dégeler
+    Cliquer Sur Bouton Degeler
+
+Attendre Que L'État Devienne Actif
+    Attendre Etat Actif
+
+Patienter Que Les Groupes Soient Remplis
+    Patienter Groupes Chargés
