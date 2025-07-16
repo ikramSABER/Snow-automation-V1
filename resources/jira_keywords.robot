@@ -1,6 +1,6 @@
 *** Settings ***
 Library    RequestsLibrary
-Library    ../libraries/JiraUpload.py
+Library    ../libraries/jira/JiraUpload.py
 Library    Collections
 Library    JSONLibrary
 
