@@ -1,97 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.13.2 on win32)" generated="2025-07-02T17:31:06.056681" rpa="false" schemaversion="5">
-<suite id="s1" name="Test Qualite Mail" source="C:\Test_Snow\ProjetAlten\tests\test_qualite_mail.robot">
-<kw name="Ouvrir le navigateur ServiceNow" owner="Qualite_mail_Keywords" type="SETUP">
+<robot generator="Robot 7.2.2 (Python 3.13.2 on win32)" generated="2025-07-15T17:33:29.135860" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Fermeture Ticket" source="C:\Test_Snow\ProjetAlten\tests\test_fermeture_ticket.robot">
+<kw name="Ouvrir le navigateur ServiceNow" owner="Fermeture_Ticket_KeyW" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-07-02T17:31:06.329481" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
+<msg time="2025-07-15T17:33:29.614782" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
 <arg>${SERVICENOW_URL}</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-07-02T17:31:06.329120" elapsed="6.853990"/>
+<status status="PASS" start="2025-07-15T17:33:29.614465" elapsed="5.556064"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-07-02T17:31:13.183362" elapsed="0.044380"/>
+<status status="PASS" start="2025-07-15T17:33:35.171024" elapsed="0.102535"/>
 </kw>
-<status status="PASS" start="2025-07-02T17:31:06.327770" elapsed="6.900277"/>
+<status status="PASS" start="2025-07-15T17:33:29.613706" elapsed="5.660117"/>
 </kw>
 <test id="s1-t1" name="Test Qualité Mail Complet" line="8">
-<kw name="Se connecter à ServiceNow" owner="Qualite_mail_Keywords">
+<kw name="Se connecter à ServiceNow" owner="Fermeture_Ticket_KeyW">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=user_name</arg>
 <arg>timeout=15s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-07-02T17:31:13.229579" elapsed="0.030513"/>
+<status status="PASS" start="2025-07-15T17:33:35.277093" elapsed="0.082791"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-07-02T17:31:13.261942" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
+<msg time="2025-07-15T17:33:35.360799" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
 <arg>id=user_name</arg>
 <arg>${SNOW_USERNAME}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-07-02T17:31:13.261079" elapsed="0.124563"/>
+<status status="PASS" start="2025-07-15T17:33:35.360298" elapsed="0.243604"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-07-02T17:31:13.386849" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
+<msg time="2025-07-15T17:33:35.604779" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>${SNOW_PASSWORD}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-07-02T17:31:13.386186" elapsed="0.128575"/>
+<status status="PASS" start="2025-07-15T17:33:35.604252" elapsed="0.149607"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-07-02T17:31:13.515328" level="INFO">Clicking button 'id=sysverb_login'.</msg>
+<msg time="2025-07-15T17:33:35.754675" level="INFO">Clicking button 'id=sysverb_login'.</msg>
 <arg>id=sysverb_login</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-07-02T17:31:13.515031" elapsed="21.797264"/>
+<status status="PASS" start="2025-07-15T17:33:35.754252" elapsed="8.176205"/>
 </kw>
-<status status="PASS" start="2025-07-02T17:31:13.229195" elapsed="22.083374"/>
+<status status="PASS" start="2025-07-15T17:33:35.276510" elapsed="8.654400"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-02T17:31:45.314480" level="INFO">Slept 10 seconds.</msg>
+<msg time="2025-07-15T17:33:53.932731" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-02T17:31:35.313178" elapsed="10.001457"/>
+<status status="PASS" start="2025-07-15T17:33:43.931733" elapsed="10.001396"/>
 </kw>
-<kw name="Naviguer Vers Lien du Ticket Creer par API" owner="Qualite_mail_Keywords">
+<kw name="Naviguer Vers Lien du Ticket Creer par API" owner="Fermeture_Ticket_KeyW">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-07-02T17:31:45.315689" level="INFO">Opening url 'https://bouyguestelecomltt3.service-now.com/u_savquality.do?sys_id=9546fcb087ea2610e93e433d8bbb35c4&amp;sysparm_stack=u_savquality_list.do?sysparm_query=active=true'</msg>
-<arg>https://bouyguestelecomltt3.service-now.com/u_savquality.do?sys_id=9546fcb087ea2610e93e433d8bbb35c4&amp;sysparm_stack=u_savquality_list.do?sysparm_query=active=true</arg>
+<msg time="2025-07-15T17:33:53.934987" level="INFO">Opening url 'https://bouyguestelecomltt3.service-now.com/u_savquality.do?sys_id=43ccdfb483fe62105985bfa6feaad3cd&amp;sysparm_stack=u_savquality_list.do?sysparm_query=active=true'</msg>
+<arg>https://bouyguestelecomltt3.service-now.com/u_savquality.do?sys_id=43ccdfb483fe62105985bfa6feaad3cd&amp;sysparm_stack=u_savquality_list.do?sysparm_query=active=true</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-07-02T17:31:45.315547" elapsed="5.664982"/>
+<status status="PASS" start="2025-07-15T17:33:53.934755" elapsed="4.558342"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-02T17:31:55.981807" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-07-15T17:34:03.494755" level="INFO">Slept 5 seconds.</msg>
 <arg>5s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-02T17:31:50.980951" elapsed="5.001167"/>
+<status status="PASS" start="2025-07-15T17:33:58.493419" elapsed="5.001442"/>
 </kw>
 <doc>Navigue vers une URL spécifique du ticket ServiceNow pour Validation.</doc>
-<status status="PASS" start="2025-07-02T17:31:45.315156" elapsed="10.667279"/>
+<status status="PASS" start="2025-07-15T17:33:53.934108" elapsed="9.560835"/>
 </kw>
-<kw name="Verifier Etat Actif" owner="ShadowQualiteMail">
-<status status="PASS" start="2025-07-02T17:31:55.983063" elapsed="0.065575"/>
-</kw>
-<kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-02T17:32:01.050938" level="INFO">Slept 5 seconds.</msg>
-<arg>time_=5</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-02T17:31:56.049969" elapsed="5.001197"/>
-</kw>
-<kw name="Verifier Etape Technique Attente Docs" owner="ShadowQualiteMail">
-<status status="PASS" start="2025-07-02T17:32:01.052036" elapsed="0.064939"/>
+<kw name="Verifier Etat Clos" owner="ShadowFermetureTicket">
+<msg time="2025-07-15T17:34:03.533463" level="INFO">✅ Le ticket est bien à l'état 'Clos'.</msg>
+<status status="PASS" start="2025-07-15T17:34:03.495472" elapsed="0.038067"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-07-02T17:32:06.117761" level="INFO">Slept 5 seconds.</msg>
-<arg>time_=5</arg>
+<msg time="2025-07-15T17:34:13.534537" level="INFO">Slept 10 seconds.</msg>
+<arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-07-02T17:32:01.117218" elapsed="5.000776"/>
-</kw>
-<kw name="Verifier Groupe Affectation Attente Photo Client" owner="ShadowQualiteMail">
-<status status="PASS" start="2025-07-02T17:32:06.118849" elapsed="0.033738"/>
+<status status="PASS" start="2025-07-15T17:34:03.533999" elapsed="10.000702"/>
 </kw>
 <doc>Simule une demande d'information</doc>
-<status status="PASS" start="2025-07-02T17:31:13.228221" elapsed="52.924621"/>
+<status status="PASS" start="2025-07-15T17:33:35.274021" elapsed="38.261112"/>
 </test>
-<status status="PASS" start="2025-07-02T17:31:06.058112" elapsed="60.095626"/>
+<status status="PASS" start="2025-07-15T17:33:29.138383" elapsed="44.398865"/>
 </suite>
 <statistics>
 <total>
@@ -100,7 +89,7 @@
 <tag>
 </tag>
 <suite>
-<stat name="Test Qualite Mail" id="s1" pass="1" fail="0" skip="0">Test Qualite Mail</stat>
+<stat name="Test Fermeture Ticket" id="s1" pass="1" fail="0" skip="0">Test Fermeture Ticket</stat>
 </suite>
 </statistics>
 <errors>

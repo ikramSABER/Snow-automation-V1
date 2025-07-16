@@ -1,7 +1,7 @@
 *** Settings ***
-Resource    ../resources/servicenow_keywords.robot
+Resource    ../resources/servicenow_keywordsA.robot
 Suite Setup    Ouvrir le navigateur ServiceNow
-Library    ../libraries/servicenow/navigation.py
+Library    ../libraries/servicenow/navigation_TCO.py
 #Suite Teardown    Fermer le navigateur
 
 *** Test Cases ***

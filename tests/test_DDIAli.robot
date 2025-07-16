@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../resources/DDI_Keywords.robot
+Resource    ../resources/DDI_KeywordsA.robot
 Library    ../libraries/DDI Ali/ShadowDDI_ali.py
 Suite Setup    Ouvrir le navigateur ServiceNow
 
