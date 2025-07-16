@@ -1,9 +1,9 @@
 *** Settings ***
 Library    SeleniumLibrary
 resource  ../resources/variables.robot
-Library    ../libraries/servicenow/navigation.py
-Library    ../libraries/servicenow/champs.py
-Library    ../libraries/servicenow/ddi.py
+Library    ../libraries/servicenow/TicketSAV/navigation.py
+Library    ../libraries/servicenow/TicketSAV/champs.py
+Library    ../libraries/servicenow/TicketSAV/ddi.py
 
 *** Keywords ***
 Ouvrir le navigateur ServiceNow
@@ -21,7 +21,7 @@ Naviguer à la création du ticket IU
     Rechercher Et Selectionner Creer Iu
 
 Remplir les champs du ticket IU
-    ${url}=    Remplir Champs Obligatoires IU    610000000075
+    ${url}=    Remplir Champs Obligatoires IU    610000000076
     RETURN    ${url}
 
 Aller à l'URL du Ticket
