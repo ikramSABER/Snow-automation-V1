@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    ../resources/Demande_mainteneur_Keyword.robot
-Library    ../libraries/servicenow/ddiAli/ShadowDDI_InterventionMainteneurA.py
+Library    ../libraries/servicenow/demandeInterventionMainteneur/ShadowDDI_InterventionMainteneurA.py
 Suite Setup    Ouvrir le navigateur ServiceNow
 
 

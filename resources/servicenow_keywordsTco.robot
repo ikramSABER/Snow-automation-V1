@@ -1,6 +1,7 @@
 *** Settings ***
 Library    SeleniumLibrary
 resource  ../resources/variables.robot
+Library    ../libraries/servicenow/demandeInfoOperateur/navigation_TCO.py
 
 *** Keywords ***
 Ouvrir le navigateur ServiceNow
@@ -13,8 +14,9 @@ Se connecter à ServiceNow
     Input Text    id=user_password    ${SNOW_PASSWORD}
     Click Button    id=sysverb_login
 
+Naviguer à la création du ticket tco
+    Cliquer Sur Bouton All
+    Rechercher Et Selectionner Creer Tco
 
-Naviguer Vers Lien Ticket Spécifique
-    [Documentation]    Navigue vers une URL spécifique du ticket ServiceNow pour consultation ou modification.
-    Go To   https://bouyguestelecomltt3.service-now.com/u_savftth.do?sys_id=02115817839ce6105985bfa6feaad397&sysparm_view=&sysparm_domain=null&sysparm_domain_scope=null&sysparm_record_row=1&sysparm_record_rows=100&sysparm_record_list=active%3dtrue%5estate%3d2%5eORDERBYDESCstate
-    Sleep    5s
+Remplir les champs du ticket tco
+    Remplir Champs Obligatoires Tco

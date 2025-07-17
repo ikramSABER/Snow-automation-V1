@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../resources/jira_keywords.robot
+Resource    ..\resources\jira\jira_keywords.robot
 
 *** Test Cases ***
 Créer un ticket Jira et effectuer des actions post-création

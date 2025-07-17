@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    ../resources/Fermeture_Ticket_KeyW.robot
-Library    ../libraries/servicenow/ddiAli/ShadowFermetureTicket.py
+Library    ../libraries/servicenow/demandeInterventionMainteneur/ShadowFermetureTicket.py
 Suite Setup    Ouvrir le navigateur ServiceNow
 
 

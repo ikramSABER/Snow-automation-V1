@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    ../resources/Qualite_mail_Keywords.robot
-Library    ../libraries/servicenow/ddiAli/ShadowQualiteMail.py
+Library    ../libraries/servicenow/demandeInterventionMainteneur/ShadowQualiteMail.py
 Suite Setup    Ouvrir le navigateur ServiceNow
 
 
