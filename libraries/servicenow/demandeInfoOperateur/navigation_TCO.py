@@ -8,6 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from robot.libraries.BuiltIn import BuiltIn
 from datetime import datetime, timedelta
 import time
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import Select
 
 def get_driver():
     return BuiltIn().get_library_instance("SeleniumLibrary").driver
@@ -183,7 +185,7 @@ def rechercher_et_selectionner_creer_Tco():
                             return true;
                         }
                     }
-                    
+
                     return false;
                 } catch(e) {
                     return false;
@@ -199,64 +201,6 @@ def rechercher_et_selectionner_creer_Tco():
         time.sleep(delay)
 
     raise Exception("Impossible de cliquer sur 'Créer tco' dans les favoris.")
-
-# -- Utilitaires de base --
-def get_driver():
-    return BuiltIn().get_library_instance("SeleniumLibrary").driver
-
-def get_wait(timeout=10):
-    driver = get_driver()
-    return WebDriverWait(driver, timeout)
-
-
-# -- Switch vers iframe principal dans le Shadow DOM --
-
-
-    for attempt in range(max_attempts):
-        print(f"[{attempt+1}/{max_attempts}] Tentative de récupération de l'iframe principale...")
-        try:
-            iframe = driver.execute_script("""
-                try {
-                    const root = document.querySelector("macroponent-f51912f4c700201072b211d4d8c26010");
-                    if (!root) return null;
-                    const shadow = root.shadowRoot;
-                    if (!shadow) return null;
-                    return shadow.querySelector("#gsft_main");
-                } catch(e) {
-                    return null;
-                }
-            """)
-            if iframe:
-                driver.switch_to.frame(iframe)
-                print("Changement vers l'iframe principal réussi.")
-                return
-        except Exception as e:
-            print(f"Erreur JS : {e}")
-        time.sleep(delay)
-
-    raise Exception("Impossible de récupérer et de switcher vers l'iframe principal.")
-
-
-# -- Fonction 1 : Forcer RAZ --
-def forcer_raz():
-    driver = get_driver()
-    max_attempts = 30
-    delay = 0.3
-
-    for attempt in range(max_attempts):
-        print(f"[{attempt+1}/{max_attempts}] Tentative de clic sur le champ 'Forcer RAZ'...")
-        try:
-            label_raz = driver.find_element(By.CSS_SELECTOR, "#label\\.ni\\.u_savorder\\.u_force_raz")
-            driver.execute_script("arguments[0].scrollIntoView(true);", label_raz)
-            time.sleep(0.5)
-            label_raz.click()
-            print("Clic sur 'Forcer RAZ' réussi.")
-            return
-        except Exception as e:
-            print(f"Erreur lors du clic sur RAZ : {e}")
-        time.sleep(delay)
-    raise Exception("Impossible de cliquer sur 'Forcer RAZ'.")
-
 
 def remplir_champ_assigned_to():
     selenium_lib = BuiltIn().get_library_instance("SeleniumLibrary")
@@ -281,18 +225,29 @@ def remplir_champ_assigned_to():
     champ.clear()
     champ.send_keys("Altst004 ALTST004")
     time.sleep(1)
-
-def get_driver():
-    selenium_lib = BuiltIn().get_library_instance("SeleniumLibrary")
-    return selenium_lib.driver
-
-
-
+def forcer_raz():
+    driver = get_driver()
+    max_attempts = 30
+    delay = 0.3
+ 
+    for attempt in range(max_attempts):
+        print(f"[{attempt+1}/{max_attempts}] Tentative de clic sur le champ 'Forcer RAZ'...")
+        try:
+            label_raz = driver.find_element(By.CSS_SELECTOR, "#label\\.ni\\.u_savorder\\.u_force_raz")
+            driver.execute_script("arguments[0].scrollIntoView(true);", label_raz)
+            time.sleep(0.5)
+            label_raz.click()
+            print("Clic sur 'Forcer RAZ' réussi.")
+            return
+        except Exception as e:
+            print(f"Erreur lors du clic sur RAZ : {e}")
+        time.sleep(delay)
+    raise Exception("Impossible de cliquer sur 'Forcer RAZ'.")
 def statut_active():
     driver = get_driver()
     max_attempts = 30
     delay = 0.3
-
+ 
     for attempt in range(max_attempts):
         print(f"[{attempt+1}/{max_attempts}] Tentative de sélection du statut 'Active'...")
         try:
@@ -300,60 +255,86 @@ def statut_active():
             statut_element = driver.find_element(By.ID, "u_savorder.state")
             driver.execute_script("arguments[0].scrollIntoView(true);", statut_element)
             time.sleep(0.5)
-
+ 
             # Cliquer sur le champ pour afficher les options
             statut_element.click()
             time.sleep(0.5)
-
+ 
             # Chercher et cliquer sur l'option "Active"
             option_active = driver.find_element(By.XPATH, "//option[text()='Active']")
             option_active.click()
-
+ 
             print("Statut 'Active' sélectionné avec succès.")
             return
         except Exception as e:
             print(f"Erreur lors de la sélection du statut : {e}")
             time.sleep(delay)
-
+ 
     raise Exception("Impossible de sélectionner le statut 'Active'.")
-    
-
-def cliquer_sur_trt_usine():
-    driver = get_driver()
-    wait = get_wait()
-
-    try:
-        # Échapper le point dans l'ID avec \\
-        select_techstage = wait.until(
-            lambda d: d.find_element(By.CSS_SELECTOR, "#u_savorder\\.u_techstage")
-        )
-        Select(select_techstage).select_by_visible_text("Trt Usine")
-        print("✅ Le champ 'Trt Usine' a été sélectionné avec succès.")
-    except Exception as e:
-        print(f"❌ Erreur lors de la sélection du champ 'Trt Usine' : {e}")
 
 def remplir_date_relance():
     print("[INFO] Remplissage de la date de relance...")
-
+ 
     # Récupérer le driver via SeleniumLibrary (Robot Framework)
     selenium_lib = BuiltIn().get_library_instance("SeleniumLibrary")
     driver = selenium_lib.driver
-
+ 
     wait = WebDriverWait(driver, 10)
-
+ 
     # Calculer la date de relance à +4 jours
     date_relance = datetime.now() + timedelta(days=4)
     date_formatee = date_relance.strftime("%d-%m-%Y %H:%M:%S")
     print(f"[INFO] Date calculée = {date_formatee}")
-
+ 
     # Rechercher le champ et remplir la date
     champ = wait.until(EC.presence_of_element_located((By.ID, "u_savorder.u_reminder_date")))
     champ.clear()
     champ.send_keys(date_formatee)
     print(f"[INFO] Champ rempli avec : {date_formatee}")
+    
 
 
-# -- Fonction 4 : Clic sur Enregistrer --
+from robot.libraries.BuiltIn import BuiltIn
+from selenium.webdriver.support.ui import WebDriverWait, Select
+from selenium.common.exceptions import TimeoutException
+
+def selectionner_trt_usine():
+    selenium_lib = BuiltIn().get_library_instance("SeleniumLibrary")
+    driver = selenium_lib.driver
+    builtin = BuiltIn()
+
+    try:
+        # Attente de l'élément
+        WebDriverWait(driver, 10).until(
+            lambda d: d.execute_script(
+                'return document.querySelector("#u_savorder\\\\.u_techstage") !== null'
+            )
+        )
+
+        # Récupération de l'élément
+        tech_stage_element = driver.execute_script(
+            'return document.querySelector("#u_savorder\\\\.u_techstage")'
+        )
+
+        # Utiliser Select pour changer la valeur
+        select = Select(tech_stage_element)
+
+        for option in select.options:
+            if option.text.strip().lower() == "trt usine":
+                select.select_by_visible_text(option.text.strip())
+                builtin.log_to_console("✅ 'Trt usine' sélectionné dans Étape technique.")
+                return
+
+        # Si l'option n'existe pas
+        message = "❌ L'option 'Trt usine' n'est pas disponible dans le champ 'Étape technique'."
+        builtin.log_to_console(message)
+        builtin.fail(message)
+
+    except TimeoutException:
+        message = "❌ Le champ 'Étape technique' n'a pas été trouvé dans les 10 secondes."
+        builtin.log_to_console(message)
+        builtin.fail(message)
+
 def enregistrer_ticket():
     driver = get_driver()
     max_attempts = 30
@@ -371,33 +352,9 @@ def enregistrer_ticket():
         time.sleep(delay)
     raise Exception("Impossible de cliquer sur le bouton 'Enregistrer'.")
  
- 
-# -- Fonction 5 : Affecter ticket à un utilisateur --
-def affecter_ticket():
-    driver = get_driver()
-    max_attempts = 30
-    delay = 0.3
- 
-    for attempt in range(max_attempts):
-        print(f"[{attempt+1}/{max_attempts}] Tentative d’affectation du ticket à ''...")
-        try:
-            input_assigned = driver.find_element(By.CSS_SELECTOR, "#sys_display.u_savorder.assigned_to")
-            input_assigned.clear()
-            input_assigned.send_keys(login)
-            time.sleep(1)
-            input_assigned.send_keys(Keys.TAB)
-            print(f"Champ 'Assigned To' rempli avec : ")
-            return
-        except Exception as e:
-            print(f"Erreur lors de la saisie du login : {e}")
-        time.sleep(delay)
-    raise Exception("Impossible de remplir le champ 'Assigned To'.")
- 
 
-# -- Fonction 6 : Enregistrer après affectation --
 def enregistrer_apres_affectation():
     enregistrer_ticket()  # On peut réutiliser la fonction précédente
-
 
 def switch_to_main_iframe(driver):
     iframe = driver.execute_script("""

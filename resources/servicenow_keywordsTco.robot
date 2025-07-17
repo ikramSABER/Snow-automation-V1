@@ -2,6 +2,7 @@
 Library    SeleniumLibrary
 resource  ../resources/variables.robot
 Library    ../libraries/servicenow/demandeInfoOperateur/navigation_TCO.py
+Library    ../libraries/servicenow/demandeInfoOperateur/champs_TCO.py
 
 *** Keywords ***
 Ouvrir le navigateur ServiceNow
@@ -19,4 +20,4 @@ Naviguer à la création du ticket tco
     Rechercher Et Selectionner Creer Tco
 
 Remplir les champs du ticket tco
-    Remplir Champs Obligatoires Tco
+    remplir_champs_obligatoires_Tco

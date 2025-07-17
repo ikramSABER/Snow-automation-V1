@@ -21,7 +21,7 @@ Naviguer à la création du ticket IU
     Rechercher Et Selectionner Creer Iu
 
 Remplir les champs du ticket IU
-    ${url}=    Remplir Champs Obligatoires IU    610000000076
+    ${url}=    Remplir Champs Obligatoires IU    610000000077
     RETURN    ${url}
 
 Aller à l'URL du Ticket
