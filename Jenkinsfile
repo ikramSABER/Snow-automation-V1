@@ -4,9 +4,6 @@ pipeline {
     environment {
         ROBOT_RESULTS_DIR = "${WORKSPACE}/robot_results"
         VENV_DIR = "${WORKSPACE}/.venv"
-        PYTHON_BIN = isUnix() ? "${WORKSPACE}/.venv/bin/python3" : "${WORKSPACE}/.venv/Scripts/python.exe"
-        PIP_BIN    = isUnix() ? "${WORKSPACE}/.venv/bin/pip3"    : "${WORKSPACE}/.venv/Scripts/pip.exe"
-        ROBOT_BIN  = isUnix() ? "${WORKSPACE}/.venv/bin/robot"   : "${WORKSPACE}/.venv/Scripts/robot.exe"
     }
 
     stages {
@@ -21,10 +18,16 @@ pipeline {
                 script {
                     if (isUnix()) {
                         sh "python3 -m venv ${VENV_DIR}"
-                        sh "${PYTHON_BIN} -m pip install --upgrade pip"
+                        env.PYTHON_BIN = "${VENV_DIR}/bin/python3"
+                        env.PIP_BIN    = "${VENV_DIR}/bin/pip3"
+                        env.ROBOT_BIN  = "${VENV_DIR}/bin/robot"
+                        sh "${env.PYTHON_BIN} -m pip install --upgrade pip"
                     } else {
                         bat "python -m venv ${VENV_DIR}"
-                        bat "${PYTHON_BIN} -m pip install --upgrade pip"
+                        env.PYTHON_BIN = "${VENV_DIR}\\Scripts\\python.exe"
+                        env.PIP_BIN    = "${VENV_DIR}\\Scripts\\pip.exe"
+                        env.ROBOT_BIN  = "${VENV_DIR}\\Scripts\\robot.exe"
+                        bat "${env.PYTHON_BIN} -m pip install --upgrade pip"
                     }
                 }
             }
@@ -34,11 +37,11 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh "${PIP_BIN} install -r ${WORKSPACE}/requirements.txt"
-                        sh "${PIP_BIN} install robotframework-requests robotframework-jsonlibrary"
+                        sh "${env.PIP_BIN} install -r ${WORKSPACE}/requirements.txt"
+                        sh "${env.PIP_BIN} install robotframework-requests robotframework-jsonlibrary"
                     } else {
-                        bat "${PIP_BIN} install -r ${WORKSPACE}/requirements.txt"
-                        bat "${PIP_BIN} install robotframework-requests robotframework-jsonlibrary"
+                        bat "${env.PIP_BIN} install -r ${WORKSPACE}\\requirements.txt"
+                        bat "${env.PIP_BIN} install robotframework-requests robotframework-jsonlibrary"
                     }
                 }
             }
@@ -48,9 +51,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh "${PIP_BIN} list"
+                        sh "${env.PIP_BIN} list"
                     } else {
-                        bat "${PIP_BIN} list"
+                        bat "${env.PIP_BIN} list"
                     }
                 }
             }
@@ -61,10 +64,10 @@ pipeline {
                 script {
                     if (isUnix()) {
                         sh "mkdir -p ${ROBOT_RESULTS_DIR}"
-                        sh "${ROBOT_BIN} -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}/tests/test_servicenowSAV.robot"
+                        sh "${env.ROBOT_BIN} -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}/tests/test_servicenowSAV.robot"
                     } else {
                         bat "if not exist \"${ROBOT_RESULTS_DIR}\" mkdir \"${ROBOT_RESULTS_DIR}\""
-                        bat "${ROBOT_BIN} -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}/tests/test_servicenowSAV.robot"
+                        bat "${env.ROBOT_BIN} -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}\\tests\\test_servicenowSAV.robot"
                     }
                 }
             }
@@ -74,9 +77,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh "${PYTHON_BIN} -m robot.rebot -d \"${ROBOT_RESULTS_DIR}\" --xunit \"${ROBOT_RESULTS_DIR}/xunit_result.xml\" \"${ROBOT_RESULTS_DIR}/output.xml\""
+                        sh "${env.PYTHON_BIN} -m robot.rebot -d \"${ROBOT_RESULTS_DIR}\" --xunit \"${ROBOT_RESULTS_DIR}/xunit_result.xml\" \"${ROBOT_RESULTS_DIR}/output.xml\""
                     } else {
-                        bat "${PYTHON_BIN} -m robot.rebot -d \"${ROBOT_RESULTS_DIR}\" --xunit \"${ROBOT_RESULTS_DIR}\\xunit_result.xml\" \"${ROBOT_RESULTS_DIR}\\output.xml\""
+                        bat "${env.PYTHON_BIN} -m robot.rebot -d \"${ROBOT_RESULTS_DIR}\" --xunit \"${ROBOT_RESULTS_DIR}\\xunit_result.xml\" \"${ROBOT_RESULTS_DIR}\\output.xml\""
                     }
                 }
             }
