@@ -9,10 +9,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/ElMouddenRiad/ProjetAlten.git'
+                git branch: 'Riad', url: 'https://github.com/ElMouddenRiad/ProjetAlten.git'
             }
         }
-
         stage('Install Dependencies') {
             steps {
                 bat "${PYTHON_ENV}/python -m pip install --upgrade pip"
