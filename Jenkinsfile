@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         ROBOT_RESULTS_DIR = "${WORKSPACE}/robot_results"
-        PYTHON_ENV = "c:/Users/geams/OneDrive/Bureau/ProjetAlten/.venv/Scripts"
+        #PYTHON_ENV = "c:/Users/geams/OneDrive/Bureau/ProjetAlten/.venv/Scripts"
     }
 
     stages {
