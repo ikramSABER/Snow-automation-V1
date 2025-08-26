@@ -1,9 +1,12 @@
-pipeline { 
+pipeline {
     agent any
 
     environment {
         ROBOT_RESULTS_DIR = "${WORKSPACE}/robot_results"
-        PYTHON_ENV = "c:/Users/geams/OneDrive/Bureau/ProjetAlten/.venv/Scripts"
+        VENV_DIR = "${WORKSPACE}/.venv"
+        PYTHON_BIN = "${WORKSPACE}/.venv/Scripts/python.exe"
+        PIP_BIN = "${WORKSPACE}/.venv/Scripts/pip.exe"
+        ROBOT_BIN = "${WORKSPACE}/.venv/Scripts/robot.exe"
     }
 
     stages {
@@ -12,31 +15,37 @@ pipeline {
                 git branch: 'Riad', url: 'https://github.com/ElMouddenRiad/ProjetAlten.git'
             }
         }
+
+        stage('Setup VirtualEnv') {
+            steps {
+                bat "python -m venv ${VENV_DIR}"
+                bat "${PYTHON_BIN} -m pip install --upgrade pip"
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                bat "${PYTHON_ENV}/python -m pip install --upgrade pip"
-                bat "${PYTHON_ENV}/pip install -r ${WORKSPACE}/requirements.txt"
-                bat "${PYTHON_ENV}/pip install robotframework-requests robotframework-jsonlibrary"
+                bat "${PIP_BIN} install -r ${WORKSPACE}/requirements.txt"
+                bat "${PIP_BIN} install robotframework-requests robotframework-jsonlibrary"
             }
         }
 
         stage('Debug: Check Installed Packages') {
             steps {
-                bat "${PYTHON_ENV}/pip list"
+                bat "${PIP_BIN} list"
             }
         }
 
         stage('Run Robot Tests - ServiceNow') {
             steps {
                 bat "if not exist \"${ROBOT_RESULTS_DIR}\" mkdir \"${ROBOT_RESULTS_DIR}\""
-                //bat "${PYTHON_ENV}/robot -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}/tests/jira/test_jira.robot"
-                bat "${PYTHON_ENV}/robot -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}/tests/test_servicenowSAV.robot"
+                bat "${ROBOT_BIN} -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}/tests/test_servicenowSAV.robot"
             }
         }
 
         stage('Convert Robot Results to JUnit Format') {
             steps {
-                bat "${PYTHON_ENV}/python -m robot.rebot -d \"${ROBOT_RESULTS_DIR}\" --xunit \"${ROBOT_RESULTS_DIR}\\xunit_result.xml\" \"${ROBOT_RESULTS_DIR}\\output.xml\""
+                bat "${PYTHON_BIN} -m robot.rebot -d \"${ROBOT_RESULTS_DIR}\" --xunit \"${ROBOT_RESULTS_DIR}\\xunit_result.xml\" \"${ROBOT_RESULTS_DIR}\\output.xml\""
             }
         }
 
@@ -46,7 +55,6 @@ pipeline {
                 bat "type \"${ROBOT_RESULTS_DIR}\\xunit_result.xml\""
             }
         }
-
 
         stage('Publish Test Results') {
             steps {
