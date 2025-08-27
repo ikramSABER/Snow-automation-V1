@@ -35,7 +35,12 @@ pipeline {
                 bat "${PIP_BIN} list"
             }
         }
-
+        stage('Cleanup Old Browsers') {
+            steps {
+                sh 'pkill -f chrome || true'
+                sh 'pkill -f chromedriver || true'
+            }
+        }
         stage('Run Robot Tests - ServiceNow') {
             steps {
                 bat "if not exist \"${ROBOT_RESULTS_DIR}\" mkdir \"${ROBOT_RESULTS_DIR}\""
