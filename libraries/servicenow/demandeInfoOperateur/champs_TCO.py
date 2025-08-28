@@ -6,12 +6,16 @@ from navigation_TCO import switch_to_main_iframe
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-def remplir_champ_input_id_contrat(driver, wait):
+def remplir_champ_input_id_contrat():
+    selenium_lib = BuiltIn().get_library_instance('SeleniumLibrary')
+    driver = selenium_lib.driver
+    wait = selenium_lib._current_browser()._wait  # ou crée un WebDriverWait(driver, timeout)
+    
     champ_input_id = "IO:5ef59274db883b804ea8fd141d961940"
     wait.until(EC.presence_of_element_located((By.ID, champ_input_id)))
     driver.execute_script(f"""
         let el = document.querySelector("[id='{champ_input_id}']");
-        el.value = "610020031011";
+        el.value = "610000000026";
         el.dispatchEvent(new Event('change', {{ bubbles: true }}));
     """)
 
@@ -173,8 +177,8 @@ def remplir_description(driver, wait):
         if (!textarea || !hidden) {{
             throw new Error("Champs de description non trouvés");
         }}
-        textarea.value = "Ticket test automatisé NR Tco par Robotframework par Aya ";
-        hidden.value = "Ticket test automatisé NR Tco SAV par Robotframework par Aya ";
+        textarea.value = "Ticket test automatisé NR Tco par Robotframework créer Par aya";
+        hidden.value = "Ticket test automatisé NR Tco SAV par Robotframework créer Par aya";
         textarea.dispatchEvent(new Event('input', {{ bubbles: true }}));
         textarea.dispatchEvent(new Event('change', {{ bubbles: true }}));
     """)

@@ -1,6 +1,7 @@
 from robot.libraries.BuiltIn import BuiltIn
 from robot.api.deco import keyword
 import time
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -230,39 +231,40 @@ def Rechercher_et_selectionner_Ticket_SAV_Ouverts():
 
 
 
-def remplir_champ_assigned_to():
+def remplir_champ_assigned_to(login="Altst004 ALTST004", max_retry=5):
     selenium_lib = BuiltIn().get_library_instance("SeleniumLibrary")
     driver = selenium_lib.driver
     wait = WebDriverWait(driver, 10)
 
     champ_id = "sys_display.u_savftth.assigned_to"
-    champ = wait.until(EC.presence_of_element_located((By.ID, champ_id)))
-    # Clic sur le champ
-    champ.click()
-    time.sleep(0.5)
-    # Taper pour déclencher les suggestions
-    champ.send_keys("Alt")
-    time.sleep(2)  # Attente suggestions
-    # JS : tenter de cliquer sur la suggestion
-    js_script = """
-        try {
-            const items = Array.from(document.querySelectorAll("div.ac_item"))
-                .filter(i => i.offsetParent !== null);
 
-            const target = items.find(i => i.innerText.includes("Altst004 ALTST004"));
-            if (target) {
-                ['mouseover', 'mousedown', 'mouseup', 'click'].forEach(evt => {
-                    target.dispatchEvent(new MouseEvent(evt, { bubbles: true }));
-                });
-            } else {
-                console.warn("Suggestion 'Altst004 ALTST004' non trouvée.");
-            }
-        } catch (e) {
-            console.warn("Erreur JS ignorée : " + e);
-        }
-    """
-    driver.execute_script(js_script)
-    time.sleep(3)
+    for attempt in range(max_retry):
+        try:
+            champ = wait.until(EC.element_to_be_clickable((By.ID, champ_id)))
+
+            # Vérif si champ activé
+            if not champ.is_enabled():
+                raise Exception("[ERROR] Champ 'assigned_to' désactivé.")
+
+            # Reset champ (clear ou JS fallback)
+            try:
+                champ.clear()
+            except:
+                driver.execute_script("arguments[0].value = '';", champ)
+
+            # Écriture + validation
+            champ.send_keys(login)
+            time.sleep(1)
+            champ.send_keys(Keys.TAB)
+            time.sleep(1)
+
+            print(f"[INFO] ✅ Champ 'assigned_to' rempli avec {login}")
+            return
+        except Exception as e:
+            print(f"[WARN] Tentative {attempt+1}/{max_retry} échouée : {e}")
+            time.sleep(2)
+
+    raise Exception(f"[FAIL] Impossible de remplir 'assigned_to' après {max_retry} tentatives.")
 
 def cliquer_bouton_save():
     selenium_lib = BuiltIn().get_library_instance("SeleniumLibrary")
