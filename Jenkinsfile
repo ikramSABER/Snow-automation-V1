@@ -4,9 +4,9 @@ pipeline {
     environment {
         ROBOT_RESULTS_DIR = "${WORKSPACE}/robot_results"
         VENV_DIR = "${WORKSPACE}/.venv"
-        PYTHON_BIN = "${WORKSPACE}/.venv/Scripts/python.exe"
-        PIP_BIN = "${WORKSPACE}/.venv/Scripts/pip.exe"
-        ROBOT_BIN = "${WORKSPACE}/.venv/Scripts/robot.exe"
+        PYTHON_BIN = "${VENV_DIR}/bin/python"
+        PIP_BIN = "${VENV_DIR}/bin/pip"
+        ROBOT_BIN = "${VENV_DIR}/bin/robot"
     }
 
     stages {
@@ -18,21 +18,28 @@ pipeline {
 
         stage('Setup VirtualEnv') {
             steps {
-                bat "python -m venv ${VENV_DIR}"
-                bat "${PYTHON_BIN} -m pip install --upgrade pip"
+                sh "python3 -m venv ${VENV_DIR}"
+                sh "${PYTHON_BIN} -m pip install --upgrade pip"
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat "${PIP_BIN} install -r ${WORKSPACE}/requirements.txt"
-                bat "${PIP_BIN} install robotframework-requests robotframework-jsonlibrary"
+                sh "${PIP_BIN} install -r requirements.txt"
+                sh "${PIP_BIN} install robotframework-requests robotframework-jsonlibrary"
             }
         }
 
         stage('Debug: Check Installed Packages') {
             steps {
-                bat "${PIP_BIN} list"
+                sh "${PIP_BIN} list"
+            }
+        }
+
+        stage('Cleanup Old Browsers') {
+            steps {
+                sh 'pkill -f chrome || true'
+                sh 'pkill -f chromedriver || true'
             }
         }
 
@@ -45,7 +52,7 @@ pipeline {
 
         stage('Convert Robot Results to JUnit Format') {
             steps {
-                bat "${PYTHON_BIN} -m robot.rebot -d \"${ROBOT_RESULTS_DIR}\" --xunit \"${ROBOT_RESULTS_DIR}\\xunit_result.xml\" \"${ROBOT_RESULTS_DIR}\\output.xml\""
+                sh "${PYTHON_BIN} -m robot.rebot -d ${ROBOT_RESULTS_DIR} --xunit ${ROBOT_RESULTS_DIR}/xunit_result.xml ${ROBOT_RESULTS_DIR}/output.xml"
             }
         }
 
