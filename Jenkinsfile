@@ -39,7 +39,7 @@ pipeline {
         stage('Run Robot Tests - ServiceNow') {
             steps {
                 bat "if not exist \"${ROBOT_RESULTS_DIR}\" mkdir \"${ROBOT_RESULTS_DIR}\""
-                bat "${ROBOT_BIN} -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}/tests/test_servicenowSAV.robot"
+                bat "${ROBOT_BIN} -d ${ROBOT_RESULTS_DIR} ${WORKSPACE}/tests/test_Demande_Mainteneur.robot"
             }
         }
 
