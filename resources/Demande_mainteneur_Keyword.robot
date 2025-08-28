@@ -16,5 +16,5 @@ Se connecter à ServiceNow
 
 Naviguer Vers Lien Ticket Spécifique
     [Documentation]    Navigue vers une URL spécifique du ticket ServiceNow pour consultation ou modification.
-    Go To    https://bouyguestelecomltt3.service-now.com/u_savftth.do?sys_id=89a25de783946a105985bfa6feaad31c&sysparm_view=&sysparm_domain=null&sysparm_domain_scope=null&sysparm_record_row=69&sysparm_record_rows=185&sysparm_record_list=active%3dtrue%5eORDERBYDESCsys_created_on
+    Go To    https://bouyguestelecomltt3.service-now.com/u_savftth.do?sys_id=5fdae4e8c3206e104c5b2dd9d001312a&sysparm_record_target=u_savftth&sysparm_record_row=63&sysparm_record_rows=185&sysparm_record_list=active%3Dtrue%5EORDERBYDESCsys_created_on
     Sleep    5s
