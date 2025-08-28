@@ -3,6 +3,7 @@ from robot.api.deco import keyword
 import time
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import InvalidElementStateException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -287,31 +288,46 @@ def clicker_boutton_Demande_intervention():
     driver.execute_script('document.querySelector("#u_savftth_demande_intervention").click();')
 
 
-def remplir_champ_source_tag():
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
-    from robot.libraries.BuiltIn import BuiltIn
-
+def remplir_champ_source_tag(valeur="Traitement N2", max_retry=5):
     selenium_lib = BuiltIn().get_library_instance("SeleniumLibrary")
     driver = selenium_lib.driver
-    wait = WebDriverWait(driver, 20)
+    wait = WebDriverWait(driver, 10)
 
-    champ_css = "#sys_display\\.u_savftth_maintainer\\.u_source_tag"
+    for attempt in range(max_retry):
+        try:
+            champ_input = wait.until(
+                lambda d: d.find_element(By.CSS_SELECTOR, "#sys_display\\.u_savftth_maintainer\\.u_source_tag")
+            )
 
-    # Attendre que le champ soit présent et visible
-    input_el = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, champ_css)))
+            # Vérification si le champ est activé
+            if not champ_input.is_enabled():
+                raise Exception("[ERROR] Champ 'u_source_tag' désactivé.")
 
-    # 🖱️ Cliquer sur le champ pour activer la saisie
-    input_el.click()
+            # Optionnel : vider proprement le champ
+            try:
+                champ_input.clear()
+            except InvalidElementStateException:
+                driver.execute_script("arguments[0].value = '';", champ_input)
 
-    # Injecter le texte via JavaScript en passant l’élément en argument
-    driver.execute_script("""
-        const input = arguments[0];
-        input.value = "Traitement N2";
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-        input.dispatchEvent(new Event('change', { bubbles: true }));
-    """, input_el)
+            champ_input.click()
+            champ_input.send_keys(valeur)
+            time.sleep(1)
+            champ_input.send_keys(Keys.TAB)
+            time.sleep(1)
+
+            bouton_enregistrer = wait.until(
+                lambda d: d.find_element(By.CSS_SELECTOR, "#sysverb_update_and_stay")
+            )
+            bouton_enregistrer.click()
+
+            print(f"[INFO] ✅ Champ 'Source Tag' rempli avec succès : {valeur}")
+            return
+
+        except Exception as e:
+            print(f"[WARN] Tentative {attempt + 1}/{max_retry} échouée : {e}")
+            time.sleep(2)
+
+    raise Exception(f"[FAIL] Impossible de remplir 'Source Tag' après {max_retry} tentatives.")
 
 
 def Remplir_champ_Type_Intervention():
