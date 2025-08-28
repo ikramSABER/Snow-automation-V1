@@ -293,8 +293,7 @@ def remplir_champ_source_tag(valeur="Traitement N2", max_retry=5):
     driver = selenium_lib.driver
     wait = WebDriverWait(driver, 10)
 
-    for attempt in range(max_retry):
-        try:
+    try:
             champ_input = wait.until(
                 lambda d: d.find_element(By.CSS_SELECTOR, "#sys_display\\.u_savftth_maintainer\\.u_source_tag")
             )
@@ -323,8 +322,8 @@ def remplir_champ_source_tag(valeur="Traitement N2", max_retry=5):
             print(f"[INFO] ✅ Champ 'Source Tag' rempli avec succès : {valeur}")
             return
 
-        except Exception as e:
-            print(f"[WARN] Tentative {attempt + 1}/{max_retry} échouée : {e}")
+    except Exception as e:
+            print(f"[WARN] Tentative {max_retry} échouée : {e}")
             time.sleep(2)
 
     raise Exception(f"[FAIL] Impossible de remplir 'Source Tag' après {max_retry} tentatives.")
