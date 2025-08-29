@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import time
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import InvalidElementStateException
 
 def get_driver():
     return BuiltIn().get_library_instance("SeleniumLibrary").driver
@@ -202,29 +203,49 @@ def rechercher_et_selectionner_creer_Tco():
 
     raise Exception("Impossible de cliquer sur 'Créer tco' dans les favoris.")
 
-def remplir_champ_assigned_to():
-    selenium_lib = BuiltIn().get_library_instance("SeleniumLibrary")
-    driver = selenium_lib.driver
-    wait = WebDriverWait(driver, 10)
- 
-    # Trouver et basculer dans le bon iframe dynamiquement
-    iframes = driver.find_elements(By.TAG_NAME, "iframe")
-    for iframe in iframes:
-        driver.switch_to.default_content()
+def remplir_champ_assigned_to(login="Altst004 ALTST004", max_retry=5):
+    driver = get_driver()
+    wait = get_wait()
+
+    for attempt in range(max_retry):
         try:
-            driver.switch_to.frame(iframe)
-            champ_test = driver.find_elements(By.CSS_SELECTOR, "#sys_display\\.u_savorder\\.assigned_to")
-            if champ_test:
-                print("Champ trouvé dans cet iframe:", iframe.get_attribute("id"))
-                break
-        except Exception:
-            continue
- 
-    # Champ visible et remplissage simple
-    champ = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#sys_display\\.u_savorder\\.assigned_to")))
-    champ.clear()
-    champ.send_keys("Altst004 ALTST004")
-    time.sleep(1)
+            # Récupération dynamique du champ 'assigned_to' (selon ton contexte 'savorder')
+            assigned_to_input = wait.until(
+                lambda d: d.find_element(By.CSS_SELECTOR, "#sys_display\\.u_savorder\\.assigned_to")
+            )
+
+            if not assigned_to_input.is_enabled():
+                raise Exception("[ERROR] Champ 'assigned_to' désactivé.")
+
+            # Nettoyage du champ
+            try:
+                assigned_to_input.clear()
+            except InvalidElementStateException:
+                driver.execute_script("arguments[0].value = '';", assigned_to_input)
+
+            # Remplissage + validation
+            assigned_to_input.send_keys(login)
+            time.sleep(1)
+            assigned_to_input.send_keys(Keys.TAB)
+
+            # Sauvegarde
+            bouton_enregistrer = wait.until(
+                lambda d: d.find_element(By.CSS_SELECTOR, "#sysverb_update_and_stay")
+            )
+            bouton_enregistrer.click()
+
+            print(f"[INFO] ✅ Champ 'assigned_to' rempli avec {login}.")
+            return
+
+        except InvalidElementStateException:
+            print(f"[WARN] Tentative {attempt + 1}/{max_retry} échouée (champ non interactif). Retry...")
+            time.sleep(2)
+        except Exception as e:
+            print(f"[ERROR] Erreur imprévue pendant le remplissage : {e}")
+            raise
+
+    raise Exception(f"[FAIL] Impossible de remplir 'assigned_to' avec {login} après {max_retry} tentatives.")
+
 def forcer_raz():
     driver = get_driver()
     max_attempts = 30
