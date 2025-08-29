@@ -206,7 +206,7 @@ def remplir_champs_obligatoires_Tco():
     wait = WebDriverWait(driver, 20)
 
     switch_to_main_iframe(driver)
-    remplir_champ_input_id_contrat(driver, wait)
+    remplir_champ_input_id_contrat()
     remplir_champ_origine(driver, wait)
     remplir_champ_technologie(driver, wait)
     attendre_et_remplir_categorie(driver, wait)
