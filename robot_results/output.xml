@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.12.0 on win32)" generated="2025-08-29T00:32:30.346195" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2.2 (Python 3.12.0 on win32)" generated="2025-08-29T00:59:38.978628" rpa="false" schemaversion="5">
 <suite id="s1" name="test Demande Mainteneur" source="C:\Users\geams\OneDrive\Bureau\ProjetAlten\tests\test_Demande_Mainteneur.robot">
 <kw name="Ouvrir le navigateur ServiceNow" owner="Demande_mainteneur_Keyword" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-08-29T00:32:30.573683" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
+<msg time="2025-08-29T00:59:39.320628" level="INFO">Opening browser 'chrome' to base url 'https://bouyguestelecomltt3.service-now.com/'.</msg>
 <arg>${SERVICENOW_URL}</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-08-29T00:32:30.572683" elapsed="4.285450"/>
+<status status="PASS" start="2025-08-29T00:59:39.320628" elapsed="4.647694"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-08-29T00:32:34.858133" elapsed="0.026999"/>
+<status status="PASS" start="2025-08-29T00:59:43.968322" elapsed="0.039002"/>
 </kw>
-<status status="PASS" start="2025-08-29T00:32:30.572683" elapsed="4.312449"/>
+<status status="PASS" start="2025-08-29T00:59:39.319632" elapsed="4.687692"/>
 </kw>
 <test id="s1-t1" name="Test DDI Complet" line="8">
 <kw name="Se connecter à ServiceNow" owner="Demande_mainteneur_Keyword">
@@ -21,192 +21,197 @@
 <arg>id=user_name</arg>
 <arg>timeout=15s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-08-29T00:32:34.886131" elapsed="0.036004"/>
+<status status="PASS" start="2025-08-29T00:59:44.009329" elapsed="0.037994"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-08-29T00:32:34.922135" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
+<msg time="2025-08-29T00:59:44.048323" level="INFO">Typing text 'altst004' into text field 'id=user_name'.</msg>
 <arg>id=user_name</arg>
 <arg>${SNOW_USERNAME}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-08-29T00:32:34.922135" elapsed="0.133999"/>
+<status status="PASS" start="2025-08-29T00:59:44.047323" elapsed="0.171639"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-08-29T00:32:35.059134" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
+<msg time="2025-08-29T00:59:44.219962" level="INFO">Typing text 'Automatisation@2023' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>${SNOW_PASSWORD}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-08-29T00:32:35.058133" elapsed="0.175258"/>
+<status status="PASS" start="2025-08-29T00:59:44.218962" elapsed="0.156037"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-08-29T00:32:35.234385" level="INFO">Clicking button 'id=sysverb_login'.</msg>
+<msg time="2025-08-29T00:59:44.374999" level="INFO">Clicking button 'id=sysverb_login'.</msg>
 <arg>id=sysverb_login</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-08-29T00:32:35.234385" elapsed="5.534409"/>
+<status status="PASS" start="2025-08-29T00:59:44.374999" elapsed="3.013886"/>
 </kw>
-<status status="PASS" start="2025-08-29T00:32:34.886131" elapsed="5.882663"/>
+<status status="PASS" start="2025-08-29T00:59:44.008328" elapsed="3.380557"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-08-29T00:32:50.770019" level="INFO">Slept 10 seconds.</msg>
+<msg time="2025-08-29T00:59:57.390621" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-08-29T00:32:40.768794" elapsed="10.001225"/>
+<status status="PASS" start="2025-08-29T00:59:47.388885" elapsed="10.001736"/>
 </kw>
 <kw name="Cliquer Sur Bouton All" owner="ShadowDDI_InterventionMainteneurA">
-<msg time="2025-08-29T00:32:50.804683" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
+<msg time="2025-08-29T00:59:57.399622" level="INFO">[1/30] Tentative de clic sur le bouton 'All'...
 Clic sur le bouton 'All' réussi.</msg>
-<status status="PASS" start="2025-08-29T00:32:50.771004" elapsed="0.033679"/>
+<status status="PASS" start="2025-08-29T00:59:57.390621" elapsed="0.009001"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-08-29T00:33:00.805939" level="INFO">Slept 10 seconds.</msg>
+<msg time="2025-08-29T01:00:07.401286" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-08-29T00:32:50.805683" elapsed="10.000256"/>
+<status status="PASS" start="2025-08-29T00:59:57.399622" elapsed="10.001664"/>
 </kw>
 <kw name="Rechercher Et Selectionner Ticket SAV Ouverts" owner="ShadowDDI_InterventionMainteneurA">
-<msg time="2025-08-29T00:33:01.215960" level="INFO">[1/30] Tentative d’accès à la barre de recherche contextuelle...
+<msg time="2025-08-29T01:00:07.806618" level="INFO">[1/30] Tentative d’accès à la barre de recherche contextuelle...
 Texte 'Ticket SAV - Tickets ouverts SAV FTTH (BO)' saisi dans la barre contextuelle.
 [1/30] Tentative de clic sur le favori 'Créer Tco'...
 [2/30] Tentative de clic sur le favori 'Créer Tco'...
 Clic sur 'Tickets SAV Ouverts' dans les favoris réussi.</msg>
-<status status="PASS" start="2025-08-29T00:33:00.805939" elapsed="0.410021"/>
+<status status="PASS" start="2025-08-29T01:00:07.402134" elapsed="0.404484"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-08-29T00:33:11.217634" level="INFO">Slept 10 seconds.</msg>
+<msg time="2025-08-29T01:00:17.808732" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-08-29T00:33:01.215960" elapsed="10.001674"/>
+<status status="PASS" start="2025-08-29T01:00:07.807611" elapsed="10.001121"/>
 </kw>
 <kw name="Naviguer Vers Lien Ticket Spécifique" owner="Demande_mainteneur_Keyword">
 <kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-08-29T00:33:11.219510" level="INFO">Opening url 'https://bouyguestelecomltt3.service-now.com/u_savftth.do?sys_id=5fdae4e8c3206e104c5b2dd9d001312a&amp;sysparm_record_target=u_savftth&amp;sysparm_record_row=63&amp;sysparm_record_rows=185&amp;sysparm_record_list=active%3Dtrue%5EORDERBYDESCsys_created_on'</msg>
+<msg time="2025-08-29T01:00:17.809915" level="INFO">Opening url 'https://bouyguestelecomltt3.service-now.com/u_savftth.do?sys_id=5fdae4e8c3206e104c5b2dd9d001312a&amp;sysparm_record_target=u_savftth&amp;sysparm_record_row=63&amp;sysparm_record_rows=185&amp;sysparm_record_list=active%3Dtrue%5EORDERBYDESCsys_created_on'</msg>
 <arg>https://bouyguestelecomltt3.service-now.com/u_savftth.do?sys_id=5fdae4e8c3206e104c5b2dd9d001312a&amp;sysparm_record_target=u_savftth&amp;sysparm_record_row=63&amp;sysparm_record_rows=185&amp;sysparm_record_list=active%3Dtrue%5EORDERBYDESCsys_created_on</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-08-29T00:33:11.218510" elapsed="5.638898"/>
+<status status="PASS" start="2025-08-29T01:00:17.809915" elapsed="5.085853"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-08-29T00:33:21.858987" level="INFO">Slept 5 seconds.</msg>
+<msg time="2025-08-29T01:00:27.897417" level="INFO">Slept 5 seconds.</msg>
 <arg>5s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-08-29T00:33:16.858408" elapsed="5.000579"/>
+<status status="PASS" start="2025-08-29T01:00:22.895768" elapsed="5.001649"/>
 </kw>
 <doc>Navigue vers une URL spécifique du ticket ServiceNow pour consultation ou modification.</doc>
-<status status="PASS" start="2025-08-29T00:33:11.218510" elapsed="10.640477"/>
+<status status="PASS" start="2025-08-29T01:00:17.809896" elapsed="10.087521"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2025-08-29T00:33:31.860115" level="INFO">Slept 10 seconds.</msg>
+<msg time="2025-08-29T01:00:37.899730" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-08-29T00:33:21.858987" elapsed="10.001128"/>
+<status status="PASS" start="2025-08-29T01:00:27.897417" elapsed="10.002313"/>
 </kw>
 <kw name="Remplir Champ Assigned To" owner="ShadowDDI_InterventionMainteneurA">
-<msg time="2025-08-29T00:33:34.142546" level="INFO">[INFO] ✅ Champ 'assigned_to' rempli avec Altst004 ALTST004</msg>
-<status status="PASS" start="2025-08-29T00:33:31.860115" elapsed="2.282431"/>
+<msg time="2025-08-29T01:00:40.095708" level="INFO">[INFO] ✅ Champ 'assigned_to' rempli avec Altst004 ALTST004</msg>
+<status status="PASS" start="2025-08-29T01:00:37.899730" elapsed="2.195978"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
+<msg time="2025-08-29T01:00:50.098047" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="FAIL" start="2025-08-29T00:33:34.144550" elapsed="1.337919">Execution terminated by signal</status>
+<status status="PASS" start="2025-08-29T01:00:40.096589" elapsed="10.001458"/>
 </kw>
 <kw name="Cliquer Bouton Save" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.483474" elapsed="0.000000"/>
+<status status="PASS" start="2025-08-29T01:00:50.099068" elapsed="7.196928"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
+<msg time="2025-08-29T01:01:07.298071" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.483474" elapsed="0.000000"/>
+<status status="PASS" start="2025-08-29T01:00:57.295996" elapsed="10.002075"/>
 </kw>
 <kw name="Clicker Boutton Demande Intervention" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.484469" elapsed="0.000000"/>
+<status status="PASS" start="2025-08-29T01:01:07.298917" elapsed="0.894015"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
+<msg time="2025-08-29T01:01:18.194836" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.484469" elapsed="0.000000"/>
+<status status="PASS" start="2025-08-29T01:01:08.192932" elapsed="10.001904"/>
 </kw>
 <kw name="Remplir Champ Source Tag" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.484469" elapsed="0.000000"/>
+<msg time="2025-08-29T01:01:20.336357" level="INFO">[INFO] ✅ Champ 'u_source_tag' rempli avec Traitement N2</msg>
+<status status="PASS" start="2025-08-29T01:01:18.194836" elapsed="2.141521"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
+<msg time="2025-08-29T01:01:30.337576" level="INFO">Slept 10 seconds.</msg>
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.485469" elapsed="0.000000"/>
+<status status="PASS" start="2025-08-29T01:01:20.337251" elapsed="10.000325"/>
 </kw>
 <kw name="Remplir Champ Type Intervention" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.485469" elapsed="0.000000"/>
+<status status="PASS" start="2025-08-29T01:01:30.337576" elapsed="0.031509"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.486468" elapsed="0.000000"/>
+<status status="FAIL" start="2025-08-29T01:01:30.370087" elapsed="4.755652">Execution terminated by signal</status>
 </kw>
 <kw name="Clicker Bouton Prender RDV Immediat" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.486468" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.126739" elapsed="0.000000"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.486468" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.126739" elapsed="0.000000"/>
 </kw>
 <kw name="Choisir Rdv Jplus2 Apres Midi" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.486468" elapsed="0.001001"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.126739" elapsed="0.000000"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.487469" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.126739" elapsed="0.001000"/>
 </kw>
 <kw name="Cliquer Bouton Reserver RDV" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.487469" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.127739" elapsed="0.000000"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.487469" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.127739" elapsed="0.000000"/>
 </kw>
 <kw name="Cliquer Bouton Modifier RDV" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.488472" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.128740" elapsed="0.000000"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.488472" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.128740" elapsed="0.000000"/>
 </kw>
 <kw name="Modifier Rdv Jplus2 Apres Midi" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.489470" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.128740" elapsed="0.000000"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.489470" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.128740" elapsed="0.000000"/>
 </kw>
 <kw name="Cliquer Bouton Modifier RDV2" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.489470" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.129738" elapsed="0.000000"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.489470" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.129738" elapsed="0.000000"/>
 </kw>
 <kw name="Clicker Bouton Annuler RDV" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.490469" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.130756" elapsed="0.000000"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.490469" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.130756" elapsed="0.000000"/>
 </kw>
 <kw name="Clicker Sur Popup Ok" owner="ShadowDDI_InterventionMainteneurA">
-<status status="NOT RUN" start="2025-08-29T00:33:35.490469" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.130756" elapsed="0.000000"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
 <arg>time_=10</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="NOT RUN" start="2025-08-29T00:33:35.490469" elapsed="0.000000"/>
+<status status="NOT RUN" start="2025-08-29T01:01:35.130756" elapsed="0.000000"/>
 </kw>
 <doc>Simule une demande d'information</doc>
-<status status="FAIL" start="2025-08-29T00:32:34.885132" elapsed="60.606337">Execution terminated by signal</status>
+<status status="FAIL" start="2025-08-29T00:59:44.007324" elapsed="111.123432">Execution terminated by signal</status>
 </test>
-<status status="FAIL" start="2025-08-29T00:32:30.347195" elapsed="65.145275"/>
+<status status="FAIL" start="2025-08-29T00:59:38.979628" elapsed="116.153111"/>
 </suite>
 <statistics>
 <total>

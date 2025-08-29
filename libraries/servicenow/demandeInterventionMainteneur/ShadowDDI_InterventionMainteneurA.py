@@ -293,40 +293,35 @@ def remplir_champ_source_tag(valeur="Traitement N2", max_retry=5):
     driver = selenium_lib.driver
     wait = WebDriverWait(driver, 10)
 
-    try:
-            champ_input = wait.until(
-                lambda d: d.find_element(By.CSS_SELECTOR, "#sys_display\\.u_savftth_maintainer\\.u_source_tag")
-            )
+    champ_id = "sys_display.u_savftth_maintainer.u_source_tag"
 
-            # Vérification si le champ est activé
-            if not champ_input.is_enabled():
+    for attempt in range(max_retry):
+        try:
+            champ = wait.until(EC.element_to_be_clickable((By.ID, champ_id)))
+
+            # Vérifier si le champ est activé
+            if not champ.is_enabled():
                 raise Exception("[ERROR] Champ 'u_source_tag' désactivé.")
 
-            # Optionnel : vider proprement le champ
+            # Reset champ (clear ou JS fallback)
             try:
-                champ_input.clear()
-            except InvalidElementStateException:
-                driver.execute_script("arguments[0].value = '';", champ_input)
+                champ.clear()
+            except:
+                driver.execute_script("arguments[0].value = '';", champ)
 
-            champ_input.click()
-            champ_input.send_keys(valeur)
+            # Écriture + validation
+            champ.send_keys(valeur)
             time.sleep(1)
-            champ_input.send_keys(Keys.TAB)
+            champ.send_keys(Keys.TAB)
             time.sleep(1)
 
-            bouton_enregistrer = wait.until(
-                lambda d: d.find_element(By.CSS_SELECTOR, "#sysverb_update_and_stay")
-            )
-            bouton_enregistrer.click()
-
-            print(f"[INFO] ✅ Champ 'Source Tag' rempli avec succès : {valeur}")
+            print(f"[INFO] ✅ Champ 'u_source_tag' rempli avec {valeur}")
             return
-
-    except Exception as e:
-            print(f"[WARN] Tentative {max_retry} échouée : {e}")
+        except Exception as e:
+            print(f"[WARN] Tentative {attempt+1}/{max_retry} échouée : {e}")
             time.sleep(2)
 
-    raise Exception(f"[FAIL] Impossible de remplir 'Source Tag' après {max_retry} tentatives.")
+    raise Exception(f"[FAIL] Impossible de remplir 'u_source_tag' après {max_retry} tentatives.")
 
 
 def Remplir_champ_Type_Intervention():
