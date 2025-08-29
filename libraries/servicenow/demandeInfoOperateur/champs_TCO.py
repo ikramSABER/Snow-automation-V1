@@ -6,11 +6,7 @@ from navigation_TCO import switch_to_main_iframe
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-def remplir_champ_input_id_contrat():
-    selenium_lib = BuiltIn().get_library_instance('SeleniumLibrary')
-    driver = get_driver
-    wait = get_wait 
-    
+def remplir_champ_input_id_contrat(driver, wait):
     champ_input_id = "IO:5ef59274db883b804ea8fd141d961940"
     wait.until(EC.presence_of_element_located((By.ID, champ_input_id)))
     driver.execute_script(f"""
@@ -177,8 +173,8 @@ def remplir_description(driver, wait):
         if (!textarea || !hidden) {{
             throw new Error("Champs de description non trouvés");
         }}
-        textarea.value = "Ticket test automatisé NR Tco par Robotframework créer Par aya";
-        hidden.value = "Ticket test automatisé NR Tco SAV par Robotframework créer Par aya";
+        textarea.value = "Ticket test automatisé NR Tco par Robotframework par Aya ";
+        hidden.value = "Ticket test automatisé NR Tco SAV par Robotframework par Aya ";
         textarea.dispatchEvent(new Event('input', {{ bubbles: true }}));
         textarea.dispatchEvent(new Event('change', {{ bubbles: true }}));
     """)
@@ -206,7 +202,7 @@ def remplir_champs_obligatoires_Tco():
     wait = WebDriverWait(driver, 20)
 
     switch_to_main_iframe(driver)
-    remplir_champ_input_id_contrat()
+    remplir_champ_input_id_contrat(driver, wait)
     remplir_champ_origine(driver, wait)
     remplir_champ_technologie(driver, wait)
     attendre_et_remplir_categorie(driver, wait)
