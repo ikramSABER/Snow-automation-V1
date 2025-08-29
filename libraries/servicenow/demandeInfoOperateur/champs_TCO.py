@@ -8,8 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 def remplir_champ_input_id_contrat():
     selenium_lib = BuiltIn().get_library_instance('SeleniumLibrary')
-    driver = selenium_lib.driver
-    wait = selenium_lib._current_browser()._wait  # ou crée un WebDriverWait(driver, timeout)
+    driver = get_driver
+    wait = get_wait 
     
     champ_input_id = "IO:5ef59274db883b804ea8fd141d961940"
     wait.until(EC.presence_of_element_located((By.ID, champ_input_id)))
