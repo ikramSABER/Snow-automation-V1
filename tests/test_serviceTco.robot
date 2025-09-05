@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ..\resources\servicenow_keywordsTCO.robot
+Resource    ../resources/servicenow_keywordsTCO.robot
 Suite Setup    Ouvrir le navigateur ServiceNow
 #Suite Teardown    Fermer le navigateur
 
